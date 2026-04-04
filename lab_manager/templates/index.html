@@ -1,0 +1,170 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block breadcrumb %}<i class="bi bi-speedometer2"></i> Dashboard{% endblock %}
+
+{% block content %}
+<h4 class="mb-4">Dashboard</h4>
+
+<!-- Stat cards -->
+<div class="row g-3 mb-4">
+  <div class="col-sm-6 col-xl-3">
+    <div class="card stat-card blue p-3">
+      <div class="text-muted" style="font-size:.8rem">INVENTORY ITEMS</div>
+      <div class="stat-number text-primary">{{ stats.inventory }}</div>
+      <a href="{{ url_for('inventory_list') }}" class="stretched-link text-decoration-none text-muted" style="font-size:.8rem">View all →</a>
+    </div>
+  </div>
+  <div class="col-sm-6 col-xl-3">
+    <div class="card stat-card green p-3">
+      <div class="text-muted" style="font-size:.8rem">SAMPLES ON RECORD</div>
+      <div class="stat-number text-success">{{ stats.samples }}</div>
+      <a href="{{ url_for('samples_list') }}" class="stretched-link text-decoration-none text-muted" style="font-size:.8rem">View all →</a>
+    </div>
+  </div>
+  <div class="col-sm-6 col-xl-3">
+    <div class="card stat-card teal p-3">
+      <div class="text-muted" style="font-size:.8rem">SEQUENCING RUNS</div>
+      <div class="stat-number text-success" style="color:#20c997!important">{{ stats.seq_runs }}</div>
+      <a href="{{ url_for('sequencing_list') }}" class="stretched-link text-decoration-none text-muted" style="font-size:.8rem">View all →</a>
+    </div>
+  </div>
+  <div class="col-sm-6 col-xl-3">
+    <div class="card stat-card purple p-3">
+      <div class="text-muted" style="font-size:.8rem">qPCR RUNS</div>
+      <div class="stat-number text-purple" style="color:#6f42c1!important">{{ stats.qpcr_runs }}</div>
+      <a href="{{ url_for('qpcr_list') }}" class="stretched-link text-decoration-none text-muted" style="font-size:.8rem">View all →</a>
+    </div>
+  </div>
+</div>
+
+<div class="row g-3">
+  <!-- Expiring items -->
+  <div class="col-lg-6">
+    <div class="card h-100">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <span><i class="bi bi-exclamation-triangle-fill text-warning me-1"></i> Expiring / Expired Items</span>
+        <a href="{{ url_for('inventory_list') }}" class="btn btn-sm btn-outline-secondary">View All</a>
+      </div>
+      <div class="card-body p-0">
+        {% if expiring %}
+        <table class="table table-sm table-hover mb-0">
+          <thead class="table-light">
+            <tr><th>Item</th><th>Location</th><th>Expires</th></tr>
+          </thead>
+          <tbody>
+          {% for item in expiring %}
+            {% set expired = item.expiration_date < today %}
+            <tr class="{{ 'table-danger' if expired else 'table-warning' }}">
+              <td><a href="{{ url_for('inventory_view', id=item.id) }}">{{ item.item_name }}</a></td>
+              <td class="text-muted" style="font-size:.8rem">{{ item.location_room }} / {{ item.location_unit }}</td>
+              <td style="font-size:.85rem">
+                {% if expired %}<span class="badge bg-danger">EXPIRED</span>{% endif %}
+                {{ item.expiration_date.strftime('%b %d, %Y') }}
+              </td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+        {% else %}
+        <div class="p-3 text-muted text-center">No items expiring within 60 days.</div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <!-- Recent samples -->
+  <div class="col-lg-6">
+    <div class="card h-100">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <span><i class="bi bi-collection me-1"></i> Recent Samples</span>
+        <a href="{{ url_for('samples_add') }}" class="btn btn-sm btn-primary">
+          <i class="bi bi-plus"></i> New Sample
+        </a>
+      </div>
+      <div class="card-body p-0">
+        {% if recent_samples %}
+        <table class="table table-sm table-hover mb-0">
+          <thead class="table-light">
+            <tr><th>Accession</th><th>Sample</th><th>Organism</th><th>Added</th></tr>
+          </thead>
+          <tbody>
+          {% for s in recent_samples %}
+          <tr>
+            <td><a href="{{ url_for('samples_view', id=s.id) }}">{{ s.accession_number }}</a></td>
+            <td>{{ s.sample_name }}</td>
+            <td class="text-muted" style="font-size:.8rem">{{ s.organism_type or '—' }}</td>
+            <td class="text-muted" style="font-size:.8rem">{{ s.date_added.strftime('%b %d') }}</td>
+          </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+        {% else %}
+        <div class="p-3 text-muted text-center">No samples yet. <a href="{{ url_for('samples_add') }}">Add the first one.</a></div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <!-- Recent sequencing runs -->
+  <div class="col-lg-6">
+    <div class="card">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <span><i class="bi bi-diagram-3 me-1"></i> Recent Sequencing Runs</span>
+        <a href="{{ url_for('sequencing_add') }}" class="btn btn-sm btn-primary">
+          <i class="bi bi-plus"></i> New Run
+        </a>
+      </div>
+      <div class="card-body p-0">
+        {% if recent_seq %}
+        <table class="table table-sm table-hover mb-0">
+          <thead class="table-light">
+            <tr><th>Date</th><th>Operator</th><th>Samples</th><th></th></tr>
+          </thead>
+          <tbody>
+          {% for r in recent_seq %}
+          <tr>
+            <td>{{ r.run_date.strftime('%b %d, %Y') if r.run_date else '—' }}</td>
+            <td>{{ r.operator.initials if r.operator else '—' }}</td>
+            <td>{{ r.seq_samples | length }}</td>
+            <td><a href="{{ url_for('sequencing_view', id=r.id) }}" class="btn btn-sm btn-outline-secondary py-0">View</a></td>
+          </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+        {% else %}
+        <div class="p-3 text-muted text-center">No sequencing runs yet.</div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <!-- Quick links -->
+  <div class="col-lg-6">
+    <div class="card">
+      <div class="card-header"><i class="bi bi-lightning me-1"></i> Quick Actions</div>
+      <div class="card-body">
+        <div class="d-grid gap-2">
+          <a href="{{ url_for('samples_add') }}" class="btn btn-outline-success text-start">
+            <i class="bi bi-plus-circle me-2"></i> Accession a New Sample
+          </a>
+          <a href="{{ url_for('qc_add') }}" class="btn btn-outline-primary text-start">
+            <i class="bi bi-clipboard2-pulse me-2"></i> Record QC Measurement (Qubit / Nanodrop)
+          </a>
+          <a href="{{ url_for('extractions_add') }}" class="btn btn-outline-info text-start">
+            <i class="bi bi-moisture me-2"></i> Start an Extraction Batch Record
+          </a>
+          <a href="{{ url_for('sequencing_add') }}" class="btn btn-outline-secondary text-start">
+            <i class="bi bi-diagram-3 me-2"></i> Log a Sanger Sequencing Run
+          </a>
+          <a href="{{ url_for('qpcr_add') }}" class="btn btn-outline-secondary text-start">
+            <i class="bi bi-graph-up me-2"></i> Log a qPCR Run
+          </a>
+          <a href="{{ url_for('inventory_add') }}" class="btn btn-outline-warning text-start">
+            <i class="bi bi-box-seam me-2"></i> Add Inventory Item
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

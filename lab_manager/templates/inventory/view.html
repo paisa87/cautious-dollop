@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% block title %}{{ item.item_name }}{% endblock %}
+{% block breadcrumb %}
+  <a href="{{ url_for('inventory_list') }}">Inventory</a> / {{ item.item_name }}
+{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h4 class="mb-0">{{ item.item_name }}</h4>
+  <div class="btn-row">
+    <a href="{{ url_for('inventory_edit', id=item.id) }}" class="btn btn-primary btn-sm">
+      <i class="bi bi-pencil"></i> Edit
+    </a>
+    {% set u = current_user() %}
+    {% if u and u.role in ('instructor', 'staff') %}
+    <form action="{{ url_for('inventory_delete', id=item.id) }}" method="post" class="confirm-delete">
+      <button class="btn btn-outline-danger btn-sm"><i class="bi bi-trash"></i> Delete</button>
+    </form>
+    {% endif %}
+    <a href="{{ url_for('inventory_list') }}" class="btn btn-outline-secondary btn-sm">← Back</a>
+  </div>
+</div>
+
+<div class="row g-3">
+  <div class="col-md-6">
+    <div class="card h-100">
+      <div class="card-header">Details</div>
+      <div class="card-body">
+        <table class="table table-sm table-borderless mb-0">
+          <tr><th style="width:40%">Category</th><td><span class="badge bg-secondary">{{ item.category }}</span></td></tr>
+          <tr><th>Vendor</th><td>{{ item.vendor.name if item.vendor else '—' }}</td></tr>
+          <tr><th>Catalog #</th><td>{{ item.catalog_number or '—' }}</td></tr>
+          <tr><th>Unit Size</th><td>{{ item.unit_size or '—' }}</td></tr>
+          <tr><th>CAS Number</th><td>{{ item.cas_number or '—' }}</td></tr>
+          <tr><th>Formula</th><td>{{ item.formula or '—' }}</td></tr>
+          <tr><th>Mol. Weight</th><td>{{ item.molecular_weight or '—' }}</td></tr>
+          <tr><th>Physical State</th><td>{{ item.physical_state or '—' }}</td></tr>
+          <tr><th>Purity</th><td>{{ item.purity or '—' }}</td></tr>
+          <tr><th>Price</th><td>{{ '$%.2f'|format(item.price) if item.price else '—' }}</td></tr>
+          {% if item.url %}<tr><th>Product URL</th><td><a href="{{ item.url }}" target="_blank">Link <i class="bi bi-box-arrow-up-right"></i></a></td></tr>{% endif %}
+          {% if item.sds_link %}<tr><th>SDS</th><td><a href="{{ item.sds_link }}" target="_blank">Safety Data Sheet <i class="bi bi-box-arrow-up-right"></i></a></td></tr>{% endif %}
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="card h-100">
+      <div class="card-header">Stock &amp; Location</div>
+      <div class="card-body">
+        <table class="table table-sm table-borderless mb-0">
+          <tr><th style="width:40%">Room</th><td>{{ item.location_room or '—' }}</td></tr>
+          <tr><th>Unit</th><td>{{ item.location_unit or '—' }}</td></tr>
+          <tr><th>Details</th><td>{{ item.location_details or '—' }}</td></tr>
+          <tr><th>Amount in Stock</th><td>{{ item.amount_in_stock or '—' }}</td></tr>
+          <tr><th>Minimum Stock</th><td>{{ item.min_stock or '—' }}</td></tr>
+          <tr><th>Lot Number</th><td>{{ item.lot_number or '—' }}</td></tr>
+          <tr><th>Expiration Date</th>
+            <td>
+              {% if item.expiration_date %}
+                {% if item.expiration_date < today() %}<span class="badge bg-danger me-1">EXPIRED</span>{% endif %}
+                {{ item.expiration_date.strftime('%B %d, %Y') }}
+              {% else %}—{% endif %}
+            </td>
+          </tr>
+          <tr><th>Date Received</th><td>{{ item.date_received.strftime('%B %d, %Y') if item.date_received else '—' }}</td></tr>
+          <tr><th>Date Opened</th><td>{{ item.date_opened.strftime('%B %d, %Y') if item.date_opened else '—' }}</td></tr>
+          <tr><th>Added By</th><td>{{ item.added_by.name if item.added_by else '—' }}</td></tr>
+          <tr><th>Date Added</th><td>{{ item.date_added.strftime('%B %d, %Y') if item.date_added else '—' }}</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  {% if item.sequence_5to3 or item.target_gene %}
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header">Primer / Probe Information</div>
+      <div class="card-body">
+        <table class="table table-sm table-borderless mb-0">
+          {% if item.sequence_5to3 %}<tr><th style="width:20%">Sequence (5′→3′)</th><td><code>{{ item.sequence_5to3 }}</code></td></tr>{% endif %}
+          {% if item.target_gene %}<tr><th>Target Gene</th><td>{{ item.target_gene }}</td></tr>{% endif %}
+          {% if item.organism_target %}<tr><th>Target Organism</th><td>{{ item.organism_target }}</td></tr>{% endif %}
+          {% if item.primer_application %}<tr><th>Application</th><td>{{ item.primer_application }}</td></tr>{% endif %}
+          {% if item.reference %}<tr><th>Reference</th><td>{{ item.reference }}</td></tr>{% endif %}
+        </table>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+
+  {% if item.notes %}
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header">Notes</div>
+      <div class="card-body"><p class="mb-0">{{ item.notes }}</p></div>
+    </div>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

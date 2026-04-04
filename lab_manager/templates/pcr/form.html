@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+{% block title %}Log PCR Run{% endblock %}
+{% block breadcrumb %}<a href="{{ url_for('pcr_list') }}">PCR Runs</a> / New{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h4 class="mb-0">Log PCR Run <small class="text-muted fw-normal">(SOP VG007)</small></h4>
+  <a href="{{ url_for('pcr_list') }}" class="btn btn-outline-secondary btn-sm">← Back</a>
+</div>
+
+<form method="post">
+  <div class="card mb-3">
+    <div class="card-header">Run Information</div>
+    <div class="card-body row g-3">
+      <div class="col-md-3">
+        <label class="form-label">Run Date</label>
+        <input type="date" name="run_date" class="form-control" value="{{ today().isoformat() }}">
+      </div>
+      <div class="col-md-3">
+        <label class="form-label">Operator</label>
+        <select name="operator_id" class="form-select">
+          {% for u in users %}<option value="{{ u.id }}" {% if session.get('user_id') == u.id %}selected{% endif %}>{{ u.name }} ({{ u.initials }})</option>{% endfor %}
+        </select>
+      </div>
+      <div class="col-md-3">
+        <label class="form-label">Thermocycler Program</label>
+        <input type="text" name="thermocycler_program" class="form-control" placeholder="e.g. ITS_PCR_55C">
+      </div>
+      <div class="col-md-2">
+        <label class="form-label d-block">&nbsp;</label>
+        <div class="form-check mt-2">
+          <input type="checkbox" name="gel_run" id="gel_run" class="form-check-input">
+          <label class="form-check-label" for="gel_run">Gel run (SOP VG010)</label>
+        </div>
+      </div>
+      <div class="col-12">
+        <label class="form-label">Notes</label>
+        <input type="text" name="notes" class="form-control" placeholder="Optional">
+      </div>
+    </div>
+  </div>
+
+  <div class="card mb-3">
+    <div class="card-header d-flex justify-content-between align-items-center">
+      <span>Samples</span>
+      <button type="button" class="btn btn-sm btn-outline-primary" onclick="addPCRRow()"><i class="bi bi-plus"></i> Add Row</button>
+    </div>
+    <div class="card-body p-0">
+      <table class="table table-sm mb-0">
+        <thead class="table-light">
+          <tr><th>Tube Label</th><th>Sample</th><th>Forward Primer</th><th>Reverse Primer</th><th>Template (µL)</th><th>Expected Size (bp)</th><th>Result</th></tr>
+        </thead>
+        <tbody id="pcr-rows">
+          {% for i in range(10) %}
+          <tr>
+            <td><input type="text" name="tube_label[]" class="form-control form-control-sm" placeholder="e.g. PB, +ctrl"></td>
+            <td>
+              <select name="sample_id[]" class="form-select form-select-sm">
+                <option value="">— Select —</option>
+                {% for s in samples %}<option value="{{ s.id }}">{{ s.accession_number }} — {{ s.sample_name }}</option>{% endfor %}
+              </select>
+            </td>
+            <td>
+              <select name="primer_f_id[]" class="form-select form-select-sm">
+                <option value="">—</option>
+                {% for p in primers %}<option value="{{ p.id }}">{{ p.item_name }}</option>{% endfor %}
+              </select>
+            </td>
+            <td>
+              <select name="primer_r_id[]" class="form-select form-select-sm">
+                <option value="">—</option>
+                {% for p in primers %}<option value="{{ p.id }}">{{ p.item_name }}</option>{% endfor %}
+              </select>
+            </td>
+            <td><input type="number" step="0.5" name="template_volume_ul[]" class="form-control form-control-sm" placeholder="2.0"></td>
+            <td><input type="number" name="expected_size_bp[]" class="form-control form-control-sm" placeholder="600"></td>
+            <td>
+              <select name="result[]" class="form-select form-select-sm">
+                <option value="">—</option>
+                <option>Band present</option>
+                <option>No band</option>
+                <option>Faint band</option>
+                <option>Multiple bands</option>
+                <option>Positive control ✓</option>
+                <option>Negative control ✓</option>
+              </select>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-primary"><i class="bi bi-check-lg"></i> Save PCR Run</button>
+  <a href="{{ url_for('pcr_list') }}" class="btn btn-outline-secondary ms-2">Cancel</a>
+</form>
+{% endblock %}
+
+{% block scripts %}
+<script>
+const sHtml = `<option value="">— Select —</option>{% for s in samples %}<option value="{{ s.id }}">{{ s.accession_number }} — {{ s.sample_name }}</option>{% endfor %}`;
+const pHtml = `<option value="">—</option>{% for p in primers %}<option value="{{ p.id }}">{{ p.item_name }}</option>{% endfor %}`;
+const resHtml = `<option value="">—</option><option>Band present</option><option>No band</option><option>Faint band</option><option>Multiple bands</option><option>Positive control ✓</option><option>Negative control ✓</option>`;
+
+function addPCRRow() {
+  const tbody = document.getElementById('pcr-rows');
+  const tr = document.createElement('tr');
+  tr.innerHTML = `
+    <td><input type="text" name="tube_label[]" class="form-control form-control-sm"></td>
+    <td><select name="sample_id[]" class="form-select form-select-sm">${sHtml}</select></td>
+    <td><select name="primer_f_id[]" class="form-select form-select-sm">${pHtml}</select></td>
+    <td><select name="primer_r_id[]" class="form-select form-select-sm">${pHtml}</select></td>
+    <td><input type="number" step="0.5" name="template_volume_ul[]" class="form-control form-control-sm"></td>
+    <td><input type="number" name="expected_size_bp[]" class="form-control form-control-sm"></td>
+    <td><select name="result[]" class="form-select form-select-sm">${resHtml}</select></td>`;
+  tbody.appendChild(tr);
+}
+</script>
+{% endblock %}

@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+venv/
+instance/lab_manager.db
+uploads/fasta/*
+uploads/results/*
+!uploads/.gitkeep

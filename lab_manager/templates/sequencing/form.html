@@ -1,0 +1,135 @@
+{% extends "base.html" %}
+{% block title %}Log Sequencing Run{% endblock %}
+{% block breadcrumb %}
+  <a href="{{ url_for('sequencing_list') }}">Sanger Sequencing</a> / New Run
+{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h4 class="mb-0">Log Sanger Sequencing Run</h4>
+  <a href="{{ url_for('sequencing_list') }}" class="btn btn-outline-secondary btn-sm">← Back</a>
+</div>
+
+<form method="post" enctype="multipart/form-data">
+  <div class="card mb-3">
+    <div class="card-header">Run Information</div>
+    <div class="card-body row g-3">
+      <div class="col-md-3">
+        <label class="form-label">Run Date <span class="text-danger">*</span></label>
+        <input type="date" name="run_date" class="form-control" required value="{{ today().isoformat() }}">
+      </div>
+      <div class="col-md-3">
+        <label class="form-label">Operator</label>
+        <select name="operator_id" class="form-select">
+          {% for u in users %}
+          <option value="{{ u.id }}" {% if session.get('user_id') == u.id %}selected{% endif %}>
+            {{ u.name }} ({{ u.initials }})
+          </option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="col-md-3">
+        <label class="form-label">Instrument</label>
+        <input type="text" name="instrument" class="form-control" value="SeqStudio">
+      </div>
+      <div class="col-md-3">
+        <label class="form-label">Notes</label>
+        <input type="text" name="notes" class="form-control" placeholder="Optional run notes">
+      </div>
+    </div>
+  </div>
+
+  <div class="card mb-3">
+    <div class="card-header d-flex justify-content-between align-items-center">
+      <span>Samples &amp; Sequence Reactions
+        <small class="text-muted fw-normal">(SOP VG008 — BigDye Terminator)</small>
+      </span>
+      <button type="button" class="btn btn-sm btn-outline-primary"
+              onclick="addSeqRow()">
+        <i class="bi bi-plus"></i> Add Row
+      </button>
+    </div>
+    <div class="card-body p-0">
+      <div class="table-responsive">
+        <table class="table table-sm mb-0">
+          <thead class="table-light">
+            <tr>
+              <th style="width:40px">Tube #</th>
+              <th>Sample</th>
+              <th>Label</th>
+              <th>Primer</th>
+              <th style="width:80px">BigDye (µL)</th>
+              <th style="width:80px">Template (µL)</th>
+              <th style="width:90px">Conc. (ng/µL)</th>
+              <th>Upload FASTA</th>
+              <th>Result Notes</th>
+            </tr>
+          </thead>
+          <tbody id="seq-rows">
+            {% for i in range(1, 9) %}
+            <tr>
+              <td><input type="number" name="tube_number[]" class="form-control form-control-sm" value="{{ i }}"></td>
+              <td>
+                <select name="sample_id[]" class="form-select form-select-sm">
+                  <option value="">— Select —</option>
+                  {% for s in samples %}
+                  <option value="{{ s.id }}">{{ s.accession_number }} — {{ s.sample_name }}</option>
+                  {% endfor %}
+                </select>
+              </td>
+              <td><input type="text" name="sample_label[]" class="form-control form-control-sm" placeholder="Label"></td>
+              <td>
+                <select name="primer_id[]" class="form-select form-select-sm">
+                  <option value="">— Select —</option>
+                  {% for p in primers %}
+                  <option value="{{ p.id }}">{{ p.item_name }}</option>
+                  {% endfor %}
+                </select>
+              </td>
+              <td><input type="number" step="0.5" name="bigdye_volume_ul[]" class="form-control form-control-sm" value="2.0"></td>
+              <td><input type="number" step="0.5" name="template_volume_ul[]" class="form-control form-control-sm"></td>
+              <td><input type="number" step="0.1" name="concentration_ng_ul[]" class="form-control form-control-sm"></td>
+              <td><input type="file" name="fasta_file[]" class="form-control form-control-sm" accept=".fa,.fasta,.txt"></td>
+              <td><input type="text" name="result_notes[]" class="form-control form-control-sm" placeholder="e.g. Good quality"></td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-1">
+    <button type="submit" class="btn btn-primary">
+      <i class="bi bi-check-lg"></i> Save Sequencing Run
+    </button>
+    <a href="{{ url_for('sequencing_list') }}" class="btn btn-outline-secondary ms-2">Cancel</a>
+  </div>
+</form>
+{% endblock %}
+
+{% block scripts %}
+<script>
+let rowCount = 9;
+const samplesHtml = `<option value="">— Select —</option>{% for s in samples %}<option value="{{ s.id }}">{{ s.accession_number }} — {{ s.sample_name }}</option>{% endfor %}`;
+const primersHtml = `<option value="">— Select —</option>{% for p in primers %}<option value="{{ p.id }}">{{ p.item_name }}</option>{% endfor %}`;
+
+function addSeqRow() {
+  const tbody = document.getElementById('seq-rows');
+  const tr = document.createElement('tr');
+  tr.innerHTML = `
+    <td><input type="number" name="tube_number[]" class="form-control form-control-sm" value="${rowCount}"></td>
+    <td><select name="sample_id[]" class="form-select form-select-sm">${samplesHtml}</select></td>
+    <td><input type="text" name="sample_label[]" class="form-control form-control-sm" placeholder="Label"></td>
+    <td><select name="primer_id[]" class="form-select form-select-sm">${primersHtml}</select></td>
+    <td><input type="number" step="0.5" name="bigdye_volume_ul[]" class="form-control form-control-sm" value="2.0"></td>
+    <td><input type="number" step="0.5" name="template_volume_ul[]" class="form-control form-control-sm"></td>
+    <td><input type="number" step="0.1" name="concentration_ng_ul[]" class="form-control form-control-sm"></td>
+    <td><input type="file" name="fasta_file[]" class="form-control form-control-sm" accept=".fa,.fasta,.txt"></td>
+    <td><input type="text" name="result_notes[]" class="form-control form-control-sm"></td>
+  `;
+  tbody.appendChild(tr);
+  rowCount++;
+}
+</script>
+{% endblock %}

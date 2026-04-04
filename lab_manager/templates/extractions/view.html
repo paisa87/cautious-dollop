@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% block title %}Extraction {{ extraction.batch_id }}{% endblock %}
+{% block breadcrumb %}
+  <a href="{{ url_for('extractions_list') }}">DNA Extractions</a> / {{ extraction.batch_id }}
+{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h4 class="mb-0">Extraction Batch: {{ extraction.batch_id }}</h4>
+  <a href="{{ url_for('extractions_list') }}" class="btn btn-outline-secondary btn-sm">← Back</a>
+</div>
+
+<div class="row g-3">
+  <div class="col-md-5">
+    <div class="card">
+      <div class="card-header">Batch Details</div>
+      <div class="card-body">
+        <table class="table table-sm table-borderless mb-0">
+          <tr><th style="width:40%">Date</th><td>{{ extraction.date.strftime('%B %d, %Y') if extraction.date else '—' }}</td></tr>
+          <tr><th>SOP</th><td>
+            {% if extraction.sop %}
+              <span class="badge bg-secondary">{{ extraction.sop }}</span>
+              {% set sop_names = {'VG002': 'Fungal DNA (Chelex)', 'VG003': 'Bacterial DNA (Chelex)', 'VG004': 'Plant DNA (MagMax/KingFisher)', 'VG006': 'Buccal DNA (MagMax/KingFisher)'} %}
+              {{ sop_names.get(extraction.sop, '') }}
+            {% else %}—{% endif %}
+          </td></tr>
+          <tr><th>Operator</th><td>{{ extraction.operator.name if extraction.operator else '—' }}</td></tr>
+          <tr><th>Instrument</th><td>{{ extraction.instrument or '—' }}</td></tr>
+          <tr><th>Checklist</th><td>
+            {% if extraction.checklist_complete %}
+              <span class="badge bg-success"><i class="bi bi-check-lg"></i> Complete</span>
+            {% else %}
+              <span class="badge bg-warning text-dark">Not verified</span>
+            {% endif %}
+          </td></tr>
+          {% if extraction.notes %}<tr><th>Notes</th><td>{{ extraction.notes }}</td></tr>{% endif %}
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-7">
+    <div class="card">
+      <div class="card-header">Samples ({{ extraction.extraction_samples | length }})</div>
+      <div class="card-body p-0">
+        {% if extraction.extraction_samples %}
+        <table class="table table-sm mb-0">
+          <thead class="table-light">
+            <tr><th>#</th><th>Sample</th><th>Tube ID</th><th>Well</th><th>Tissue (mg)</th><th>Final Vol. (µL)</th><th>QC</th></tr>
+          </thead>
+          <tbody>
+          {% for es in extraction.extraction_samples %}
+          <tr>
+            <td>{{ loop.index }}</td>
+            <td>
+              <a href="{{ url_for('samples_view', id=es.sample.id) }}">{{ es.sample.accession_number }}</a>
+              <br><small class="text-muted">{{ es.sample.sample_name }}</small>
+            </td>
+            <td>{{ es.tube_id or '—' }}</td>
+            <td>{{ es.well_position or '—' }}</td>
+            <td>{{ es.tissue_amount_mg or '—' }}</td>
+            <td>{{ es.final_volume_ul or '—' }}</td>
+            <td>
+              {% if es.sample.qc_measurements %}
+                <span class="badge bg-success">{{ es.sample.qc_measurements[-1].concentration_ng_ul }} ng/µL</span>
+              {% else %}
+                <a href="{{ url_for('qc_add', sample_id=es.sample.id) }}" class="badge bg-light text-muted text-decoration-none border">Add QC</a>
+              {% endif %}
+            </td>
+          </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+        {% else %}
+        <div class="p-3 text-muted text-center">No samples in this batch.</div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

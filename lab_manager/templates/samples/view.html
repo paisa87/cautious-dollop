@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+{% block title %}{{ sample.sample_name }}{% endblock %}
+{% block breadcrumb %}
+  <a href="{{ url_for('samples_list') }}">Samples</a> / {{ sample.accession_number }}
+{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <div>
+    <h4 class="mb-0">{{ sample.sample_name }}</h4>
+    <small class="text-muted">Accession: <strong>{{ sample.accession_number }}</strong>
+      {% if sample.batch_id %} · Batch: {{ sample.batch_id }}{% endif %}
+    </small>
+  </div>
+  <div class="btn-row">
+    <a href="{{ url_for('qc_add', sample_id=sample.id) }}" class="btn btn-success btn-sm">
+      <i class="bi bi-clipboard2-pulse"></i> Add QC
+    </a>
+    <a href="{{ url_for('samples_edit', id=sample.id) }}" class="btn btn-primary btn-sm">
+      <i class="bi bi-pencil"></i> Edit
+    </a>
+    {% set u = current_user() %}
+    {% if u and u.role in ('instructor', 'staff') %}
+    <form action="{{ url_for('samples_delete', id=sample.id) }}" method="post" class="confirm-delete">
+      <button class="btn btn-outline-danger btn-sm"><i class="bi bi-trash"></i></button>
+    </form>
+    {% endif %}
+    <a href="{{ url_for('samples_list') }}" class="btn btn-outline-secondary btn-sm">← Back</a>
+  </div>
+</div>
+
+<div class="row g-3">
+  <div class="col-md-5">
+    <div class="card">
+      <div class="card-header">Sample Information</div>
+      <div class="card-body">
+        <table class="table table-sm table-borderless mb-0">
+          <tr><th style="width:40%">Organism / Type</th><td>{{ sample.organism_type or '—' }}</td></tr>
+          <tr><th>Description</th><td>{{ sample.description or '—' }}</td></tr>
+          <tr><th>Submitted By</th><td>{{ sample.submitted_by.name if sample.submitted_by else '—' }}</td></tr>
+          <tr><th>Date Collected</th><td>{{ sample.date_collected.strftime('%B %d, %Y') if sample.date_collected else '—' }}</td></tr>
+          <tr><th>Storage Location</th><td>{{ sample.storage_location or '—' }}</td></tr>
+          <tr><th>Date Accessioned</th><td>{{ sample.date_added.strftime('%B %d, %Y') if sample.date_added else '—' }}</td></tr>
+          {% if sample.notes %}<tr><th>Notes</th><td>{{ sample.notes }}</td></tr>{% endif %}
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- QC History -->
+  <div class="col-md-7">
+    <div class="card">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <span><i class="bi bi-clipboard2-pulse me-1"></i> QC Measurements</span>
+        <a href="{{ url_for('qc_add', sample_id=sample.id) }}" class="btn btn-sm btn-success">
+          <i class="bi bi-plus"></i> Add
+        </a>
+      </div>
+      <div class="card-body p-0">
+        {% if sample.qc_measurements %}
+        <table class="table table-sm mb-0">
+          <thead class="table-light">
+            <tr><th>Date</th><th>Method</th><th>Conc. (ng/µL)</th><th>260/280</th><th>260/230</th><th>Operator</th></tr>
+          </thead>
+          <tbody>
+          {% for qc in sample.qc_measurements | sort(attribute='date', reverse=True) %}
+          <tr>
+            <td style="font-size:.82rem">{{ qc.date.strftime('%Y-%m-%d %H:%M') if qc.date else '—' }}</td>
+            <td><span class="badge bg-info text-dark">{{ qc.method }}</span></td>
+            <td>{{ qc.concentration_ng_ul or '—' }}</td>
+            <td>
+              {% if qc.ratio_260_280 %}
+                {% set r = qc.ratio_260_280 %}
+                <span class="{{ 'text-success' if 1.7 <= r <= 2.0 else 'text-danger' }}">{{ r }}</span>
+              {% else %}—{% endif %}
+            </td>
+            <td>
+              {% if qc.ratio_260_230 %}
+                {% set r = qc.ratio_260_230 %}
+                <span class="{{ 'text-success' if r >= 1.8 else 'text-danger' }}">{{ r }}</span>
+              {% else %}—{% endif %}
+            </td>
+            <td style="font-size:.82rem">{{ qc.operator.initials if qc.operator else '—' }}</td>
+          </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+        {% else %}
+        <div class="p-3 text-muted text-center">No QC records yet.</div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+{% block title %}New Extraction Batch{% endblock %}
+{% block breadcrumb %}
+  <a href="{{ url_for('extractions_list') }}">DNA Extractions</a> / New Batch
+{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h4 class="mb-0">New DNA Extraction Batch Record</h4>
+  <a href="{{ url_for('extractions_list') }}" class="btn btn-outline-secondary btn-sm">← Back</a>
+</div>
+
+<form method="post">
+  <div class="card mb-3">
+    <div class="card-header">Batch Information</div>
+    <div class="card-body row g-3">
+      <div class="col-md-3">
+        <label class="form-label">Batch ID</label>
+        <input type="text" name="batch_id" class="form-control" placeholder="Auto-generated if blank">
+      </div>
+      <div class="col-md-3">
+        <label class="form-label">Date <span class="text-danger">*</span></label>
+        <input type="date" name="date" class="form-control" required
+               value="{{ today().isoformat() }}">
+      </div>
+      <div class="col-md-3">
+        <label class="form-label">SOP Used</label>
+        <select name="sop" class="form-select">
+          <option value="VG002">VG002 — Fungal DNA (Chelex)</option>
+          <option value="VG003">VG003 — Bacterial DNA (Chelex)</option>
+          <option value="VG004">VG004 — Plant DNA (MagMax/KingFisher)</option>
+          <option value="VG006">VG006 — Buccal DNA (MagMax/KingFisher)</option>
+        </select>
+      </div>
+      <div class="col-md-3">
+        <label class="form-label">Operator</label>
+        <select name="operator_id" class="form-select">
+          {% for u in users %}
+          <option value="{{ u.id }}"
+            {% if session.get('user_id') == u.id %}selected{% endif %}>
+            {{ u.name }} ({{ u.initials }})
+          </option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="col-md-4">
+        <label class="form-label">Instrument</label>
+        <input type="text" name="instrument" class="form-control"
+               placeholder="e.g. KingFisher Flex, N/A (manual)">
+      </div>
+      <div class="col-md-4">
+        <label class="form-label">Notes</label>
+        <input type="text" name="notes" class="form-control" placeholder="Optional notes">
+      </div>
+      <div class="col-md-4 d-flex align-items-end">
+        <div class="form-check mb-2">
+          <input type="checkbox" name="checklist_complete" class="form-check-input" id="chk">
+          <label class="form-check-label" for="chk">Checklist complete &amp; verified</label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Samples table -->
+  <div class="card mb-3">
+    <div class="card-header d-flex justify-content-between align-items-center">
+      <span>Samples in this Batch</span>
+      <button type="button" class="btn btn-sm btn-outline-primary"
+              onclick="addRow('sample-rows', 'sample-row-template')">
+        <i class="bi bi-plus"></i> Add Row
+      </button>
+    </div>
+    <div class="card-body p-0">
+      <table class="table table-sm mb-0">
+        <thead class="table-light">
+          <tr>
+            <th>Sample</th>
+            <th>Tube ID</th>
+            <th>Well Position</th>
+            <th>Tissue (mg)</th>
+            <th>Final Vol. (µL)</th>
+          </tr>
+        </thead>
+        <tbody id="sample-rows">
+          {% for _ in range(6) %}
+          <tr>
+            <td>
+              <select name="sample_id[]" class="form-select form-select-sm">
+                <option value="">— Select —</option>
+                {% for s in samples %}
+                <option value="{{ s.id }}">{{ s.accession_number }} — {{ s.sample_name }}</option>
+                {% endfor %}
+              </select>
+            </td>
+            <td><input type="text" name="tube_id[]" class="form-control form-control-sm" placeholder="e.g. 1A"></td>
+            <td><input type="text" name="well_position[]" class="form-control form-control-sm" placeholder="e.g. A1"></td>
+            <td><input type="number" step="0.1" name="tissue_amount_mg[]" class="form-control form-control-sm" placeholder="10"></td>
+            <td><input type="number" step="1" name="final_volume_ul[]" class="form-control form-control-sm" placeholder="50"></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Hidden template row for JS cloning -->
+  <tr id="sample-row-template" style="display:none">
+    <td>
+      <select name="sample_id[]" class="form-select form-select-sm">
+        <option value="">— Select —</option>
+        {% for s in samples %}
+        <option value="{{ s.id }}">{{ s.accession_number }} — {{ s.sample_name }}</option>
+        {% endfor %}
+      </select>
+    </td>
+    <td><input type="text" name="tube_id[]" class="form-control form-control-sm"></td>
+    <td><input type="text" name="well_position[]" class="form-control form-control-sm"></td>
+    <td><input type="number" step="0.1" name="tissue_amount_mg[]" class="form-control form-control-sm"></td>
+    <td><input type="number" step="1" name="final_volume_ul[]" class="form-control form-control-sm"></td>
+  </tr>
+
+  <div class="mt-1">
+    <button type="submit" class="btn btn-primary">
+      <i class="bi bi-check-lg"></i> Save Batch Record
+    </button>
+    <a href="{{ url_for('extractions_list') }}" class="btn btn-outline-secondary ms-2">Cancel</a>
+  </div>
+</form>
+{% endblock %}

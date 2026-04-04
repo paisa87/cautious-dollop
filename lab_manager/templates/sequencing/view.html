@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% block title %}Sequencing Run {{ run.run_date }}{% endblock %}
+{% block breadcrumb %}
+  <a href="{{ url_for('sequencing_list') }}">Sanger Sequencing</a> /
+  {{ run.run_date.strftime('%Y-%m-%d') if run.run_date else 'Run' }}
+{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h4 class="mb-0">Sequencing Run — {{ run.run_date.strftime('%B %d, %Y') if run.run_date else 'No date' }}</h4>
+  <a href="{{ url_for('sequencing_list') }}" class="btn btn-outline-secondary btn-sm">← Back</a>
+</div>
+
+<div class="row g-3 mb-3">
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-header">Run Details</div>
+      <div class="card-body">
+        <table class="table table-sm table-borderless mb-0">
+          <tr><th style="width:40%">Operator</th><td>{{ run.operator.name if run.operator else '—' }} ({{ run.operator.initials if run.operator else '' }})</td></tr>
+          <tr><th>Instrument</th><td>{{ run.instrument or '—' }}</td></tr>
+          <tr><th># Samples</th><td>{{ run.seq_samples | length }}</td></tr>
+          {% if run.notes %}<tr><th>Notes</th><td>{{ run.notes }}</td></tr>{% endif %}
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header">Samples &amp; Results</div>
+  <div class="card-body p-0">
+    <div class="table-responsive">
+      <table class="table table-sm mb-0">
+        <thead class="table-light">
+          <tr>
+            <th>Tube #</th>
+            <th>Sample</th>
+            <th>Label</th>
+            <th>Primer</th>
+            <th>BigDye (µL)</th>
+            <th>Template (µL)</th>
+            <th>Conc. (ng/µL)</th>
+            <th>FASTA</th>
+            <th>Result Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for ss in run.seq_samples | sort(attribute='tube_number') %}
+        <tr>
+          <td>{{ ss.tube_number }}</td>
+          <td>
+            {% if ss.sample %}
+              <a href="{{ url_for('samples_view', id=ss.sample.id) }}">{{ ss.sample.accession_number }}</a>
+              <br><small class="text-muted">{{ ss.sample.sample_name }}</small>
+            {% else %}—{% endif %}
+          </td>
+          <td>{{ ss.sample_label or '—' }}</td>
+          <td style="font-size:.82rem">{{ ss.primer.item_name if ss.primer else '—' }}</td>
+          <td>{{ ss.bigdye_volume_ul or '—' }}</td>
+          <td>{{ ss.template_volume_ul or '—' }}</td>
+          <td>{{ ss.concentration_ng_ul or '—' }}</td>
+          <td>
+            {% if ss.fasta_filename %}
+              <a href="{{ url_for('fasta_download', filename=ss.fasta_filename) }}"
+                 class="btn btn-sm btn-outline-success py-0">
+                <i class="bi bi-download"></i> {{ ss.fasta_filename }}
+              </a>
+            {% else %}
+              <span class="text-muted" style="font-size:.82rem">—</span>
+            {% endif %}
+          </td>
+          <td style="font-size:.82rem">{{ ss.result_notes or '—' }}</td>
+        </tr>
+        {% else %}
+        <tr><td colspan="9" class="text-center text-muted py-3">No samples recorded.</td></tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}

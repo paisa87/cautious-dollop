@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block title %}PCR Run {{ run.run_date }}{% endblock %}
+{% block breadcrumb %}<a href="{{ url_for('pcr_list') }}">PCR Runs</a> / {{ run.run_date }}{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h4 class="mb-0">PCR Run — {{ run.run_date.strftime('%B %d, %Y') if run.run_date else 'No date' }}</h4>
+  <a href="{{ url_for('pcr_list') }}" class="btn btn-outline-secondary btn-sm">← Back</a>
+</div>
+
+<div class="row g-3 mb-3">
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-header">Run Details</div>
+      <div class="card-body">
+        <table class="table table-sm table-borderless mb-0">
+          <tr><th style="width:45%">Operator</th><td>{{ run.operator.name if run.operator else '—' }}</td></tr>
+          <tr><th>Program</th><td>{{ run.thermocycler_program or '—' }}</td></tr>
+          <tr><th>Gel Run</th><td>{{ 'Yes (SOP VG010)' if run.gel_run else 'No' }}</td></tr>
+          {% if run.notes %}<tr><th>Notes</th><td>{{ run.notes }}</td></tr>{% endif %}
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header">Samples &amp; Results</div>
+  <div class="card-body p-0">
+    <table class="table table-sm mb-0">
+      <thead class="table-light">
+        <tr><th>Tube</th><th>Sample</th><th>Forward Primer</th><th>Reverse Primer</th><th>Template (µL)</th><th>Expected (bp)</th><th>Result</th></tr>
+      </thead>
+      <tbody>
+      {% for ps in run.pcr_samples %}
+      <tr>
+        <td>{{ ps.tube_label or '—' }}</td>
+        <td>{% if ps.sample %}<a href="{{ url_for('samples_view', id=ps.sample.id) }}">{{ ps.sample.accession_number }}</a> <small class="text-muted">{{ ps.sample.sample_name }}</small>{% else %}—{% endif %}</td>
+        <td style="font-size:.82rem">{{ ps.primer_f.item_name if ps.primer_f else '—' }}</td>
+        <td style="font-size:.82rem">{{ ps.primer_r.item_name if ps.primer_r else '—' }}</td>
+        <td>{{ ps.template_volume_ul or '—' }}</td>
+        <td>{{ ps.expected_size_bp or '—' }}</td>
+        <td>
+          {% if ps.result %}
+            {% if 'present' in ps.result or 'control ✓' in ps.result %}
+              <span class="badge bg-success">{{ ps.result }}</span>
+            {% elif 'No band' in ps.result %}
+              <span class="badge bg-danger">{{ ps.result }}</span>
+            {% else %}
+              <span class="badge bg-warning text-dark">{{ ps.result }}</span>
+            {% endif %}
+          {% else %}—{% endif %}
+        </td>
+      </tr>
+      {% else %}
+      <tr><td colspan="7" class="text-center text-muted py-3">No samples recorded.</td></tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

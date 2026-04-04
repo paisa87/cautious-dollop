@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block title %}qPCR Run {{ run.run_date }}{% endblock %}
+{% block breadcrumb %}<a href="{{ url_for('qpcr_list') }}">qPCR Runs</a> / {{ run.run_date }}{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h4 class="mb-0">qPCR Run — {{ run.run_date.strftime('%B %d, %Y') if run.run_date else 'No date' }}</h4>
+  <a href="{{ url_for('qpcr_list') }}" class="btn btn-outline-secondary btn-sm">← Back</a>
+</div>
+
+<div class="row g-3 mb-3">
+  <div class="col-md-5">
+    <div class="card">
+      <div class="card-header">Run Details</div>
+      <div class="card-body">
+        <table class="table table-sm table-borderless mb-0">
+          <tr><th style="width:40%">Assay</th><td>{{ run.assay_type or '—' }}</td></tr>
+          <tr><th>Operator</th><td>{{ run.operator.name if run.operator else '—' }}</td></tr>
+          <tr><th>Instrument</th><td>{{ run.instrument or '—' }}</td></tr>
+          <tr><th>Results File</th><td>
+            {% if run.plate_filename %}
+              <a href="{{ url_for('qpcr_download', filename=run.plate_filename) }}">
+                <i class="bi bi-download"></i> {{ run.plate_filename }}
+              </a>
+            {% else %}—{% endif %}
+          </td></tr>
+          {% if run.notes %}<tr><th>Notes</th><td>{{ run.notes }}</td></tr>{% endif %}
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header">Samples &amp; Ct Values</div>
+  <div class="card-body p-0">
+    <table class="table table-sm mb-0">
+      <thead class="table-light">
+        <tr><th>Well</th><th>Sample</th><th>Replicate Group</th><th>Ct Value</th><th>Result</th></tr>
+      </thead>
+      <tbody>
+      {% for qs in run.qpcr_samples | sort(attribute='well_position') %}
+      <tr>
+        <td><strong>{{ qs.well_position or '—' }}</strong></td>
+        <td>{% if qs.sample %}<a href="{{ url_for('samples_view', id=qs.sample.id) }}">{{ qs.sample.accession_number }}</a> <small class="text-muted">{{ qs.sample.sample_name }}</small>{% else %}—{% endif %}</td>
+        <td style="font-size:.85rem">{{ qs.replicate_group or '—' }}</td>
+        <td><strong>{{ qs.ct_value or '—' }}</strong></td>
+        <td>
+          {% if qs.result %}
+            {% if 'Positive' in qs.result %}<span class="badge bg-success">{{ qs.result }}</span>
+            {% elif 'Negative' in qs.result %}<span class="badge bg-secondary">{{ qs.result }}</span>
+            {% elif 'Control' in qs.result %}<span class="badge bg-info text-dark">{{ qs.result }}</span>
+            {% else %}<span class="badge bg-light text-dark border">{{ qs.result }}</span>{% endif %}
+          {% else %}—{% endif %}
+        </td>
+      </tr>
+      {% else %}
+      <tr><td colspan="5" class="text-center text-muted py-3">No samples recorded.</td></tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

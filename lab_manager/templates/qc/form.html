@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+{% block title %}Record QC Measurement{% endblock %}
+{% block breadcrumb %}
+  <a href="{{ url_for('qc_list') }}">QC Measurements</a> / New
+{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h4 class="mb-0">Record QC Measurement</h4>
+  <a href="{{ url_for('qc_list') }}" class="btn btn-outline-secondary btn-sm">← Back</a>
+</div>
+
+<form method="post">
+  <div class="card">
+    <div class="card-body row g-3">
+      <div class="col-md-6">
+        <label class="form-label">Sample <span class="text-danger">*</span></label>
+        <select name="sample_id" class="form-select" required>
+          <option value="">— Select sample —</option>
+          {% for s in samples %}
+          <option value="{{ s.id }}" {{ 'selected' if preselect and preselect == s.id|string }}>
+            {{ s.accession_number }} — {{ s.sample_name }}
+          </option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="col-md-3">
+        <label class="form-label">Method <span class="text-danger">*</span></label>
+        <select name="method" class="form-select" required id="method-select">
+          <option value="Qubit">Qubit Fluorometer</option>
+          <option value="Nanodrop">Nanodrop Spectrophotometer</option>
+        </select>
+      </div>
+      <div class="col-md-3">
+        <label class="form-label">SOP</label>
+        <select name="sop" class="form-select" id="sop-select">
+          <option value="VG001">VG001 (Qubit)</option>
+          <option value="VG005">VG005 (Nanodrop)</option>
+        </select>
+      </div>
+      <div class="col-md-3">
+        <label class="form-label">Nucleic Acid Type</label>
+        <select name="nucleic_acid_type" class="form-select">
+          <option value="dsDNA">dsDNA</option>
+          <option value="RNA">RNA</option>
+          <option value="ssDNA">ssDNA</option>
+        </select>
+      </div>
+      <div class="col-md-3">
+        <label class="form-label">Concentration (ng/µL) <span class="text-danger">*</span></label>
+        <input type="number" step="0.01" name="concentration_ng_ul" class="form-control" required
+               placeholder="e.g. 119.0">
+      </div>
+      <!-- Nanodrop-only fields -->
+      <div class="col-md-3" id="ratio-280-field">
+        <label class="form-label">260/280 Ratio</label>
+        <input type="number" step="0.01" name="ratio_260_280" class="form-control" placeholder="e.g. 1.85">
+        <div class="form-text">Acceptable: 1.7–2.0</div>
+      </div>
+      <div class="col-md-3" id="ratio-230-field">
+        <label class="form-label">260/230 Ratio</label>
+        <input type="number" step="0.01" name="ratio_260_230" class="form-control" placeholder="e.g. 2.1">
+        <div class="form-text">Acceptable: ≥1.8</div>
+      </div>
+      <div class="col-md-4">
+        <label class="form-label">Operator</label>
+        <select name="operator_id" class="form-select">
+          {% for u in users %}
+          <option value="{{ u.id }}"
+            {% if session.get('user_id') == u.id %}selected{% endif %}>
+            {{ u.name }} ({{ u.initials }})
+          </option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="col-12">
+        <label class="form-label">Notes</label>
+        <textarea name="notes" class="form-control" rows="2"
+                  placeholder="e.g. Sample appeared slightly turbid; re-quantified after dilution"></textarea>
+      </div>
+    </div>
+  </div>
+  <div class="mt-3">
+    <button type="submit" class="btn btn-primary">
+      <i class="bi bi-check-lg"></i> Save Measurement
+    </button>
+    <a href="{{ url_for('qc_list') }}" class="btn btn-outline-secondary ms-2">Cancel</a>
+  </div>
+</form>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  const methodSelect = document.getElementById('method-select');
+  const sopSelect = document.getElementById('sop-select');
+  const r280 = document.getElementById('ratio-280-field');
+  const r230 = document.getElementById('ratio-230-field');
+
+  function updateFields() {
+    const isNanodrop = methodSelect.value === 'Nanodrop';
+    r280.style.display = isNanodrop ? '' : 'none';
+    r230.style.display = isNanodrop ? '' : 'none';
+    sopSelect.value = isNanodrop ? 'VG005' : 'VG001';
+  }
+  methodSelect.addEventListener('change', updateFields);
+  updateFields();
+</script>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}Vendors{% endblock %}
+{% block breadcrumb %}<a href="{{ url_for('vendors_list') }}">Vendors</a>{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h4 class="mb-0">Approved Vendors</h4>
+  {% set u = current_user() %}
+  {% if u and u.role in ('instructor', 'staff') %}
+  <a href="{{ url_for('vendors_add') }}" class="btn btn-primary"><i class="bi bi-plus-lg"></i> Add Vendor</a>
+  {% endif %}
+</div>
+<div class="card">
+  <div class="card-body p-0">
+    <table class="table table-sm table-hover data-table mb-0">
+      <thead class="table-light">
+        <tr><th>Vendor Name</th><th>Account #</th><th>Contact</th><th>Website</th><th># Items</th><th>Notes</th><th></th></tr>
+      </thead>
+      <tbody>
+      {% for v in vendors %}
+      <tr>
+        <td class="fw-semibold">{{ v.name }}</td>
+        <td style="font-size:.85rem">{{ v.account_number or '—' }}</td>
+        <td style="font-size:.85rem">{{ v.contact or '—' }}</td>
+        <td>{% if v.website %}<a href="{{ v.website }}" target="_blank" style="font-size:.82rem">{{ v.website | replace('https://','') | truncate(30) }} <i class="bi bi-box-arrow-up-right"></i></a>{% else %}—{% endif %}</td>
+        <td>{{ v.items | length }}</td>
+        <td style="font-size:.82rem">{{ v.notes or '' }}</td>
+        <td>
+          {% set u = current_user() %}
+          {% if u and u.role in ('instructor', 'staff') %}
+          <a href="{{ url_for('vendors_edit', id=v.id) }}" class="btn btn-sm btn-outline-primary py-0">Edit</a>
+          {% endif %}
+        </td>
+      </tr>
+      {% else %}
+      <tr><td colspan="7" class="text-center text-muted py-4">No vendors yet.</td></tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

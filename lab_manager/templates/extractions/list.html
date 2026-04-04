@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %}DNA Extractions{% endblock %}
+{% block breadcrumb %}<a href="{{ url_for('extractions_list') }}">DNA Extractions</a>{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h4 class="mb-0">DNA Extraction Batch Records</h4>
+  <a href="{{ url_for('extractions_add') }}" class="btn btn-primary">
+    <i class="bi bi-plus-lg"></i> New Extraction Batch
+  </a>
+</div>
+
+<div class="card">
+  <div class="card-body p-0">
+    <table class="table table-sm table-hover data-table mb-0">
+      <thead class="table-light">
+        <tr>
+          <th>Batch ID</th>
+          <th>Date</th>
+          <th>SOP</th>
+          <th>Instrument</th>
+          <th>Operator</th>
+          <th># Samples</th>
+          <th>Checklist</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for e in extractions %}
+      <tr>
+        <td><a href="{{ url_for('extractions_view', id=e.id) }}" class="fw-semibold text-decoration-none">{{ e.batch_id }}</a></td>
+        <td>{{ e.date.strftime('%Y-%m-%d') if e.date else '—' }}</td>
+        <td><span class="badge bg-secondary">{{ e.sop or '—' }}</span></td>
+        <td style="font-size:.85rem">{{ e.instrument or '—' }}</td>
+        <td style="font-size:.85rem">{{ e.operator.initials if e.operator else '—' }}</td>
+        <td>{{ e.extraction_samples | length }}</td>
+        <td>
+          {% if e.checklist_complete %}
+            <span class="badge bg-success"><i class="bi bi-check-lg"></i> Complete</span>
+          {% else %}
+            <span class="badge bg-warning text-dark">Pending</span>
+          {% endif %}
+        </td>
+        <td><a href="{{ url_for('extractions_view', id=e.id) }}" class="btn btn-sm btn-outline-secondary py-0">View</a></td>
+      </tr>
+      {% else %}
+      <tr><td colspan="8" class="text-center text-muted py-4">No extraction records yet.</td></tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

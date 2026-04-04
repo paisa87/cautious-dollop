@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}PCR Runs{% endblock %}
+{% block breadcrumb %}<a href="{{ url_for('pcr_list') }}">PCR Runs</a>{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h4 class="mb-0">PCR Runs</h4>
+  <a href="{{ url_for('pcr_add') }}" class="btn btn-primary"><i class="bi bi-plus-lg"></i> Log New Run</a>
+</div>
+<div class="card">
+  <div class="card-body p-0">
+    <table class="table table-sm table-hover data-table mb-0">
+      <thead class="table-light">
+        <tr><th>Date</th><th>Operator</th><th>Program</th><th># Samples</th><th>Gel Run?</th><th>Notes</th><th></th></tr>
+      </thead>
+      <tbody>
+      {% for r in runs %}
+      <tr>
+        <td><a href="{{ url_for('pcr_view', id=r.id) }}" class="fw-semibold text-decoration-none">
+          {{ r.run_date.strftime('%Y-%m-%d') if r.run_date else 'No date' }}</a></td>
+        <td>{{ r.operator.initials if r.operator else '—' }}</td>
+        <td style="font-size:.85rem">{{ r.thermocycler_program or '—' }}</td>
+        <td>{{ r.pcr_samples | length }}</td>
+        <td>{% if r.gel_run %}<span class="badge bg-info text-dark">Yes</span>{% else %}<span class="text-muted">No</span>{% endif %}</td>
+        <td style="font-size:.82rem">{{ r.notes or '' }}</td>
+        <td><a href="{{ url_for('pcr_view', id=r.id) }}" class="btn btn-sm btn-outline-secondary py-0">View</a></td>
+      </tr>
+      {% else %}
+      <tr><td colspan="7" class="text-center text-muted py-4">No PCR runs yet.</td></tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

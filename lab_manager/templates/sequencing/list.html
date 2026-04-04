@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}Sanger Sequencing Runs{% endblock %}
+{% block breadcrumb %}<a href="{{ url_for('sequencing_list') }}">Sanger Sequencing</a>{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h4 class="mb-0">Sanger Sequencing Runs</h4>
+  <a href="{{ url_for('sequencing_add') }}" class="btn btn-primary">
+    <i class="bi bi-plus-lg"></i> Log New Run
+  </a>
+</div>
+
+<div class="card">
+  <div class="card-body p-0">
+    <table class="table table-sm table-hover data-table mb-0">
+      <thead class="table-light">
+        <tr>
+          <th>Run Date</th>
+          <th>Operator</th>
+          <th>Instrument</th>
+          <th># Samples</th>
+          <th>FASTA Files</th>
+          <th>Notes</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for r in runs %}
+      <tr>
+        <td><a href="{{ url_for('sequencing_view', id=r.id) }}" class="fw-semibold text-decoration-none">
+          {{ r.run_date.strftime('%Y-%m-%d') if r.run_date else 'No date' }}
+        </a></td>
+        <td>{{ r.operator.initials if r.operator else '—' }}</td>
+        <td style="font-size:.85rem">{{ r.instrument or '—' }}</td>
+        <td>{{ r.seq_samples | length }}</td>
+        <td>
+          {% set fasta_count = r.seq_samples | selectattr('fasta_filename') | list | length %}
+          {% if fasta_count > 0 %}
+            <span class="badge bg-success">{{ fasta_count }} file{{ 's' if fasta_count != 1 }}</span>
+          {% else %}
+            <span class="text-muted" style="font-size:.82rem">None uploaded</span>
+          {% endif %}
+        </td>
+        <td style="font-size:.82rem; max-width:200px; overflow:hidden; text-overflow:ellipsis"
+            title="{{ r.notes or '' }}">{{ r.notes or '' }}</td>
+        <td><a href="{{ url_for('sequencing_view', id=r.id) }}" class="btn btn-sm btn-outline-secondary py-0">View</a></td>
+      </tr>
+      {% else %}
+      <tr><td colspan="7" class="text-center text-muted py-4">No sequencing runs yet.</td></tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}
