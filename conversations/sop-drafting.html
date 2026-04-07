@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Drafting Lab SOPs — AI in My Work & Life</title>
+  <link rel="stylesheet" href="../css/styles.css" />
+</head>
+<body>
+  <nav id="navbar">
+    <div class="nav-inner">
+      <a href="../index.html" class="nav-brand">AI in Practice</a>
+      <ul class="nav-links">
+        <li><a href="../index.html#use-cases">Use Cases</a></li>
+        <li><a href="../index.html#conversations">Conversations</a></li>
+        <li><a href="../index.html#reflections">Reflections</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="convo-page">
+    <a href="../index.html#conversations" class="convo-back">&larr; Back to all conversations</a>
+
+    <div class="convo-page-header">
+      <h1>Drafting Lab SOPs from Scratch</h1>
+      <div class="meta">
+        <span class="ai-badge ai-claude">Claude</span>
+        <span class="card-tag tag-teaching">Teaching</span>
+        <!-- Update with the actual date of this conversation -->
+        <span class="convo-date">Date: [add date]</span>
+      </div>
+    </div>
+
+    <div class="convo-context">
+      <strong>Context:</strong> I had rough procedural notes for a Chelex-based
+      fungal DNA extraction (covered in BTC181). They were in bullet form, written
+      during a run — timing notes, margin scribbles, that sort of thing. I wanted
+      a proper SOP I could hand to students and keep on file. Instead of starting
+      from a blank template, I pasted my notes into Claude and asked it to do the
+      heavy lifting on structure.
+    </div>
+
+    <div class="chat-thread">
+
+      <div class="chat-turn user">
+        <span class="chat-label">You</span>
+        <div class="chat-bubble">Here are my rough notes for a Chelex DNA extraction from fungal isolates. Please reformat these as a numbered SOP with a materials list, numbered procedural steps, and safety callouts where relevant. Keep the language direct — this is for students, not a publication.
+
+[Rough notes pasted in]
+- chelex 100, 5% solution in water
+- ~50mg tissue or a small scraping from colony
+- add ~200ul chelex to tube
+- vortex briefly
+- boil 10 min in heat block (100C)
+- vortex again
+- spin 3 min full speed
+- supernatant = your DNA, use 2ul for PCR
+- chelex is irritant, gloves required
+- label tubes before you start or you will regret it</div>
+      </div>
+
+      <div class="chat-turn ai">
+        <span class="chat-label">Claude</span>
+        <div class="chat-bubble"><strong>SOP: Fungal Isolate DNA Extraction with Chelex 100</strong>
+
+<strong>Purpose:</strong> Extract genomic DNA from fungal colony material for use in downstream PCR applications.
+
+<strong>Materials</strong>
+- 5% Chelex 100 solution (prepared in nuclease-free water)
+- Fungal isolate material (~50 mg tissue or colony scraping)
+- 1.5 mL microcentrifuge tubes (labeled before use)
+- Micropipettes and aerosol-barrier tips
+- Vortex mixer
+- Heat block set to 100°C
+- Microcentrifuge capable of full speed (~13,000 × g)
+- Personal protective equipment: gloves, lab coat, eye protection
+
+<strong>⚠ Safety Note:</strong> Chelex 100 is an irritant. Wear gloves throughout this procedure. Avoid inhalation of dry resin.
+
+<strong>Procedure</strong>
+1. Label all microcentrifuge tubes before beginning.
+2. Transfer approximately 50 mg of fungal tissue or a small colony scraping into a labeled 1.5 mL tube.
+3. Add 200 µL of 5% Chelex 100 solution to the tube.
+4. Vortex briefly (5–10 seconds) to mix.
+5. Incubate at 100°C in a heat block for 10 minutes.
+6. Remove from heat block and vortex again briefly.
+7. Centrifuge at full speed for 3 minutes.
+8. The supernatant contains your extracted DNA. Transfer to a fresh labeled tube or use directly.
+9. Use 2 µL of supernatant per PCR reaction.
+10. Store remaining DNA at −20°C or proceed to PCR.
+
+<strong>Notes</strong>
+- Do not disturb the Chelex pellet when pipetting supernatant.
+- DNA quality by this method is sufficient for PCR but not for applications requiring high-purity nucleic acid.</div>
+      </div>
+
+      <div class="chat-turn user">
+        <span class="chat-label">You</span>
+        <div class="chat-bubble">Good. Can you add a "Common Problems" section at the end covering the two most likely failure modes?</div>
+      </div>
+
+      <div class="chat-turn ai">
+        <span class="chat-label">Claude</span>
+        <div class="chat-bubble"><strong>Common Problems</strong>
+
+<strong>No amplification in PCR after extraction</strong>
+- Likely cause: Chelex pellet was disturbed during pipetting, introducing inhibitors into the supernatant.
+- Solution: Re-spin the tube and carefully re-pipette from the top of the supernatant. If the problem persists, dilute the DNA 1:5 in nuclease-free water before using in PCR.
+
+<strong>Inconsistent results between replicate extractions</strong>
+- Likely cause: Variation in tissue input amount, incomplete homogenization, or inconsistent boiling temperature.
+- Solution: Standardize tissue input using a balance or consistent colony scraping technique. Verify heat block temperature with a calibrated thermometer. Ensure all samples are vortexed and boiled under identical conditions.</div>
+      </div>
+
+      <div class="chat-turn user">
+        <span class="chat-label">You</span>
+        <div class="chat-bubble">Perfect. One more thing — add a version number and revision date field to the top so it looks like a proper controlled document.</div>
+      </div>
+
+      <div class="chat-turn ai">
+        <span class="chat-label">Claude</span>
+        <div class="chat-bubble">Here's a header block to add at the top of the SOP:
+
+─────────────────────────────────────────
+SOP Title:  Fungal Isolate DNA Extraction with Chelex 100
+SOP Number: [e.g., VG002]
+Version:    1.0
+Date:       [MM/DD/YYYY]
+Author:     [Your Name]
+Reviewed by: ___________________________
+Approved by: ___________________________
+─────────────────────────────────────────
+
+Let me know if you'd like this formatted for a specific document template (Word table, etc.).</div>
+      </div>
+
+    </div><!-- /chat-thread -->
+
+    <div class="convo-takeaway">
+      <h2>What I took away</h2>
+      <ul>
+        <li>The structure came out clean on the first try — Claude understood "SOP" as a format with materials, steps, and safety callouts without me having to define it.</li>
+        <li>The follow-up prompts (Common Problems, header block) were easy and additive — much faster than editing a blank template myself.</li>
+        <li>I still reviewed every step against my actual protocol before handing it to students. A few µL values and timing notes needed adjustment.</li>
+        <li>Total time from rough notes to final SOP: about 15 minutes, versus probably 45–60 minutes writing from scratch.</li>
+      </ul>
+    </div>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>AI in My Work &amp; Life — A Faculty Perspective</p>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

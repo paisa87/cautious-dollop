@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Learning Mixed-Effects Models &mdash; AI in My Work &amp; Life</title>
+  <link rel="stylesheet" href="../css/styles.css" />
+</head>
+<body>
+  <nav id="navbar">
+    <div class="nav-inner">
+      <a href="../index.html" class="nav-brand">AI in Practice</a>
+      <ul class="nav-links">
+        <li><a href="../index.html#use-cases">Use Cases</a></li>
+        <li><a href="../index.html#conversations">Conversations</a></li>
+        <li><a href="../index.html#reflections">Reflections</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="convo-page">
+    <a href="../index.html#conversations" class="convo-back">&larr; Back to all conversations</a>
+
+    <div class="convo-page-header">
+      <h1>Learning Mixed-Effects Models</h1>
+      <div class="meta">
+        <span class="ai-badge ai-claude">Claude</span>
+        <span class="card-tag tag-personal">Personal</span>
+        <span class="convo-date">Date: [add date]</span>
+      </div>
+    </div>
+
+    <div class="convo-context">
+      <strong>Context:</strong> A collaborator suggested I use a mixed-effects model
+      for a dataset with repeated measures from the same plant samples. I hadn&rsquo;t
+      used them before and needed to understand the concept well enough to make
+      a decision about whether it was appropriate &mdash; not just copy an R formula.
+      This is a personal use case in the sense that it was self-directed learning,
+      not a formal course.
+    </div>
+
+    <div class="chat-thread">
+
+      <div class="chat-turn user">
+        <span class="chat-label">You</span>
+        <div class="chat-bubble">I need to understand mixed-effects models. I have a biology background, not a stats background. Start simple &mdash; what&rsquo;s the basic idea, and why would I use one instead of a regular ANOVA?</div>
+      </div>
+
+      <div class="chat-turn ai">
+        <span class="chat-label">Claude</span>
+        <div class="chat-bubble">The core idea: regular ANOVA assumes your observations are independent. Mixed-effects models are for situations where they&rsquo;re not.
+
+Here&rsquo;s a biology example. Say you&rsquo;re measuring gene expression from 10 plants, and you take 3 measurements from each plant over time. You have 30 data points &mdash; but they&rsquo;re not 30 independent observations. The 3 measurements from the same plant are correlated. If you run a standard ANOVA ignoring this, you&rsquo;ll probably get a spuriously low p-value because the model thinks it has more independent information than it does.
+
+Mixed-effects models handle this by separating two kinds of effects:
+
+<strong>Fixed effects</strong> &mdash; the things you actually care about and want to draw conclusions about (e.g., treatment group, time point, temperature).
+
+<strong>Random effects</strong> &mdash; sources of variation you want to account for but not specifically study (e.g., which plant an observation came from, which batch an extraction was in, which technician ran the sample).
+
+The "mixed" part just means the model has both fixed and random effects in it.
+
+In your case: if you&rsquo;re measuring the same plants repeatedly, "plant identity" is a random effect. You&rsquo;re not interested in the specific plants you happened to use &mdash; you&rsquo;re interested in the treatment &mdash; but the model needs to account for the fact that some plants are just naturally higher expressors than others.</div>
+      </div>
+
+      <div class="chat-turn user">
+        <span class="chat-label">You</span>
+        <div class="chat-bubble">That makes sense. My specific situation: I have 6 plant genotypes, 2 treatment conditions (inoculated vs. control), and I&rsquo;m measuring disease severity at 3 time points. Each plant is measured at all 3 time points. Should I use a mixed-effects model?</div>
+      </div>
+
+      <div class="chat-turn ai">
+        <span class="chat-label">Claude</span>
+        <div class="chat-bubble">Yes, a mixed-effects model is appropriate here, and probably better than a standard repeated-measures ANOVA for your design.
+
+Here&rsquo;s what your structure looks like:
+
+<strong>Fixed effects (what you want to test):</strong>
+- Genotype (6 levels)
+- Treatment (inoculated vs. control)
+- Time point (3 levels)
+- Interactions: genotype &times; treatment, time &times; treatment, and potentially the three-way interaction
+
+<strong>Random effects (what you want to account for):</strong>
+- Individual plant (since each plant is measured 3 times, observations within a plant are correlated)
+
+A basic model formula in R would look like:
+lmer(disease_severity ~ genotype * treatment * time + (1 | plant_id), data = your_data)
+
+The (1 | plant_id) part is the random intercept for each plant &mdash; it allows the model to account for the fact that plants start at different baseline levels.
+
+One thing to check: if your time points are evenly spaced and you care about the trajectory over time rather than just each time point in isolation, you might want to treat time as a continuous variable rather than a factor. That&rsquo;s worth discussing with your collaborator based on what question you&rsquo;re actually asking.</div>
+      </div>
+
+      <div class="chat-turn user">
+        <span class="chat-label">You</span>
+        <div class="chat-bubble">What does the random intercept actually do? I get that it&rsquo;s for individual plant, but I want to understand what it means mathematically in plain terms.</div>
+      </div>
+
+      <div class="chat-turn ai">
+        <span class="chat-label">Claude</span>
+        <div class="chat-bubble">Plain terms version:
+
+Think of it this way. Without a random intercept, the model draws one regression line (or fits one set of means) for all your data.
+
+With a random intercept for plant, the model says: &ldquo;I know that each plant has its own baseline. Let me estimate a separate starting point (intercept) for each plant, while still assuming the treatment and time effects are the same for all plants.&rdquo;
+
+Imagine you plot disease severity over time for all your plants. Even in the control group, some plants are just naturally at 0.2 and some are at 0.8 at the start &mdash; not because of anything you did, just biological variation. The random intercept captures that difference so the model doesn&rsquo;t treat it as noise or, worse, as evidence that your treatment had an effect when it didn&rsquo;t.
+
+Mathematically: the model estimates the average intercept (fixed) plus a small deviation for each individual plant (random). Those plant-level deviations are assumed to follow a normal distribution centered at zero. The model estimates the variance of that distribution &mdash; which tells you how much plant-to-plant baseline variation there is.
+
+The practical result: your fixed effects (treatment, genotype, time) are estimated after accounting for individual plant differences, so you&rsquo;re not comparing plants to each other &mdash; you&rsquo;re comparing each plant to itself across conditions.</div>
+      </div>
+
+    </div>
+
+    <div class="convo-takeaway">
+      <h2>What I took away</h2>
+      <ul>
+        <li>This is one of my favorite AI use cases &mdash; interactive explanation of a concept I needed to understand quickly, at my level, with my specific dataset as context.</li>
+        <li>The fixed/random effects distinction clicked for me with the plant baseline example in a way that textbook definitions hadn&rsquo;t.</li>
+        <li>I still ran the final analysis decisions by my collaborator. I wouldn&rsquo;t use an AI explanation alone to justify a statistical approach in a manuscript.</li>
+        <li>The &ldquo;treat time as continuous vs. factor&rdquo; flag was useful &mdash; it prompted a conversation with my collaborator that changed our approach.</li>
+      </ul>
+    </div>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>AI in My Work &amp; Life &mdash; A Faculty Perspective</p>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI in My Work & Life — A Faculty Perspective</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- ========== NAV ========== -->
+  <nav id="navbar">
+    <div class="nav-inner">
+      <span class="nav-brand">AI in Practice</span>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">&#9776;</button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#about">About</a></li>
+        <li><a href="#use-cases">Use Cases</a></li>
+        <li><a href="#conversations">Conversations</a></li>
+        <li><a href="#reflections">Reflections</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ========== HERO ========== -->
+  <header id="hero">
+    <div class="hero-content">
+      <p class="hero-eyebrow">A Faculty Perspective</p>
+      <h1>AI in My Work &amp; Life</h1>
+      <p class="hero-sub">
+        Real prompts. Real outcomes. Honest reflections on what's working,
+        what flopped, and what I'd do differently.
+      </p>
+      <div class="hero-badges">
+        <span class="badge badge-claude">Claude</span>
+        <span class="badge badge-chatgpt">ChatGPT</span>
+        <span class="badge badge-gemini">Gemini</span>
+      </div>
+      <a href="#use-cases" class="btn-primary">See My Use Cases</a>
+    </div>
+    <div class="hero-scroll-hint" aria-hidden="true">&#8595;</div>
+  </header>
+
+  <!-- ========== ABOUT ========== -->
+  <section id="about">
+    <div class="container">
+      <div class="section-header">
+        <h2>About This Site</h2>
+      </div>
+      <div class="about-grid">
+        <div class="about-text">
+          <p>
+            I'm a biotechnology faculty member who teaches lab techniques,
+            runs applied research, and is constantly looking for ways to
+            work smarter — not just faster. I started experimenting with
+            AI tools out of curiosity, and kept using them because they
+            actually helped.
+          </p>
+          <p>
+            This site collects that experience in one place: the prompts I've
+            tried, the workflows I've built, the embarrassing misfires, and
+            the genuine wins. It's aimed at the panel of peer educators I'm
+            presenting to, but it's also just a public record I can point
+            people to.
+          </p>
+          <p>
+            No hype. No affiliate links. Just a working scientist trying to
+            figure out how AI fits into the lab, the classroom, and the rest
+            of life.
+          </p>
+        </div>
+        <div class="about-cards">
+          <div class="about-card">
+            <div class="about-card-icon">&#128300;</div>
+            <h3>Research &amp; Lab</h3>
+            <p>DNA extraction, qPCR, sequencing, data wrangling, and writing up results.</p>
+          </div>
+          <div class="about-card">
+            <div class="about-card-icon">&#128218;</div>
+            <h3>Teaching</h3>
+            <p>Course design, SOPs, rubrics, student feedback, and lab safety docs.</p>
+          </div>
+          <div class="about-card">
+            <div class="about-card-icon">&#127968;</div>
+            <h3>Personal</h3>
+            <p>Everyday uses that don't fit neatly into "work" but shaped how I think about AI.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== USE CASES ========== -->
+  <section id="use-cases">
+    <div class="container">
+      <div class="section-header">
+        <h2>Use Cases</h2>
+        <p class="section-sub">Filter by domain to see how I've used AI across different parts of my work.</p>
+      </div>
+
+      <!-- Filter tabs -->
+      <div class="filter-tabs" role="tablist">
+        <button class="tab active" data-filter="all" role="tab" aria-selected="true">All</button>
+        <button class="tab" data-filter="teaching" role="tab" aria-selected="false">Teaching</button>
+        <button class="tab" data-filter="lab" role="tab" aria-selected="false">Lab &amp; Research</button>
+        <button class="tab" data-filter="personal" role="tab" aria-selected="false">Personal</button>
+      </div>
+
+      <!-- Cards -->
+      <div class="cards-grid" id="useCaseGrid">
+
+        <!-- TEACHING -->
+        <article class="use-card" data-category="teaching">
+          <div class="card-tag tag-teaching">Teaching</div>
+          <h3>Drafting Lab SOPs from Scratch</h3>
+          <p>
+            I pasted my rough procedural notes into Claude and asked it to
+            format them as a standard operating procedure with numbered steps,
+            safety callouts, and a materials list. Cut my drafting time by
+            more than half.
+          </p>
+          <div class="card-meta">
+            <span class="ai-badge ai-claude">Claude</span>
+            <a href="conversations/sop-drafting.html" class="card-link">See the conversation &rarr;</a>
+          </div>
+        </article>
+
+        <article class="use-card" data-category="teaching">
+          <div class="card-tag tag-teaching">Teaching</div>
+          <h3>Writing Assessment Rubrics</h3>
+          <p>
+            Gave ChatGPT a learning objective and asked it to generate a
+            four-point rubric. The first draft was too generic — the back-and-forth
+            to make it specific to a lab course was the real value.
+          </p>
+          <div class="card-meta">
+            <span class="ai-badge ai-chatgpt">ChatGPT</span>
+            <a href="conversations/rubric-writing.html" class="card-link">See the conversation &rarr;</a>
+          </div>
+        </article>
+
+        <article class="use-card" data-category="teaching">
+          <div class="card-tag tag-teaching">Teaching</div>
+          <h3>Generating Practice Quiz Questions</h3>
+          <p>
+            Asked Gemini to generate multiple-choice questions from a set of
+            learning objectives for BTC181. It was fast, but I had to fact-check
+            every distractor — a useful reminder of where AI still needs a human.
+          </p>
+          <div class="card-meta">
+            <span class="ai-badge ai-gemini">Gemini</span>
+            <a href="conversations/quiz-generation.html" class="card-link">See the conversation &rarr;</a>
+          </div>
+        </article>
+
+        <article class="use-card" data-category="teaching">
+          <div class="card-tag tag-teaching">Teaching</div>
+          <h3>Explaining Complex Concepts Differently</h3>
+          <p>
+            When a student struggled with the logic of qPCR amplification,
+            I used Claude to generate three different analogies at varying
+            complexity levels and shared the one that clicked.
+          </p>
+          <div class="card-meta">
+            <span class="ai-badge ai-claude">Claude</span>
+            <a href="conversations/concept-analogies.html" class="card-link">See the conversation &rarr;</a>
+          </div>
+        </article>
+
+        <!-- LAB & RESEARCH -->
+        <article class="use-card" data-category="lab">
+          <div class="card-tag tag-lab">Lab &amp; Research</div>
+          <h3>Troubleshooting a Failed PCR</h3>
+          <p>
+            Described my reaction conditions and gel results to Claude and
+            asked for a ranked list of likely causes. It suggested primer dimer
+            as the top candidate — which turned out to be correct. Saved me a
+            full day of trial-and-error.
+          </p>
+          <div class="card-meta">
+            <span class="ai-badge ai-claude">Claude</span>
+            <a href="conversations/pcr-troubleshoot.html" class="card-link">See the conversation &rarr;</a>
+          </div>
+        </article>
+
+        <article class="use-card" data-category="lab">
+          <div class="card-tag tag-lab">Lab &amp; Research</div>
+          <h3>Summarizing Methods Sections</h3>
+          <p>
+            Pasted in dense methods text from three papers and asked ChatGPT
+            to extract and compare the DNA extraction protocols. It got the
+            gist right but occasionally conflated details across papers —
+            I now always verify step-by-step.
+          </p>
+          <div class="card-meta">
+            <span class="ai-badge ai-chatgpt">ChatGPT</span>
+            <a href="conversations/methods-summary.html" class="card-link">See the conversation &rarr;</a>
+          </div>
+        </article>
+
+        <article class="use-card" data-category="lab">
+          <div class="card-tag tag-lab">Lab &amp; Research</div>
+          <h3>Writing a Grant Section First Draft</h3>
+          <p>
+            Used Claude to draft the Background and Significance section of a
+            small internal grant. I gave it my outline and key citations.
+            The draft needed heavy editing, but it broke my writer's block.
+          </p>
+          <div class="card-meta">
+            <span class="ai-badge ai-claude">Claude</span>
+            <a href="conversations/grant-draft.html" class="card-link">See the conversation &rarr;</a>
+          </div>
+        </article>
+
+        <article class="use-card" data-category="lab">
+          <div class="card-tag tag-lab">Lab &amp; Research</div>
+          <h3>Data Interpretation Gut-Check</h3>
+          <p>
+            Shared a Ct value table from a qPCR run and asked Gemini to help
+            interpret the efficiency and R² values. It gave a reasonable
+            explanation, which I used as a starting point for my own analysis
+            write-up.
+          </p>
+          <div class="card-meta">
+            <span class="ai-badge ai-gemini">Gemini</span>
+            <a href="conversations/qpcr-interpretation.html" class="card-link">See the conversation &rarr;</a>
+          </div>
+        </article>
+
+        <!-- PERSONAL -->
+        <article class="use-card" data-category="personal">
+          <div class="card-tag tag-personal">Personal</div>
+          <h3>Planning a Conference Trip</h3>
+          <p>
+            Used ChatGPT to build a day-by-day schedule around a conference
+            agenda, factoring in session times, networking breaks, and travel.
+            Works surprisingly well as an itinerary assistant.
+          </p>
+          <div class="card-meta">
+            <span class="ai-badge ai-chatgpt">ChatGPT</span>
+            <a href="conversations/conference-planning.html" class="card-link">See the conversation &rarr;</a>
+          </div>
+        </article>
+
+        <article class="use-card" data-category="personal">
+          <div class="card-tag tag-personal">Personal</div>
+          <h3>Drafting Difficult Emails</h3>
+          <p>
+            Asked Claude to help me rewrite a frustrating email exchange into
+            something professional and direct. It's become my go-to for
+            high-stakes communication drafts.
+          </p>
+          <div class="card-meta">
+            <span class="ai-badge ai-claude">Claude</span>
+            <a href="conversations/email-drafting.html" class="card-link">See the conversation &rarr;</a>
+          </div>
+        </article>
+
+        <article class="use-card" data-category="personal">
+          <div class="card-tag tag-personal">Personal</div>
+          <h3>Learning Something New Quickly</h3>
+          <p>
+            Used Claude to get up to speed on a statistics method I hadn't
+            used before (mixed-effects models). It explained, gave examples,
+            and answered follow-ups — better than any YouTube tutorial for
+            my specific context.
+          </p>
+          <div class="card-meta">
+            <span class="ai-badge ai-claude">Claude</span>
+            <a href="conversations/stats-learning.html" class="card-link">See the conversation &rarr;</a>
+          </div>
+        </article>
+
+      </div><!-- /cards-grid -->
+    </div>
+  </section>
+
+  <!-- ========== CONVERSATIONS ========== -->
+  <section id="conversations">
+    <div class="container">
+      <div class="section-header">
+        <h2>Selected Conversations</h2>
+        <p class="section-sub">
+          Real prompts, real responses, real results. Each one is linked from
+          a use case above — or browse them here.
+        </p>
+      </div>
+
+      <div class="convo-list">
+
+        <a href="conversations/sop-drafting.html" class="convo-preview">
+          <div class="convo-preview-header">
+            <span class="ai-badge ai-claude">Claude</span>
+            <span class="convo-category">Teaching</span>
+          </div>
+          <h3>Drafting Lab SOPs from Scratch</h3>
+          <p class="convo-excerpt">
+            "Here are my rough notes for a Chelex DNA extraction. Please
+            reformat these as a numbered SOP with safety callouts…"
+          </p>
+          <span class="convo-read-more">Read conversation &rarr;</span>
+        </a>
+
+        <a href="conversations/pcr-troubleshoot.html" class="convo-preview">
+          <div class="convo-preview-header">
+            <span class="ai-badge ai-claude">Claude</span>
+            <span class="convo-category">Lab &amp; Research</span>
+          </div>
+          <h3>Troubleshooting a Failed PCR</h3>
+          <p class="convo-excerpt">
+            "My gel shows a bright smear and no distinct band. Annealing
+            temp was 58°C, Mg²⁺ at 2.5 mM…"
+          </p>
+          <span class="convo-read-more">Read conversation &rarr;</span>
+        </a>
+
+        <a href="conversations/rubric-writing.html" class="convo-preview">
+          <div class="convo-preview-header">
+            <span class="ai-badge ai-chatgpt">ChatGPT</span>
+            <span class="convo-category">Teaching</span>
+          </div>
+          <h3>Writing Assessment Rubrics</h3>
+          <p class="convo-excerpt">
+            "Write a four-point rubric for a lab report submitted by
+            community college biotechnology students…"
+          </p>
+          <span class="convo-read-more">Read conversation &rarr;</span>
+        </a>
+
+        <a href="conversations/grant-draft.html" class="convo-preview">
+          <div class="convo-preview-header">
+            <span class="ai-badge ai-claude">Claude</span>
+            <span class="convo-category">Lab &amp; Research</span>
+          </div>
+          <h3>Grant Section First Draft</h3>
+          <p class="convo-excerpt">
+            "Using the outline below, draft a Background and Significance
+            section for a small applied research grant…"
+          </p>
+          <span class="convo-read-more">Read conversation &rarr;</span>
+        </a>
+
+        <a href="conversations/quiz-generation.html" class="convo-preview">
+          <div class="convo-preview-header">
+            <span class="ai-badge ai-gemini">Gemini</span>
+            <span class="convo-category">Teaching</span>
+          </div>
+          <h3>Generating Practice Quiz Questions</h3>
+          <p class="convo-excerpt">
+            "Generate 10 multiple-choice questions for community college
+            students on gel electrophoresis principles…"
+          </p>
+          <span class="convo-read-more">Read conversation &rarr;</span>
+        </a>
+
+        <a href="conversations/stats-learning.html" class="convo-preview">
+          <div class="convo-preview-header">
+            <span class="ai-badge ai-claude">Claude</span>
+            <span class="convo-category">Personal</span>
+          </div>
+          <h3>Learning Mixed-Effects Models</h3>
+          <p class="convo-excerpt">
+            "I need to understand mixed-effects models. I have a biology
+            background, not a stats background. Start simple…"
+          </p>
+          <span class="convo-read-more">Read conversation &rarr;</span>
+        </a>
+
+      </div><!-- /convo-list -->
+    </div>
+  </section>
+
+  <!-- ========== REFLECTIONS ========== -->
+  <section id="reflections">
+    <div class="container">
+      <div class="section-header">
+        <h2>Honest Reflections</h2>
+        <p class="section-sub">
+          For the peer educators panel — and anyone else who wants the
+          unfiltered version.
+        </p>
+      </div>
+
+      <div class="reflections-grid">
+
+        <div class="reflection-block reflection-working">
+          <div class="reflection-icon">&#10003;</div>
+          <h3>What's Working</h3>
+          <ul>
+            <li>First-draft generation for documents I'd otherwise procrastinate on (SOPs, grants, emails)</li>
+            <li>Troubleshooting in domains where I know enough to evaluate the answer</li>
+            <li>Explaining concepts in multiple ways for different student levels</li>
+            <li>Turning messy notes into structured, readable documents</li>
+            <li>Breaking writer's block — AI gives me something to react to, which is easier than starting from nothing</li>
+          </ul>
+        </div>
+
+        <div class="reflection-block reflection-didnt">
+          <div class="reflection-icon">&#10007;</div>
+          <h3>What Didn't Work</h3>
+          <ul>
+            <li>Trusting AI-generated quiz distractors without fact-checking every single one</li>
+            <li>Asking it to compare papers when I hadn't read them myself first — it conflates details</li>
+            <li>Using it to generate literature citations (it hallucinates references confidently)</li>
+            <li>Expecting consistent output across sessions — the same prompt can give different results</li>
+            <li>Treating the first draft as finished — heavy editing is always required</li>
+          </ul>
+        </div>
+
+        <div class="reflection-block reflection-differently">
+          <div class="reflection-icon">&#8635;</div>
+          <h3>What I'd Do Differently</h3>
+          <ul>
+            <li>Build a prompt library earlier — I've rewritten the same prompts too many times</li>
+            <li>Verify AI outputs more systematically, not just when something feels off</li>
+            <li>Introduce AI tools to students explicitly, with guardrails, rather than ignoring it</li>
+            <li>Use it more for thinking out loud — it's a great thinking partner when I treat it like one</li>
+            <li>Keep notes on what worked — this site is partly me doing that retroactively</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Panel note -->
+      <div class="panel-note">
+        <p>
+          <strong>For the peer educators panel:</strong> I'm happy to go deeper on
+          any of these use cases during the session. The conversation pages linked
+          throughout this site show the actual prompts and responses — not cherry-picked
+          successes, but representative examples including the ones that needed
+          significant follow-up.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========== CONTACT ========== -->
+  <section id="contact">
+    <div class="container">
+      <div class="section-header">
+        <h2>Get In Touch</h2>
+        <p class="section-sub">
+          Questions about anything on this site? Want to share your own
+          experiences? Reach out.
+        </p>
+      </div>
+      <div class="contact-block">
+        <!-- Replace with your actual contact info -->
+        <p>
+          <strong>Institution:</strong> <!-- Your institution here -->
+        </p>
+        <p>
+          <strong>Course:</strong> BTC181 — Laboratory Techniques
+        </p>
+        <p>
+          <strong>Email:</strong> <!-- your.email@institution.edu -->
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer>
+    <div class="container">
+      <p>
+        Built to share real AI experiences with fellow educators.
+        All conversations are paraphrased or lightly edited for clarity
+        unless marked as verbatim.
+      </p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
