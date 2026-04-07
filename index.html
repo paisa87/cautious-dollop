@@ -4,9 +4,20 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AI in My Work & Life — Perspectives from an educator and life long learner</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lobster+Two:ital,wght@0,400;0,700;1,400&family=Comic+Neue:ital,wght@0,400;0,700;1,400&family=Press+Start+2P&family=VT323:wght@400&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
+
+  <!-- ========== MARQUEE TICKER ========== -->
+  <div class="marquee-bar" aria-hidden="true">
+    <div class="marquee-track">
+      <span>✦ Welcome to my AI Portfolio ✦ Real prompts. Real results. No cap. ✦ Currently obsessed with: Gemini Storybook ✦ Powered by curiosity &amp; too much coffee ✦ BTC181 represent ✦ DNA doesn't lie and neither does this site ✦ Views: <span id="visitorCount">1,337</span> ✦ Best viewed at 1024×768 ✦ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+      <span aria-hidden="true">✦ Welcome to my AI Portfolio ✦ Real prompts. Real results. No cap. ✦ Currently obsessed with: Gemini Storybook ✦ Powered by curiosity &amp; too much coffee ✦ BTC181 represent ✦ DNA doesn't lie and neither does this site ✦ Views: 1,337 ✦ Best viewed at 1024×768 ✦ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+    </div>
+  </div>
 
   <!-- ========== NAV ========== -->
   <nav id="navbar">
@@ -287,8 +298,93 @@
         All conversations are paraphrased or lightly edited for clarity
         unless marked as verbatim.
       </p>
+      <p class="footer-konami-hint" title="...">&#8593;&#8593;&#8595;&#8595;&#8592;&#8594;&#8592;&#8594; B A &nbsp;&nbsp; [ try it ]</p>
     </div>
   </footer>
+
+  <!-- ========== EASTER EGG MODAL ========== -->
+  <div id="easterEgg" class="easter-egg-overlay" role="dialog" aria-modal="true" aria-label="Secret DNA sequence unlocked" aria-hidden="true">
+    <div class="easter-egg-modal">
+      <button class="ee-close" id="eeClose">[ESC] CLOSE</button>
+
+      <div class="ee-header">&#x1F9EC; CHEAT CODE ACTIVATED &#x1F9EC;</div>
+      <p class="ee-sub">
+        You found the Genetic Code&#8482;<br>
+        The original cheat code of life.
+      </p>
+
+      <!-- DNA double helix as Minecraft-colored blocks -->
+      <div class="dna-helix" aria-label="DNA double helix with Pokemon base pair labels">
+
+        <div class="dna-row">
+          <span class="dna-label right">&#x1F7E2; Bulbasaur</span>
+          <div class="dna-block A">A</div>
+          <div class="dna-bridge"></div>
+          <div class="dna-block T">T</div>
+          <span class="dna-label">&#x1F525; Charmander</span>
+        </div>
+        <div class="dna-connector"></div>
+
+        <div class="dna-row">
+          <span class="dna-label right">&#x1F4A7; Squirtle</span>
+          <div class="dna-block G">G</div>
+          <div class="dna-bridge"></div>
+          <div class="dna-block C">C</div>
+          <span class="dna-label">&#x26A1; Pikachu</span>
+        </div>
+        <div class="dna-connector twist"></div>
+
+        <div class="dna-row">
+          <span class="dna-label right">&#x1F525; Charmander</span>
+          <div class="dna-block T">T</div>
+          <div class="dna-bridge"></div>
+          <div class="dna-block A">A</div>
+          <span class="dna-label">&#x1F7E2; Bulbasaur</span>
+        </div>
+        <div class="dna-connector"></div>
+
+        <div class="dna-row">
+          <span class="dna-label right">&#x26A1; Pikachu</span>
+          <div class="dna-block C">C</div>
+          <div class="dna-bridge"></div>
+          <div class="dna-block G">G</div>
+          <span class="dna-label">&#x1F4A7; Squirtle</span>
+        </div>
+        <div class="dna-connector twist"></div>
+
+        <div class="dna-row">
+          <span class="dna-label right">&#x1F7E2; Bulbasaur</span>
+          <div class="dna-block A">A</div>
+          <div class="dna-bridge"></div>
+          <div class="dna-block T">T</div>
+          <span class="dna-label">&#x1F525; Charmander</span>
+        </div>
+        <div class="dna-connector"></div>
+
+        <div class="dna-row">
+          <span class="dna-label right">&#x1F4A7; Squirtle</span>
+          <div class="dna-block G">G</div>
+          <div class="dna-bridge"></div>
+          <div class="dna-block C">C</div>
+          <span class="dna-label">&#x26A1; Pikachu</span>
+        </div>
+
+      </div><!-- /dna-helix -->
+
+      <div class="ee-legend">
+        <span><strong style="color:#4caf50">A</strong> Adenine &nbsp;=&nbsp; &#x1F7E2; Bulbasaur</span>
+        <span><strong style="color:#f44336">T</strong> Thymine &nbsp;=&nbsp; &#x1F525; Charmander</span>
+        <span><strong style="color:#2196f3">G</strong> Guanine &nbsp;=&nbsp; &#x1F4A7; Squirtle</span>
+        <span><strong style="color:#c9b300">C</strong> Cytosine =&nbsp; &#x26A1; Pikachu</span>
+      </div>
+
+      <p class="ee-footer-text">
+        A pairs with T &nbsp;|&nbsp; G pairs with C &nbsp;|&nbsp; Always.<br>
+        In Minecraft, every block has a place. In DNA, every base has a pair.<br>
+        &#x2191;&#x2191;&#x2193;&#x2193;&#x2190;&#x2192;&#x2190;&#x2192; B A &mdash; the first cheat code was written in nucleotides.
+      </p>
+    </div>
+  </div>
 
   <script src="js/main.js"></script>
 </body>
