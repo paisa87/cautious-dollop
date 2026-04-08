@@ -38,7 +38,8 @@ tabs.forEach(tab => {
 
     const filter = tab.dataset.filter;
     cards.forEach(card => {
-      card.classList.toggle('hidden', filter !== 'all' && card.dataset.category !== filter);
+      const cats = card.dataset.category ? card.dataset.category.split(' ') : [];
+      card.classList.toggle('hidden', filter !== 'all' && !cats.includes(filter));
     });
   });
 });

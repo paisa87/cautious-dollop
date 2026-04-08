@@ -717,6 +717,135 @@ section:nth-child(even) { background: var(--white); }
 .panel-note strong { color: var(--yellow); }
 
 /* ==========================================
+   GEMS & FEATURED OUTPUTS
+   ========================================== */
+#gems { background: var(--white); }
+
+.gems-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.gem-card {
+  background: var(--cream);
+  border: 2px solid var(--green);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-hard);
+  transition: transform 0.15s, box-shadow 0.15s;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+.gem-card:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 7px 7px 0px var(--yellow-dark);
+}
+.gem-card-wide {
+  grid-column: span 2;
+}
+.gem-card-placeholder {
+  border-style: dashed;
+  box-shadow: none;
+  opacity: 0.7;
+}
+.gem-card-placeholder:hover {
+  transform: none;
+  box-shadow: none;
+  opacity: 1;
+}
+
+.gem-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.25rem;
+  border: 2px solid currentColor;
+}
+.gem-icon svg { width: 22px; height: 22px; }
+.gem-icon-github   { color: var(--gray-dark);  background: var(--gray-light); }
+.gem-icon-gemini   { color: #1e40af;            background: #dbeafe; }
+.gem-icon-database { color: var(--green-dark);  background: var(--green-pale); }
+.gem-icon-placeholder { color: var(--yellow-dark); background: var(--yellow-pale); border-color: var(--yellow-dark); }
+
+.gem-card h3 {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--green-dark);
+}
+.gem-card p {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  color: var(--gray-dark);
+  line-height: 1.65;
+  flex-grow: 1;
+}
+
+.gem-link {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--green);
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 0.25rem;
+  transition: color 0.15s;
+}
+.gem-link:hover { color: var(--green-dark); text-decoration: underline; }
+.gem-link-placeholder {
+  color: var(--gray-mid);
+  font-style: italic;
+  font-weight: 400;
+  cursor: default;
+}
+.gem-link-placeholder:hover { color: var(--gray-mid); text-decoration: none; }
+
+.gem-links-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  margin-top: 0.25rem;
+}
+
+/* Lab DB screenshot frame */
+.gem-screenshot-frame {
+  margin-top: 0.75rem;
+  border: 2px dashed var(--gray-light);
+  border-radius: var(--radius);
+  background: linear-gradient(135deg, #f0f4f0 25%, #e8f5ec 100%);
+  min-height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.gem-coming-soon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  text-align: center;
+  padding: 1rem;
+}
+.coming-soon-icon  { font-size: 2rem; }
+.coming-soon-label {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--green-dark);
+}
+.coming-soon-sub {
+  font-family: var(--font-vt);
+  font-size: 0.95rem;
+  color: var(--gray-mid);
+  letter-spacing: 0.04em;
+}
+
+/* ==========================================
    CONTACT
    ========================================== */
 .contact-block {
@@ -736,6 +865,40 @@ section:nth-child(even) { background: var(--white); }
 }
 .contact-block p:last-child { margin-bottom: 0; }
 .contact-block strong { color: var(--green-dark); }
+
+.contact-social {
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 2px dashed var(--gray-light);
+}
+
+.linkedin-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--white);
+  background: #0077B5;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius);
+  border: 2px solid #005885;
+  box-shadow: 3px 3px 0px #005885;
+  text-decoration: none;
+  transition: transform 0.1s, box-shadow 0.1s;
+}
+.linkedin-link:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0px #005885;
+  text-decoration: none;
+  color: var(--white);
+}
+.linkedin-icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
 
 /* ==========================================
    FOOTER
@@ -1103,6 +1266,8 @@ footer {
 
   .cards-grid       { grid-template-columns: 1fr; }
   .convo-list       { grid-template-columns: 1fr; }
+  .gems-grid        { grid-template-columns: 1fr; }
+  .gem-card-wide    { grid-column: span 1; }
   .chat-bubble      { max-width: 95%; }
 
   .dna-label, .dna-label.right { display: none; }
