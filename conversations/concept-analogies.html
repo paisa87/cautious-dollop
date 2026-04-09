@@ -3,11 +3,88 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Concept Analogies &mdash; AI in My Work &amp; Life</title>
+  <title>The Tree's Invisible Shield &mdash; AI in My Work &amp; Life</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&family=Comic+Neue:ital,wght@0,400;0,700;1,400;1,700&family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../css/styles.css" />
+  <style>
+    .story-output {
+      background: #f9faf7;
+      border: 1px solid #c8d4ca;
+      border-radius: 8px;
+      padding: 1.25rem 1.5rem;
+      margin-top: 0.5rem;
+      font-style: italic;
+    }
+    .story-output h4 {
+      font-family: 'Lobster Two', cursive;
+      font-size: 1.2rem;
+      font-style: italic;
+      color: #005a25;
+      margin-bottom: 0.75rem;
+      text-align: center;
+    }
+    .story-output p {
+      font-size: 0.9rem;
+      color: #4a5056;
+      line-height: 1.8;
+      margin-bottom: 0.75rem;
+      font-style: normal;
+    }
+    .story-output p:last-child { margin-bottom: 0; }
+    .story-wrong { background: #fff7ed; border-color: #fed7aa; }
+    .story-wrong h4 { color: #92400e; }
+    .wrong-label {
+      font-family: 'VT323', monospace;
+      font-size: 0.95rem;
+      background: #fed7aa;
+      color: #92400e;
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+      display: inline-block;
+      margin-bottom: 0.6rem;
+    }
+    .right-label {
+      font-family: 'VT323', monospace;
+      font-size: 0.95rem;
+      background: #d1fae5;
+      color: #065f46;
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+      display: inline-block;
+      margin-bottom: 0.6rem;
+    }
+    .gemini-disclaimer {
+      font-family: 'Comic Neue', cursive;
+      font-size: 0.78rem;
+      color: #A7A8AA;
+      font-style: italic;
+      margin-bottom: 0.75rem;
+      display: block;
+    }
+    .view-output-btn {
+      display: inline-block;
+      margin-top: 1rem;
+      font-family: 'Comic Neue', cursive;
+      font-weight: 700;
+      font-size: 0.875rem;
+      background: #4285f4;
+      color: #fff;
+      padding: 0.5rem 1.1rem;
+      border-radius: 6px;
+      border: 2px solid #1a5cd8;
+      box-shadow: 3px 3px 0 #1a5cd8;
+      text-decoration: none;
+      transition: transform 0.1s, box-shadow 0.1s;
+    }
+    .view-output-btn:hover {
+      transform: translate(-2px,-2px);
+      box-shadow: 5px 5px 0 #1a5cd8;
+      text-decoration: none;
+      color: #fff;
+    }
+  </style>
 </head>
 <body>
   <nav id="navbar">
@@ -16,23 +93,147 @@
       <ul class="nav-links">
         <li><a href="../index.html#use-cases">Use Cases</a></li>
         <li><a href="../index.html#conversations">Conversations</a></li>
+        <li><a href="../index.html#gems">Gems</a></li>
         <li><a href="../index.html#reflections">Reflections</a></li>
       </ul>
     </div>
   </nav>
+
   <main class="convo-page">
     <a href="../index.html#conversations" class="convo-back">&larr; Back to all conversations</a>
+
     <div class="convo-page-header">
-      <h1>Concept Analogies</h1>
+      <h1>The Tree's Invisible Shield</h1>
+      <div class="meta">
+        <span class="ai-badge ai-gemini">Gemini</span>
+        <span class="card-tag tag-teaching">Teaching</span>
+        <span class="card-tag tag-personal">Personal</span>
+        <span class="convo-date">April 9, 2026</span>
+      </div>
     </div>
+
     <div class="convo-context">
-      <strong>Coming soon.</strong> This conversation will be added here.
-      Use <a href="../conversations/_template.html">the template</a> to add your real conversation.
+      <strong>Context:</strong> I used Gemini's Storybook feature to turn my own
+      peer-reviewed research into a children's story for my daughter Annabelle. The paper
+      (<a href="https://www.frontiersin.org/journals/plant-science/articles/10.3389/fpls.2023.1282188/full" target="_blank" rel="noopener"><em>Frontiers in Plant Science</em>, 2023</a>)
+      is about endophytic microbes in Flowering Dogwood trees — specifically how bacteria
+      and fungi living inside the tree's tissues act as a protective microbiome against
+      Anthracnose disease. My goal was a story an 8-year-old could follow that was still
+      grounded in real science. Gemini got the paper topic completely wrong on the first
+      try, but a single correction sentence turned it around.
+      <br><br>
+      <strong>Note:</strong> This conversation was generated within a Gemini Project with
+      custom creator instructions that shaped the output style.
+      <a href="https://gemini.google.com/share/d992d081d764" target="_blank" rel="noopener">View original shared conversation &rarr;</a>
     </div>
+
+    <div class="chat-thread">
+
+      <!-- TURN 1: User prompt -->
+      <div class="chat-turn user">
+        <span class="chat-label">You</span>
+        <div class="chat-bubble">Illustrate a storybook given the description of me below without describing my features too much in the writing.
+
+Plot: I want the story to summarize the work I did according to this linked research paper (https://www.frontiersin.org/journals/plant-science/articles/10.3389/fpls.2023.1282188/full), including some key findings and impacts of my research. This story is geared towards my kids, explaining what kind of science I've done.
+
+Andrew (Dad)
+• Physical: Short, neat dark hair. He wears classic rectangular glasses and has a gentle, friendly facial structure.
+• Vibe: The steady, approachable father figure; looks like he's always ready with a clever fact or a dad joke.</div>
+      </div>
+
+      <!-- TURN 1: Gemini response — WRONG topic -->
+      <div class="chat-turn ai">
+        <span class="chat-label">Gemini</span>
+        <div class="chat-bubble">
+          <span class="wrong-label">&#x26A0; Wrong paper — wrote about Magnolia flower development instead</span>
+          <span class="gemini-disclaimer">I've written a story for children around 7 years old that explains how flowers use secret signals to bloom, based on your research into Magnolia flower development. This story simplifies complex scientific concepts like genes and hormones into an engaging tale about how plants follow their own internal instructions, though please note the story may not be 100% faithful to every technical detail of the research paper.</span>
+          <div class="story-output story-wrong">
+            <h4>The Magnolia's Secret Message</h4>
+            <p>In a garden filled with the scent of spring, Andrew stood beneath the twisting branches of a special tree called a <em>Magnolia biondii</em>. To most people, it was just a tree with fuzzy silver buds, but to Andrew, it was a giant mystery waiting to be solved. He spent his days as a scientist, asking the trees questions that only a magnifying glass and a lot of patience could answer.</p>
+            <p>Andrew's daughter, Nola, skipped over to him, her eyes wide with wonder. She pointed to a tightly closed bud, wrapped in its velvety coat. "Dad," she whispered, "how does the flower know when it's time to come out? Does it have an alarm clock?" Andrew smiled and knelt down. "In a way, it does," he said. "It's all about a secret conversation happening inside the tree."</p>
+            <p>Andrew explained that every living thing has a giant library inside of it. "These are called genes," he said. "Think of them as thousands of tiny recipe books. Each recipe tells the flower how to grow a petal, what color to be, or how to smell sweet. But the books don't read themselves; they need to be told which page to open."</p>
+            <p>"To open the right page at the right time," Andrew continued, "the tree uses special messengers called hormones. These are like little mailmen running through the branches, carrying notes that say, 'Start growing!' or 'Wait for the sun!'" He moved his hands through the air, tracing the path the invisible messengers might take from the roots up to the very tip of the bud.</p>
+            <p>Nola touched the soft fuzz of a bud. "Is this bud waiting for a letter right now?" she asked. Andrew nodded. "Exactly. Right now, the 'stay asleep' messengers are keeping it cozy. But soon, the 'wake up' messengers — hormones like Auxin and Gibberellin — will arrive in a big rush. They tell the genes to start the construction of the beautiful flower."</p>
+            <p>[Story continues with transcriptome maps, microscope scenes, and the eventual blooming of the flowers...]</p>
+            <p>"Because we studied the <em>Magnolia biondii</em>," Andrew said, "we know exactly which messengers were the most important. We learned that the tree uses its hormones to coordinate the genes, making sure every petal opens at the exact same time so the tree can be beautiful all at once."</p>
+            <p>Nola hugged the tree's trunk. "I'm glad you listen to the flowers, Dad," she said. Andrew hugged her back, looking up through the canopy of white petals at the blue sky. "Science is just a way of listening very carefully," he replied. "And the flowers always have the most wonderful stories to tell, as long as you know how to read their messages."</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- TURN 2: One-sentence correction -->
+      <div class="chat-turn user">
+        <span class="chat-label">You</span>
+        <div class="chat-bubble">Cool, but this paper is about student microbes in flowering dogwood trees...</div>
+      </div>
+
+      <!-- TURN 2: Gemini response — correct topic, wrong name -->
+      <div class="chat-turn ai">
+        <span class="chat-label">Gemini</span>
+        <div class="chat-bubble">
+          <span class="right-label">&#x2713; Correct topic now — but uses "Nola" instead of "Annabelle"</span>
+          <span class="gemini-disclaimer">I've updated the story for an 8-year-old reader to correctly focus on your research regarding the tiny microbes living inside dogwood trees and how they act as a shield against disease. Please note that while this story captures the essence of your work, it simplifies complex scientific data and may not be 100% faithful to every detail of the research paper.</span>
+          <div class="story-output">
+            <h4>The Tree's Invisible Shield</h4>
+            <p>In the heart of the woods, Andrew loved to visit the Flowering Dogwood trees. In the springtime, they looked like fluffy white clouds had landed right on the branches. But Andrew was a scientist, and he noticed that some of these beautiful trees were getting sick. Their leaves had tiny brown spots, and they didn't look as strong as they used to. He knew he had to find out why.</p>
+            <p>Andrew's daughter, <strong>Nola</strong>, followed him into the grove. She reached out to touch a leaf marked with dark, dusty circles. "Is the tree having a bad day, Dad?" she asked...</p>
+            <p>[Story correctly covers endophytes, Anthracnose, the microbiome map, seed-borne vs. environment-acquired microbes — but uses the name "Nola" throughout.]</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- TURN 3: Name fix -->
+      <div class="chat-turn user">
+        <span class="chat-label">You</span>
+        <div class="chat-bubble">Getting better. Replace the name "Nola" with "Annabelle"</div>
+      </div>
+
+      <!-- TURN 3: Final version -->
+      <div class="chat-turn ai">
+        <span class="chat-label">Gemini</span>
+        <div class="chat-bubble">
+          <span class="right-label">&#x2713; Final version</span>
+          <span class="gemini-disclaimer">I've updated your story for an 8-year-old reader, changing the name "Nola" to "Annabelle" while Andrew explains how tiny microbes within flowering dogwood trees act as a protective shield.</span>
+          <div class="story-output">
+            <h4>The Tree's Invisible Shield</h4>
+            <p>In the heart of the woods, Andrew loved to visit the Flowering Dogwood trees. In the springtime, they looked like fluffy white clouds had landed right on the branches. But Andrew was a scientist, and he noticed that some of these beautiful trees were getting sick. Their leaves had tiny brown spots, and they didn't look as strong as they used to. He knew he had to find out why.</p>
+            <p>Andrew's daughter, Annabelle, followed him into the grove. She reached out to touch a leaf marked with dark, dusty circles. "Is the tree having a bad day, Dad?" she asked. Andrew knelt beside her. "It's a bit more than that, Annabelle. A tiny fungus called Anthracnose is making the trees sick. It's like an unwanted visitor that won't leave."</p>
+            <p>Annabelle looked around at the other dogwoods. Some of them were perfectly healthy, with strong green leaves and bright white flowers. "Why are those trees so happy?" she wondered. She leaned in so close to a healthy leaf that her nose almost touched it, trying to see if there was a secret hidden on the surface.</p>
+            <p>Andrew stood up and smiled. "That is the mystery I'm solving! I believe the healthy trees have a secret army living inside them. We call them Endophytes. They are tiny microbes — little bacteria and friendly fungi — that live inside the tree's leaves and stems without causing any harm at all."</p>
+            <p>"Are they like bodyguards?" Annabelle asked, her eyes brightening. Andrew nodded. "Exactly! And my research shows they come from two places. Some are 'family heirlooms' passed down from the mother tree inside the seeds. Others are 'neighborhood friends' that the tree picks up from the soil and the air."</p>
+            <p>In his laboratory, Andrew traded his hiking boots for a lab coat. He used special machines to look at the "microbiome" — a map of all the tiny living things inside the trees. "We are disentangling the two groups," Andrew explained. On his computer, long rows of colorful data appeared, showing which microbes were from the seeds and which were from the environment.</p>
+            <p>Annabelle took a turn looking through a powerful microscope. She saw a world that was usually invisible. "I see them!" she whispered. Andrew explained that the microbes from the seeds are like a starter kit, but the microbes from the environment help the tree grow a strong shield against the bad fungus.</p>
+            <p>Andrew showed Annabelle how he could grow the "good" microbes in small dishes. "By finding which helpers come from the seeds and which come from the forest, we can learn how to give the sick trees their bodyguards back," he said. Annabelle watched as he carefully moved a tiny drop of liquid into a dish.</p>
+            <p>A few weeks later, they returned to the forest. Annabelle ran ahead, through the tall grass and under the canopy of white blossoms. She felt different knowing that inside every leaf, a tiny world was busy working — some microbes born with the tree and some invited in from the forest floor.</p>
+            <p>Andrew sat on a mossy rock, watching Annabelle play. He felt proud that his research could help protect these trees by understanding their tiny invisible friends. Annabelle sat down beside him and gave him a big hug. "Thanks for helping the trees, Dad." Andrew laughed and hugged her back. "It's a big job, but someone has to listen to the little things."</p>
+          </div>
+          <a href="https://gemini.google.com/share/388751e9e07f" target="_blank" rel="noopener" class="view-output-btn">
+            &#x1F4D6; View illustrated Storybook output &rarr;
+          </a>
+        </div>
+      </div>
+
+    </div><!-- /chat-thread -->
+
+    <div class="convo-takeaway">
+      <h2>What I took away</h2>
+      <ul>
+        <li>Gemini did not correctly read the linked paper on the first pass — it produced a well-written, scientifically plausible story about the entirely wrong research topic (<em>Magnolia</em> flower hormones instead of dogwood endophytes). Linking to a paper is not a substitute for pasting in the relevant context.</li>
+        <li>A single casual correction sentence ("Cool, but this paper is about...") was enough to completely redirect the output. The iterative approach costs almost nothing and gets you where you need to go.</li>
+        <li>Three short exchanges produced a genuinely touching children's story grounded in real research — something I can share with Annabelle and with the panel as a concrete example of AI-assisted science communication.</li>
+        <li>The custom Project instructions (Gemini feature) shaped the narrative style and illustration prompts — worth setting up if you do this kind of work repeatedly.</li>
+        <li>The illustrated output (linked above) is the real deliverable. The conversation is just the scaffolding.</li>
+      </ul>
+    </div>
+
   </main>
+
   <footer>
-    <div class="container"><p>AI in My Work &amp; Life &mdash; A Faculty Perspective</p></div>
+    <div class="container">
+      <p>AI in My Work &amp; Life &mdash; A Faculty Perspective</p>
+    </div>
   </footer>
+
   <script src="../js/main.js"></script>
 </body>
 </html>
