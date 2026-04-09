@@ -139,8 +139,10 @@
   </div>
 </div>
 
-<!-- Main content -->
-<div class="main-content">
+{% endif %}
+
+<!-- Page content — rendered once, always, outside the session if/else -->
+<div class="{{ 'main-content' if 'user_id' in session else '' }}">
   {% with messages = get_flashed_messages(with_categories=true) %}
     {% for cat, msg in messages %}
     <div class="alert alert-{{ cat }} alert-dismissible fade show mt-2" role="alert">
@@ -152,11 +154,6 @@
 
   {% block content %}{% endblock %}
 </div>
-
-{% else %}
-<!-- Logged-out: no sidebar -->
-{% block content %}{% endblock %}
-{% endif %}
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
