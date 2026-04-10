@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Building a Notetaking Worksheet with Copilot &mdash; AI in My Work &amp; Life</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&family=Comic+Neue:ital,wght@0,400;0,700;1,400;1,700&family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/styles.css" />
+  <style>
+    .output-badge {
+      font-family: 'VT323', monospace;
+      font-size: 0.95rem;
+      background: #d1fae5;
+      color: #065f46;
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+      display: inline-block;
+      margin-bottom: 0.6rem;
+    }
+    .source-badge {
+      font-family: 'VT323', monospace;
+      font-size: 0.82rem;
+      background: #ede9fe;
+      color: #5b21b6;
+      padding: 0.1rem 0.45rem;
+      border-radius: 3px;
+      display: inline;
+      margin-left: 0.25rem;
+      vertical-align: middle;
+    }
+    .copilot-disclaimer {
+      font-family: 'Comic Neue', cursive;
+      font-size: 0.78rem;
+      color: #A7A8AA;
+      font-style: italic;
+      margin-bottom: 0.75rem;
+      display: block;
+    }
+    .doc-output {
+      background: #f9faf7;
+      border: 1px solid #c8d4ca;
+      border-radius: 8px;
+      padding: 1.1rem 1.4rem;
+      margin-top: 0.75rem;
+      font-size: 0.875rem;
+      color: #4a5056;
+      line-height: 1.7;
+    }
+    .doc-output h4 {
+      font-family: 'Lobster Two', cursive;
+      font-style: italic;
+      font-size: 1.1rem;
+      color: #005a25;
+      margin-bottom: 0.5rem;
+    }
+    .doc-output h5 {
+      font-family: 'Comic Neue', cursive;
+      font-weight: 700;
+      font-size: 0.875rem;
+      color: #333;
+      margin: 0.9rem 0 0.3rem;
+    }
+    .doc-output ul, .doc-output ol {
+      margin: 0.3rem 0 0 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+    .doc-output p {
+      margin-bottom: 0.4rem;
+    }
+    .worksheet-output {
+      background: #f0f9ff;
+      border: 1px solid #bae6fd;
+      border-radius: 8px;
+      padding: 1.1rem 1.4rem;
+      margin-top: 0.75rem;
+      font-size: 0.875rem;
+      color: #0c4a6e;
+      line-height: 1.7;
+    }
+    .worksheet-output h4 {
+      font-family: 'Lobster Two', cursive;
+      font-style: italic;
+      font-size: 1.1rem;
+      color: #0369a1;
+      margin-bottom: 0.5rem;
+    }
+    .worksheet-output h5 {
+      font-family: 'Comic Neue', cursive;
+      font-weight: 700;
+      font-size: 0.875rem;
+      color: #0c4a6e;
+      margin: 0.9rem 0 0.3rem;
+    }
+    .worksheet-output p { margin-bottom: 0.4rem; }
+    .blank { border-bottom: 1px solid #94a3b8; display: inline-block; min-width: 14rem; }
+    .fill-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 0.5rem 0;
+      font-size: 0.82rem;
+    }
+    .fill-table th {
+      background: #e0f2fe;
+      color: #0369a1;
+      font-family: 'Comic Neue', cursive;
+      font-weight: 700;
+      padding: 0.35rem 0.6rem;
+      text-align: left;
+      border: 1px solid #bae6fd;
+    }
+    .fill-table td {
+      border: 1px solid #bae6fd;
+      padding: 0.4rem 0.6rem;
+      color: #4a5056;
+      vertical-align: top;
+    }
+    .fill-table td.blank-cell {
+      color: #94a3b8;
+      font-style: italic;
+    }
+    .hint-text {
+      font-family: 'VT323', monospace;
+      font-size: 0.9rem;
+      color: #065f46;
+      background: #d1fae5;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      display: block;
+      margin-top: 0.3rem;
+    }
+    .attach-note {
+      font-family: 'VT323', monospace;
+      font-size: 0.95rem;
+      color: #6b7280;
+      background: #f3f4f6;
+      border: 1px solid #d1d5db;
+      border-radius: 4px;
+      padding: 0.2rem 0.5rem;
+      display: inline-block;
+      margin: 0.1rem 0.15rem;
+    }
+  </style>
+</head>
+<body>
+  <nav id="navbar">
+    <div class="nav-inner">
+      <a href="../index.html" class="nav-brand">AI in Practice</a>
+      <ul class="nav-links">
+        <li><a href="../index.html#use-cases">Use Cases</a></li>
+        <li><a href="../index.html#conversations">Conversations</a></li>
+        <li><a href="../index.html#gems">Gems</a></li>
+        <li><a href="../index.html#reflections">Reflections</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="convo-page">
+    <a href="../index.html#conversations" class="convo-back">&larr; Back to all conversations</a>
+
+    <div class="convo-page-header">
+      <h1>Building a Notetaking Worksheet with Copilot</h1>
+      <div class="meta">
+        <span class="ai-badge ai-chatgpt">ChatGPT / Copilot</span>
+        <span class="card-tag tag-teaching">Teaching</span>
+        <span class="card-tag tag-lab">Lab &amp; Research</span>
+        <span class="convo-date">January 22, 2026</span>
+      </div>
+    </div>
+
+    <div class="convo-context">
+      <strong>Context:</strong> BTC181 uses a mandatory asynchronous notetaking activity
+      where students tune into a recorded webinar and fill in a structured worksheet by hand
+      as they follow along. To build the worksheet for the DNA Extraction lecture, I gave
+      Copilot my webinar agenda, the KingFisher instrument slide deck, and a merged SDS PDF
+      for all the reagents used in the protocol. In two exchanges &mdash; first asking for a
+      fleshed-out outline, then asking it to convert that into a fillable student worksheet &mdash;
+      Copilot produced a classroom-ready handout grounded entirely in the actual attached documents.
+    </div>
+
+    <div class="chat-thread">
+
+      <!-- TURN 1: User -->
+      <div class="chat-turn user">
+        <span class="chat-label">You</span>
+        <div class="chat-bubble">
+          <span class="attach-note">&#x1F4CE; DNA Extraction SDS merged.pdf</span>
+          <span class="attach-note">&#x1F4CE; VGCC_KingFisher_04052023.pdf</span>
+          <br><br>
+          Hello, I want to have a fleshed out outline for students to take notes on my webinar recording.
+          Please use the documents attached to flesh out the second and third points in my outline on
+          the theory of DNA extraction and review of SDS for DNA Extraction:
+
+          <br><br><strong>Lab Techniques Webinar Agenda:</strong>
+          <ul>
+            <li>Reviewing where we are in the process map and contingencies for inclement weather on week 3</li>
+            <li>Theory on DNA Extraction</li>
+            <li>Review of SDS for DNA Extraction</li>
+            <li>Presentation Example, Rubric, and Q&amp;A Forum</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- TURN 1: Copilot — fleshed-out outline -->
+      <div class="chat-turn ai">
+        <span class="chat-label">Copilot</span>
+        <div class="chat-bubble">
+          <span class="output-badge">&#x2713; Generated from attached PDFs &mdash; cited specific slides and SDS pages</span>
+          <span class="copilot-disclaimer">Great &mdash; thanks for sharing your agenda and the SDS + KingFisher deck. Below is a fleshed-out, student-friendly note-taking outline for Points 2 and 3 of your webinar. Everything is based directly on the attached PDFs and formatted so students can print or annotate digitally.</span>
+
+          <div class="doc-output">
+            <h4>Webinar Note-Taking Outline (Expanded Sections 2 &amp; 3)</h4>
+
+            <h5>2. Theory on DNA Extraction</h5>
+            <p><em>Based on KingFisher Instrument Slides</em></p>
+
+            <h5>2.1 Purpose of DNA Extraction</h5>
+            <ul>
+              <li>Why do we isolate DNA? To study genomic DNA, plasmids, viral nucleic acids, RNA, PCR products, cells, proteins, and more. <span class="source-badge">Slide 5</span></li>
+              <li>Applications in biotechnology and bioprocessing.</li>
+            </ul>
+
+            <h5>2.2 Basic Steps of DNA Extraction</h5>
+            <ul>
+              <li><strong>Cell Lysis</strong> &mdash; Breaking open cells to release nucleic acids; uses lysis buffers, detergents, chaotropic salts.</li>
+              <li><strong>Binding</strong> &mdash; DNA binds to superparamagnetic polymer beads under high-salt conditions. <span class="source-badge">Slide 11</span> High salt = DNA binds; low salt = DNA elutes.</li>
+              <li><strong>Washing</strong> &mdash; Remove contaminants: proteins, salts, inhibitors, cellular debris.</li>
+              <li><strong>Elution</strong> &mdash; DNA released from beads under low-salt / warm conditions.</li>
+            </ul>
+
+            <h5>2.3 Sample Types &amp; Expected Yields</h5>
+            <ul>
+              <li>Different tissues produce different amounts of nucleic acid. <span class="source-badge">Slide 3</span></li>
+              <li>Liver: highest yield &mdash; Heart, bone, adipose: among lowest.</li>
+              <li>Expect variability based on sample source, lysis strength, homogenization quality.</li>
+            </ul>
+
+            <h5>2.4 Manual vs. Magnetic Bead-Based Extraction</h5>
+            <ul>
+              <li><strong>Column-based</strong> <span class="source-badge">Slide 6</span> &mdash; Uses spin columns, silica membranes; requires centrifugation; lower throughput.</li>
+              <li><strong>Magnetic bead-based (KingFisher)</strong> <span class="source-badge">Slides 7&ndash;10</span> &mdash; No centrifugation; beads move, not liquids; higher reproducibility and purity; better for automation. <span class="source-badge">Slide 9</span></li>
+            </ul>
+
+            <h5>2.5 KingFisher Technology Overview</h5>
+            <ul>
+              <li><strong>Key concept:</strong> Inverse magnetic particle processing &mdash; magnetic rods + disposable tip comb capture and transfer beads between wells. <span class="source-badge">Slide 9</span></li>
+              <li>Advantages <span class="source-badge">Slide 24</span>: automates complex steps, high throughput, minimal hands-on time, no carryover, highly reproducible.</li>
+              <li>Compatible with 24-well and 96-well formats; heating blocks up to 96&deg;C <span class="source-badge">Slide 18</span>.</li>
+            </ul>
+
+            <h5>3. Review of SDS for DNA Extraction Reagents</h5>
+            <p><em>Based on DNA Extraction SDS merged.pdf</em></p>
+
+            <h5>3.1 Why SDS Review Matters</h5>
+            <p>Reagents include chaotropic salts, corrosives, detergents, enzymes, and flammable solvents. Students must identify hazards, PPE, first-aid, storage, and incompatibilities.</p>
+
+            <h5>3.2 Reagent Summaries (key points)</h5>
+            <ul>
+              <li><strong>Ethanol 96%</strong> <span class="source-badge">SDS pp. 1&ndash;9</span> &mdash; Highly flammable (Cat. 2); eye irritant; store in cool ventilated area; 15-min eye rinse if exposed.</li>
+              <li><strong>Lysis/Binding Solution (Guanidine Thiocyanate 41&ndash;54%)</strong> <span class="source-badge">pp. 10&ndash;19</span> &mdash; Corrosive; severe skin/eye damage; <em>never mix with bleach or acids</em> &rarr; toxic gas; full PPE required.</li>
+              <li><strong>Proteinase K</strong> <span class="source-badge">pp. 20&ndash;28</span> &mdash; Respiratory sensitizer; handle gently to avoid aerosols; store &minus;25 to &minus;15&deg;C.</li>
+              <li><strong>Qubit dsDNA HS Reagent (DMSO-based)</strong> <span class="source-badge">pp. 29&ndash;37</span> &mdash; Combustible; DMSO can carry chemicals through skin &mdash; avoid contact.</li>
+              <li><strong>MagMAX Wash Solution 1</strong> <span class="source-badge">pp. 38&ndash;46</span> &mdash; Contains guanidine thiocyanate (25&ndash;40%); same bleach incompatibility; 15-min rinse priority.</li>
+            </ul>
+
+            <h5>3.3 Common Hazard Themes</h5>
+            <ul>
+              <li>Guanidine thiocyanate in multiple solutions &rarr; corrosive + never mix with bleach.</li>
+              <li>Flammability (ethanol, DMSO-based reagents).</li>
+              <li>Consistent PPE: chemical-resistant gloves, goggles, lab coat.</li>
+            </ul>
+
+            <h5>3.4 Comparison Table</h5>
+            <table class="fill-table" style="margin-top:0.5rem;">
+              <thead>
+                <tr>
+                  <th>Reagent</th><th>Main Hazard</th><th>PPE</th><th>Do NOT Mix With</th><th>First-Aid Priority</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>Ethanol 96%</td><td>Flammable; eye irritant</td><td>Eye protection</td><td>Ignition sources</td><td>Eye rinse</td></tr>
+                <tr><td>Lysis/Binding Solution</td><td>Corrosive; toxic</td><td>Gloves, goggles, coat</td><td>Bleach, acids</td><td>Skin/eye treatment</td></tr>
+                <tr><td>Proteinase K</td><td>Respiratory sensitizer</td><td>Mask/hood, gloves</td><td>&mdash;</td><td>Fresh air</td></tr>
+                <tr><td>Qubit HS (DMSO)</td><td>Combustible</td><td>Gloves, goggles</td><td>Strong oxidizers</td><td>Skin rinse</td></tr>
+                <tr><td>Wash Solution 1</td><td>Irritant; harmful</td><td>Gloves, goggles</td><td>Bleach, acids</td><td>Eye/skin rinse</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          Copilot also offered to:
+          <ul>
+            <li>&#x2705; Build this as a fillable student worksheet</li>
+            <li>&#x2705; Convert to PowerPoint, OneNote, or PDF handout</li>
+            <li>&#x2705; Add comprehension questions or case-study scenarios</li>
+            <li>&#x2705; Create a Canvas-ready module</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- TURN 2: User -->
+      <div class="chat-turn user">
+        <span class="chat-label">You</span>
+        <div class="chat-bubble">Build this as a fillable student worksheet</div>
+      </div>
+
+      <!-- TURN 2: Copilot — worksheet -->
+      <div class="chat-turn ai">
+        <span class="chat-label">Copilot</span>
+        <div class="chat-bubble">
+          <span class="output-badge">&#x2713; Fillable worksheet generated in one pass</span>
+          <span class="copilot-disclaimer">Absolutely &mdash; here is your fillable student worksheet, formatted so it can be downloaded, shared, or converted into a form-fillable PDF/Word document.</span>
+
+          <div class="worksheet-output">
+            <h4>DNA Extraction Webinar &mdash; Student Worksheet</h4>
+            <p><em>Sections 2 &amp; 3: Theory of DNA Extraction + SDS Review</em></p>
+            <p>Student Name: <span class="blank"></span> &nbsp; Date: <span class="blank" style="min-width:8rem;"></span></p>
+
+            <h5>Section 2 &mdash; Theory of DNA Extraction</h5>
+
+            <p><strong>2.1 Purpose of DNA Extraction</strong><br>
+            List three reasons why scientists need to isolate DNA:</p>
+            <ol>
+              <li><span class="blank" style="min-width:22rem;"></span></li>
+              <li><span class="blank" style="min-width:22rem;"></span></li>
+              <li><span class="blank" style="min-width:22rem;"></span></li>
+            </ol>
+
+            <p style="margin-top:0.75rem;"><strong>2.2 Major Steps of DNA Extraction</strong><br>
+            Fill in the purpose of each step:</p>
+            <table class="fill-table">
+              <thead>
+                <tr><th>Step</th><th>What Happens?</th><th>Why It Matters</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>1. Cell Lysis</td><td class="blank-cell">___________________________</td><td class="blank-cell">___________________________</td></tr>
+                <tr><td>2. DNA Binding</td><td class="blank-cell">___________________________</td><td class="blank-cell">___________________________</td></tr>
+                <tr><td>3. Washing</td><td class="blank-cell">___________________________</td><td class="blank-cell">___________________________</td></tr>
+                <tr><td>4. Elution</td><td class="blank-cell">___________________________</td><td class="blank-cell">___________________________</td></tr>
+              </tbody>
+            </table>
+            <span class="hint-text">Hint: DNA binds to magnetic beads in high-salt conditions and releases in low-salt conditions.</span>
+
+            <p style="margin-top:0.75rem;"><strong>2.3 Sample Type Considerations</strong><br>
+            Which samples in your lab do you think will yield high vs. low DNA? Why?</p>
+            <p>High yield: <span class="blank" style="min-width:20rem;"></span></p>
+            <p>Low yield: <span class="blank" style="min-width:20rem;"></span></p>
+
+            <p style="margin-top:0.75rem;"><strong>2.4 Comparison of Extraction Methods</strong></p>
+            <table class="fill-table">
+              <thead>
+                <tr><th>Method</th><th>Advantages</th><th>Disadvantages</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Column-Based Extraction</td><td class="blank-cell">___________________________</td><td class="blank-cell">___________________________</td></tr>
+                <tr><td>Magnetic Bead-Based (KingFisher)</td><td class="blank-cell">___________________________</td><td class="blank-cell">___________________________</td></tr>
+              </tbody>
+            </table>
+            <span class="hint-text">Hint: KingFisher moves beads instead of liquids, reducing contamination and improving purity.</span>
+
+            <p style="margin-top:0.75rem;"><strong>2.5 KingFisher Technology Overview</strong><br>
+            What is Inverse Magnetic Particle Processing?</p>
+            <p><span class="blank" style="min-width:26rem;"></span></p>
+            <p>List two advantages of the KingFisher system:</p>
+            <ol>
+              <li><span class="blank" style="min-width:22rem;"></span></li>
+              <li><span class="blank" style="min-width:22rem;"></span></li>
+            </ol>
+
+            <h5 style="margin-top:1rem;">Section 3 &mdash; SDS Review for DNA Extraction Reagents</h5>
+
+            <p><strong>3.1 Why SDS Knowledge Matters</strong><br>
+            Explain why understanding SDS sheets is essential during DNA extraction:</p>
+            <p><span class="blank" style="min-width:26rem;"></span></p>
+
+            <p style="margin-top:0.75rem;"><strong>3.2 Hazard Identification Practice</strong></p>
+
+            <p><strong>A. Ethanol 96%</strong></p>
+            <p>Main hazard(s): <span class="blank"></span></p>
+            <p>Required PPE: <span class="blank"></span></p>
+            <p>Storage concern: <span class="blank"></span></p>
+
+            <p><strong>B. Lysis/Binding Solution (Guanidine Thiocyanate)</strong></p>
+            <p>Main hazard(s): <span class="blank"></span></p>
+            <p>Why bleach incompatibility? <span class="blank"></span></p>
+            <p>First-aid priority: <span class="blank"></span></p>
+
+            <p><strong>C. Proteinase K</strong></p>
+            <p>Inhalation hazard? <span class="blank"></span></p>
+            <p>Required PPE: <span class="blank"></span></p>
+
+            <p><strong>D. Qubit dsDNA HS Reagent (DMSO-based)</strong></p>
+            <p>Main hazard(s): <span class="blank"></span></p>
+            <p>Skin safety concern with DMSO: <span class="blank"></span></p>
+
+            <p><strong>E. MagMAX Wash Solution 1</strong></p>
+            <p>Main hazard(s): <span class="blank"></span></p>
+            <p>Incompatibilities: <span class="blank"></span></p>
+            <p>First-aid step: <span class="blank"></span></p>
+
+            <p style="margin-top:0.75rem;"><strong>3.3 Patterns Across All Reagents</strong><br>
+            List two hazard themes that appear across multiple SDS sheets:</p>
+            <ol>
+              <li><span class="blank" style="min-width:22rem;"></span></li>
+              <li><span class="blank" style="min-width:22rem;"></span></li>
+            </ol>
+
+            <p style="margin-top:0.75rem;"><strong>3.4 PPE Reinforcement</strong><br>
+            Circle all PPE that apply across all DNA extraction reagents:</p>
+            <p>Gloves &mdash; Lab Coat &mdash; Safety Goggles &mdash; Face Shield &mdash; Fume Hood / Ventilation &mdash; Respirator (if needed)</p>
+            <p>What PPE item do you personally need to be more consistent about using?</p>
+            <p><span class="blank" style="min-width:26rem;"></span></p>
+
+            <p style="margin-top:0.75rem;"><strong>3.5 Scenario Practice</strong><br>
+            <em>Scenario: You accidentally splash lysis buffer (guanidine thiocyanate) on your wrist.
+            Write the correct response steps:</em></p>
+            <ol>
+              <li><span class="blank" style="min-width:22rem;"></span></li>
+              <li><span class="blank" style="min-width:22rem;"></span></li>
+              <li><span class="blank" style="min-width:22rem;"></span></li>
+            </ol>
+          </div>
+
+          Copilot also offered next steps:
+          <ul>
+            <li>&#x2705; Convert to form-fillable PDF</li>
+            <li>&#x2705; Produce a Microsoft Word version</li>
+            <li>&#x2705; Add matching answer keys for instructors</li>
+            <li>&#x2705; Create Canvas / Blackboard upload formats</li>
+          </ul>
+        </div>
+      </div>
+
+    </div><!-- /chat-thread -->
+
+    <div class="convo-takeaway">
+      <h2>What I took away</h2>
+      <ul>
+        <li>Two exchanges produced a classroom-ready worksheet I could use immediately. The first pass gave me a structured content outline; the second converted it into a student-facing fillable format without any follow-up clarification needed.</li>
+        <li>Copilot actually read the attached PDFs. The outline cited specific slide numbers and SDS page ranges rather than producing generic biology content. Document-grounded AI output is qualitatively different from asking an AI to summarize a topic from memory.</li>
+        <li>The worksheet format &mdash; fill-in-the-blank tables, hint text, a scenario at the end &mdash; is pedagogically sound. I reviewed it and accepted it with no structural revisions. That saved at least two hours of formatting work.</li>
+        <li>The AI offered four extension options without being asked (fillable PDF, Word doc, answer key, Canvas format). I didn&rsquo;t need them for this iteration, but knowing those are one request away is useful for future builds.</li>
+        <li>The only input I needed to supply was the agenda structure and the source documents. The AI handled the scaffolding. Domain knowledge (what &ldquo;good&rdquo; notetaking looks like for this course, what the learning outcomes are) still came from me.</li>
+      </ul>
+    </div>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>AI in My Work &amp; Life &mdash; A Faculty Perspective</p>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>
