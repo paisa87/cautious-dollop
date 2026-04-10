@@ -844,6 +844,13 @@ section:nth-child(even) { background: var(--white); }
   color: var(--gray-mid);
   letter-spacing: 0.04em;
 }
+.gem-caption {
+  font-family: var(--font-vt);
+  font-size: 0.9rem;
+  color: var(--gray-mid);
+  margin-top: 0.5rem;
+  font-style: italic;
+}
 
 /* ==========================================
    CONTACT
