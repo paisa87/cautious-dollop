@@ -134,6 +134,48 @@ if (easterEgg) {
 }
 
 // ==========================================
+// GUESTBOOK FORM — AJAX submission via Formspree
+// ==========================================
+const guestForm  = document.getElementById('guestbookForm');
+const gbSubmit   = document.getElementById('gbSubmit');
+const gbError    = document.getElementById('gbError');
+
+if (guestForm) {
+  guestForm.addEventListener('submit', async e => {
+    e.preventDefault();
+    if (gbSubmit) { gbSubmit.disabled = true; gbSubmit.textContent = 'Sending\u2026'; }
+    if (gbError)  { gbError.style.display = 'none'; }
+
+    try {
+      const resp = await fetch(guestForm.action, {
+        method: 'POST',
+        body: new FormData(guestForm),
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (resp.ok) {
+        guestForm.innerHTML =
+          '<p class="guestbook-success">' +
+          '\u2728 Entry received \u2014 thanks for signing the guestbook! \u2728' +
+          '</p>';
+      } else {
+        const data = await resp.json().catch(() => ({}));
+        const msg = (data.errors || []).map(x => x.message).join(', ') ||
+                    'Something went wrong. Please try emailing paisa@vgcc.edu instead.';
+        if (gbError) { gbError.textContent = msg; gbError.style.display = 'block'; }
+        if (gbSubmit) { gbSubmit.disabled = false; gbSubmit.textContent = '\u270D Submit Entry'; }
+      }
+    } catch {
+      if (gbError) {
+        gbError.textContent = 'Network error. Please try emailing paisa@vgcc.edu instead.';
+        gbError.style.display = 'block';
+      }
+      if (gbSubmit) { gbSubmit.disabled = false; gbSubmit.textContent = '\u270D Submit Entry'; }
+    }
+  });
+}
+
+// ==========================================
 // STORYBOOK 3 — PASSWORD UNLOCK
 // Password = AGTCAG (5' → 3' left strand of DNA helix)
 // ==========================================

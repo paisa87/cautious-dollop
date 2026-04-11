@@ -510,7 +510,6 @@
         </p>
       </div>
       <div class="contact-block">
-        <!-- Replace with your actual contact info -->
         <p>
           <strong>Institution:</strong> Vance-Granville Community College
         </p>
@@ -527,6 +526,61 @@
           </a>
         </div>
       </div>
+
+      <!-- GUESTBOOK -->
+      <!-- To activate: create a free account at formspree.io, create a new form,
+           and replace YOUR_FORM_ID below with your actual form ID (e.g. xpwzqkde). -->
+      <div class="guestbook-wrap">
+        <h3 class="guestbook-header">&#x1F4D6; Sign the Guestbook</h3>
+        <span class="guestbook-sub">Leave a comment, ask a question, or say hi &#x2014; all welcome.</span>
+
+        <form
+          id="guestbookForm"
+          class="guestbook-form"
+          action="https://formspree.io/f/YOUR_FORM_ID"
+          method="POST"
+        >
+          <div class="guestbook-row">
+            <div class="gb-field">
+              <label for="gb-name">Name <span aria-hidden="true">*</span></label>
+              <input type="text" id="gb-name" name="name" required placeholder="Your name" autocomplete="name" />
+            </div>
+            <div class="gb-field">
+              <label for="gb-email">Email <span class="gb-optional">(optional)</span></label>
+              <input type="email" id="gb-email" name="email" placeholder="So I can reply" autocomplete="email" />
+            </div>
+          </div>
+
+          <div class="guestbook-row">
+            <div class="gb-field">
+              <label for="gb-role">Role / Affiliation <span class="gb-optional">(optional)</span></label>
+              <input type="text" id="gb-role" name="role" placeholder="e.g. Educator, Researcher&hellip;" />
+            </div>
+            <div class="gb-field">
+              <label for="gb-subject">Reason for reaching out</label>
+              <select id="gb-subject" name="subject">
+                <option value="Question">Question about the site</option>
+                <option value="Collaboration">Collaboration request</option>
+                <option value="AI Guidance">Looking for AI guidance</option>
+                <option value="Comment">Just leaving a comment</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="gb-field">
+            <label for="gb-message">Message <span aria-hidden="true">*</span></label>
+            <textarea id="gb-message" name="message" required placeholder="What&rsquo;s on your mind?"></textarea>
+          </div>
+
+          <div id="gbError" class="guestbook-error" style="display:none;" role="alert"></div>
+
+          <button type="submit" class="guestbook-submit" id="gbSubmit">
+            &#x270D; Submit Entry
+          </button>
+        </form>
+      </div>
+
     </div>
   </section>
 
