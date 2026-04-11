@@ -808,8 +808,83 @@ section:nth-child(even) { background: var(--white); }
 .gem-links-list {
   display: flex;
   flex-direction: column;
-  gap: 0.3rem;
+  gap: 0.6rem;
   margin-top: 0.25rem;
+}
+.storybook-entry {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+.storybook-caption {
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  color: var(--gray-mid);
+  font-style: italic;
+  padding-left: 0.1rem;
+}
+
+/* Storybook 3 password lock */
+.sb3-locked {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.sb3-lock-label {
+  font-family: var(--font-vt);
+  font-size: 1rem;
+  color: var(--gray-dark);
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+.sb3-input-row {
+  display: flex;
+  gap: 0.4rem;
+  align-items: center;
+}
+.sb3-input {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  border: 2px solid var(--gray-mid);
+  border-radius: 4px;
+  padding: 0.3rem 0.5rem;
+  width: 9rem;
+  outline: none;
+  transition: border-color 0.15s;
+}
+.sb3-input:focus { border-color: var(--green); }
+.sb3-input.sb3-error {
+  border-color: #ef4444;
+  animation: sb3-shake 0.35s ease;
+}
+@keyframes sb3-shake {
+  0%,100% { transform: translateX(0); }
+  20%,60%  { transform: translateX(-5px); }
+  40%,80%  { transform: translateX(5px); }
+}
+.sb3-btn {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.78rem;
+  background: var(--green);
+  color: #fff;
+  border: 2px solid var(--green-dark);
+  border-radius: 4px;
+  padding: 0.3rem 0.7rem;
+  cursor: pointer;
+  box-shadow: 2px 2px 0 var(--green-dark);
+  transition: transform 0.1s, box-shadow 0.1s;
+}
+.sb3-btn:hover {
+  transform: translate(-1px,-1px);
+  box-shadow: 3px 3px 0 var(--green-dark);
+}
+.sb3-hint {
+  font-family: var(--font-vt);
+  font-size: 0.88rem;
+  color: var(--gray-mid);
+  font-style: italic;
 }
 
 /* Lab DB screenshot frame */

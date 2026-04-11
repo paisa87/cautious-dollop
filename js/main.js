@@ -132,3 +132,44 @@ if (easterEgg) {
     if (e.target === easterEgg) closeEasterEgg();
   });
 }
+
+// ==========================================
+// STORYBOOK 3 — PASSWORD UNLOCK
+// Password = AGTCAG (5' → 3' left strand of DNA helix)
+// ==========================================
+const SB3_PASSWORD = 'AGTCAG';
+const sb3Input    = document.getElementById('sb3Password');
+const sb3Submit   = document.getElementById('sb3Submit');
+const sb3Locked   = document.getElementById('sb3Locked');
+const sb3Unlocked = document.getElementById('sb3Unlocked');
+
+function unlockSb3() {
+  if (sb3Locked)   sb3Locked.style.display   = 'none';
+  if (sb3Unlocked) sb3Unlocked.style.display = 'block';
+  sessionStorage.setItem('sb3Unlocked', '1');
+}
+
+function checkSb3Password() {
+  if (!sb3Input) return;
+  if (sb3Input.value.trim().toUpperCase() === SB3_PASSWORD) {
+    unlockSb3();
+  } else {
+    sb3Input.classList.add('sb3-error');
+    const orig = sb3Input.placeholder;
+    sb3Input.value = '';
+    sb3Input.placeholder = 'Wrong sequence \u2014 try again';
+    setTimeout(() => {
+      sb3Input.classList.remove('sb3-error');
+      sb3Input.placeholder = orig;
+    }, 1600);
+  }
+}
+
+if (sb3Submit) sb3Submit.addEventListener('click', checkSb3Password);
+if (sb3Input) {
+  sb3Input.addEventListener('keydown', e => {
+    if (e.key === 'Enter') checkSb3Password();
+  });
+  // Restore unlocked state within the same browser session
+  if (sessionStorage.getItem('sb3Unlocked') === '1') unlockSb3();
+}
