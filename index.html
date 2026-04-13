@@ -397,6 +397,79 @@
           </div>
         </div>
 
+        <!-- AI Music Remaster — Winamp player -->
+        <!-- Upload your MP3 to audio/it-was-good-demo.mp3 to activate the player -->
+        <div class="gem-card winamp-card">
+          <div class="gem-icon" style="background:var(--green-pale);color:var(--green-dark);">
+            <span style="font-size:1.6rem;">&#x1F3B5;</span>
+          </div>
+          <h3>AI-Remastered Music</h3>
+          <p>
+            Raw phone-video vocals stitched, EQ&rsquo;d, and modulated toward a
+            Johnny Cash baritone using ChatGPT. Demo fades at 1:10.
+          </p>
+
+          <!-- Winamp player -->
+          <div class="wa-player" id="winampPlayer">
+
+            <div class="wa-titlebar">
+              <span class="wa-titlebar-name">&#x25A0; Winamp</span>
+              <div class="wa-tb-btns">
+                <span class="wa-tb-btn">_</span>
+                <span class="wa-tb-btn">&#x25A1;</span>
+                <span class="wa-tb-btn">&#x00D7;</span>
+              </div>
+            </div>
+
+            <div class="wa-display">
+              <div class="wa-display-top">
+                <span class="wa-time" id="waTime">0:00</span>
+                <span class="wa-status" id="waStatus">STOPPED</span>
+              </div>
+              <div class="wa-title-scroll paused" id="waTitleScroll">
+                <span>It Was Good &mdash; Andrew Pais &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; It Was Good &mdash; Andrew Pais &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+              </div>
+              <div class="wa-eq-bars" id="waEqBars">
+                <span style="height:3px"></span>
+                <span style="height:5px"></span>
+                <span style="height:2px"></span>
+                <span style="height:8px"></span>
+                <span style="height:4px"></span>
+                <span style="height:6px"></span>
+                <span style="height:3px"></span>
+              </div>
+            </div>
+
+            <div class="wa-seek-wrap">
+              <div class="wa-seek" id="waSeek">
+                <div class="wa-seek-fill" id="waSeekFill"></div>
+                <div class="wa-seek-thumb" id="waSeekThumb"></div>
+              </div>
+            </div>
+
+            <div class="wa-controls">
+              <button class="wa-ctrl-btn" id="waPrev" title="Previous">&#x23EE;</button>
+              <button class="wa-ctrl-btn wa-play-btn" id="waPlayBtn" title="Play">&#x25BA;</button>
+              <button class="wa-ctrl-btn" id="waPauseBtn" title="Pause">&#x23F8;</button>
+              <button class="wa-ctrl-btn" id="waStopBtn" title="Stop">&#x23F9;</button>
+              <button class="wa-ctrl-btn" id="waNext" title="Next">&#x23ED;</button>
+            </div>
+
+            <div class="wa-bottom">
+              <span class="wa-vol-label">VOL</span>
+              <input type="range" class="wa-volume" id="waVolume" min="0" max="100" value="80" />
+              <span class="wa-demo-label">DEMO &bull; 1:10</span>
+            </div>
+
+          </div><!-- /wa-player -->
+
+          <audio id="waAudio" preload="none">
+            <source src="audio/it-was-good-demo.mp3" type="audio/mpeg" />
+          </audio>
+
+          <p class="gem-caption">AI sound-engineered remaster &mdash; more tracks coming soon.</p>
+        </div>
+
         <!-- Lab Database System -->
         <div class="gem-card gem-card-wide">
           <div class="gem-icon gem-icon-database">

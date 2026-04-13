@@ -983,6 +983,270 @@ section:nth-child(even) { background: var(--white); }
 }
 
 /* ==========================================
+   WINAMP PLAYER GEM
+   ========================================== */
+.winamp-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+.winamp-card > p {
+  font-size: 0.85rem;
+  color: var(--gray-dark);
+  line-height: 1.6;
+}
+.winamp-card .gem-caption {
+  margin-top: 0;
+  font-size: 0.82rem;
+  color: var(--gray-mid);
+  font-style: italic;
+  font-family: var(--font-vt);
+}
+
+/* The player itself */
+.wa-player {
+  width: 275px;
+  background: #232337;
+  border: 2px solid #111;
+  border-radius: 2px;
+  box-shadow: 3px 3px 0 #111, inset 1px 1px 0 rgba(255,255,255,0.08);
+  font-family: 'Courier New', Courier, monospace;
+  user-select: none;
+  flex-shrink: 0;
+}
+/* Title bar */
+.wa-titlebar {
+  background: linear-gradient(90deg, #1a1a2e 0%, #2d2d50 100%);
+  padding: 3px 6px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #111;
+  cursor: default;
+}
+.wa-titlebar-name {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: #8fa0d0;
+  text-transform: uppercase;
+}
+.wa-tb-btns {
+  display: flex;
+  gap: 3px;
+}
+.wa-tb-btn {
+  width: 12px;
+  height: 12px;
+  background: #3a3a5c;
+  border: 1px solid #222;
+  border-radius: 1px;
+  font-size: 0.45rem;
+  color: #8fa0d0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  line-height: 1;
+}
+.wa-tb-btn:hover { background: #5a5a7c; }
+
+/* Display */
+.wa-display {
+  background: #000;
+  margin: 4px;
+  padding: 4px 6px;
+  border: 1px solid #1a1a1a;
+  border-radius: 1px;
+}
+.wa-display-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 3px;
+}
+.wa-time {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #1ed14b;
+  letter-spacing: 0.1em;
+  font-variant-numeric: tabular-nums;
+  flex-shrink: 0;
+}
+.wa-status {
+  font-size: 0.5rem;
+  color: #1a7a32;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.wa-title-scroll {
+  overflow: hidden;
+  white-space: nowrap;
+  width: 100%;
+  margin-bottom: 3px;
+}
+.wa-title-scroll span {
+  display: inline-block;
+  font-size: 0.6rem;
+  color: #1ed14b;
+  letter-spacing: 0.06em;
+  animation: wa-scroll 12s linear infinite;
+}
+@keyframes wa-scroll {
+  0%   { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+.wa-title-scroll.paused span { animation-play-state: paused; }
+
+/* EQ bars */
+.wa-eq-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 14px;
+}
+.wa-eq-bars span {
+  display: block;
+  width: 4px;
+  background: #1ed14b;
+  border-radius: 1px 1px 0 0;
+  transition: height 0.1s;
+}
+.wa-playing .wa-eq-bars span:nth-child(1) { animation: wa-eq1 0.5s ease-in-out infinite alternate; }
+.wa-playing .wa-eq-bars span:nth-child(2) { animation: wa-eq2 0.4s ease-in-out infinite alternate; }
+.wa-playing .wa-eq-bars span:nth-child(3) { animation: wa-eq3 0.6s ease-in-out infinite alternate; }
+.wa-playing .wa-eq-bars span:nth-child(4) { animation: wa-eq4 0.35s ease-in-out infinite alternate; }
+.wa-playing .wa-eq-bars span:nth-child(5) { animation: wa-eq5 0.55s ease-in-out infinite alternate; }
+.wa-playing .wa-eq-bars span:nth-child(6) { animation: wa-eq1 0.45s ease-in-out infinite alternate; }
+.wa-playing .wa-eq-bars span:nth-child(7) { animation: wa-eq3 0.5s ease-in-out infinite alternate; }
+@keyframes wa-eq1 { from { height: 3px; } to { height: 12px; } }
+@keyframes wa-eq2 { from { height: 5px; } to { height: 10px; } }
+@keyframes wa-eq3 { from { height: 2px; } to { height: 14px; } }
+@keyframes wa-eq4 { from { height: 8px; } to { height: 4px; } }
+@keyframes wa-eq5 { from { height: 4px; } to { height: 11px; } }
+
+/* Seek bar */
+.wa-seek-wrap {
+  padding: 0 4px 4px;
+}
+.wa-seek {
+  position: relative;
+  height: 8px;
+  background: #0a0a0a;
+  border: 1px solid #1a1a1a;
+  border-radius: 1px;
+  cursor: pointer;
+}
+.wa-seek-fill {
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  background: #1ed14b;
+  width: 0%;
+  transition: width 0.25s linear;
+  border-radius: 1px 0 0 1px;
+}
+.wa-seek-thumb {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 6px;
+  height: 10px;
+  background: #8fa0d0;
+  border-radius: 1px;
+  left: 0%;
+}
+
+/* Controls */
+.wa-controls {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  padding: 4px 4px 2px;
+}
+.wa-ctrl-btn {
+  background: #3a3a5c;
+  border: 1px solid #111;
+  border-right-color: #555;
+  border-bottom-color: #555;
+  color: #c8d0f0;
+  font-size: 0.55rem;
+  padding: 3px 5px;
+  cursor: pointer;
+  border-radius: 1px;
+  font-family: 'Courier New', monospace;
+  letter-spacing: 0.04em;
+  transition: background 0.1s;
+  flex-shrink: 0;
+}
+.wa-ctrl-btn:hover { background: #5a5a7c; color: #fff; }
+.wa-ctrl-btn:active {
+  border-color: #111;
+  border-right-color: #333;
+  border-bottom-color: #333;
+  background: #232337;
+}
+.wa-ctrl-btn.wa-play-btn {
+  background: #1a4a2a;
+  border-color: #111;
+  border-right-color: #2a7a3a;
+  border-bottom-color: #2a7a3a;
+  color: #1ed14b;
+  font-size: 0.7rem;
+  padding: 3px 8px;
+}
+.wa-ctrl-btn.wa-play-btn:hover { background: #1e6030; }
+
+/* Volume + bottom row */
+.wa-bottom {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 4px 5px;
+}
+.wa-vol-label {
+  font-size: 0.5rem;
+  color: #8fa0d0;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  flex-shrink: 0;
+}
+.wa-volume {
+  flex: 1;
+  height: 4px;
+  appearance: none;
+  background: #0a0a0a;
+  border: 1px solid #1a1a1a;
+  border-radius: 1px;
+  cursor: pointer;
+  outline: none;
+}
+.wa-volume::-webkit-slider-thumb {
+  appearance: none;
+  width: 8px;
+  height: 12px;
+  background: #8fa0d0;
+  border-radius: 1px;
+  cursor: pointer;
+}
+.wa-volume::-moz-range-thumb {
+  width: 8px;
+  height: 12px;
+  background: #8fa0d0;
+  border-radius: 1px;
+  cursor: pointer;
+  border: none;
+}
+.wa-demo-label {
+  font-size: 0.45rem;
+  color: #4a5070;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  flex-shrink: 0;
+  font-family: 'Courier New', monospace;
+}
+
+/* ==========================================
    GUESTBOOK FORM
    ========================================== */
 .guestbook-wrap {

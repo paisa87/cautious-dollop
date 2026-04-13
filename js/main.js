@@ -134,6 +134,124 @@ if (easterEgg) {
 }
 
 // ==========================================
+// WINAMP PLAYER
+// ==========================================
+(function () {
+  const audio      = document.getElementById('waAudio');
+  const playBtn    = document.getElementById('waPlayBtn');
+  const pauseBtn   = document.getElementById('waPauseBtn');
+  const stopBtn    = document.getElementById('waStopBtn');
+  const timeEl     = document.getElementById('waTime');
+  const statusEl   = document.getElementById('waStatus');
+  const seekFill   = document.getElementById('waSeekFill');
+  const seekThumb  = document.getElementById('waSeekThumb');
+  const seekEl     = document.getElementById('waSeek');
+  const volEl      = document.getElementById('waVolume');
+  const titleScroll= document.getElementById('waTitleScroll');
+  const player     = document.getElementById('winampPlayer');
+
+  if (!audio || !playBtn) return;
+
+  const DEMO_DURATION = 70;   // 1:10 in seconds
+  const FADE_START    = 60;   // begin fade at 1:00
+  let   isFading      = false;
+
+  function fmtTime(s) {
+    const m = Math.floor(s / 60);
+    const sec = Math.floor(s % 60);
+    return m + ':' + String(sec).padStart(2, '0');
+  }
+
+  function setStatus(s) {
+    if (statusEl) statusEl.textContent = s;
+  }
+
+  function updateSeek(t) {
+    const pct = Math.min((t / DEMO_DURATION) * 100, 100);
+    if (seekFill)  seekFill.style.width  = pct + '%';
+    if (seekThumb) seekThumb.style.left  = pct + '%';
+    if (timeEl)    timeEl.textContent    = fmtTime(t);
+  }
+
+  audio.addEventListener('timeupdate', () => {
+    const t = audio.currentTime;
+    updateSeek(t);
+
+    // Fade out from FADE_START to DEMO_DURATION
+    if (t >= FADE_START && !isFading) isFading = true;
+    if (isFading) {
+      const ratio = (t - FADE_START) / (DEMO_DURATION - FADE_START);
+      audio.volume = Math.max(0, 1 - ratio);
+    }
+
+    // Stop at demo limit
+    if (t >= DEMO_DURATION) {
+      audio.pause();
+      audio.currentTime = 0;
+      audio.volume = parseFloat(volEl ? volEl.value : 80) / 100;
+      isFading = false;
+      setStatus('STOPPED');
+      if (player) player.classList.remove('wa-playing');
+      if (titleScroll) titleScroll.classList.add('paused');
+      updateSeek(0);
+    }
+  });
+
+  playBtn.addEventListener('click', () => {
+    isFading = false;
+    audio.volume = parseFloat(volEl ? volEl.value : 80) / 100;
+    audio.play().then(() => {
+      setStatus('PLAYING');
+      if (player) player.classList.add('wa-playing');
+      if (titleScroll) titleScroll.classList.remove('paused');
+    }).catch(() => setStatus('ERROR'));
+  });
+
+  pauseBtn.addEventListener('click', () => {
+    if (!audio.paused) {
+      audio.pause();
+      setStatus('PAUSED');
+      if (player) player.classList.remove('wa-playing');
+      if (titleScroll) titleScroll.classList.add('paused');
+    } else {
+      audio.play().then(() => {
+        setStatus('PLAYING');
+        if (player) player.classList.add('wa-playing');
+        if (titleScroll) titleScroll.classList.remove('paused');
+      });
+    }
+  });
+
+  stopBtn.addEventListener('click', () => {
+    audio.pause();
+    audio.currentTime = 0;
+    audio.volume = parseFloat(volEl ? volEl.value : 80) / 100;
+    isFading = false;
+    setStatus('STOPPED');
+    if (player) player.classList.remove('wa-playing');
+    if (titleScroll) titleScroll.classList.add('paused');
+    updateSeek(0);
+  });
+
+  if (volEl) {
+    volEl.addEventListener('input', () => {
+      if (!isFading) audio.volume = parseFloat(volEl.value) / 100;
+    });
+  }
+
+  // Click on seek bar to scrub
+  if (seekEl) {
+    seekEl.addEventListener('click', e => {
+      const rect = seekEl.getBoundingClientRect();
+      const pct  = (e.clientX - rect.left) / rect.width;
+      const t    = Math.min(pct * DEMO_DURATION, DEMO_DURATION - 0.5);
+      audio.currentTime = t;
+      isFading = t >= FADE_START;
+    });
+  }
+})();
+
+// ==========================================
 // GUESTBOOK FORM — AJAX submission via Formspree
 // ==========================================
 const guestForm  = document.getElementById('guestbookForm');
