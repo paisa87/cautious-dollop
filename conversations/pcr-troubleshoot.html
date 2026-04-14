@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Troubleshooting a Failed PCR — AI in My Work & Life</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&family=Comic+Neue:ital,wght@0,400;0,700;1,400;1,700&family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/styles.css" />
+</head>
+<body>
+  <nav id="navbar">
+    <div class="nav-inner">
+      <a href="../index.html" class="nav-brand">AI in Practice</a>
+      <ul class="nav-links">
+        <li><a href="../index.html#use-cases">Use Cases</a></li>
+        <li><a href="../index.html#conversations">Conversations</a></li>
+        <li><a href="../index.html#reflections">Reflections</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="convo-page">
+    <a href="../index.html#conversations" class="convo-back">&larr; Back to all conversations</a>
+
+    <div class="convo-page-header">
+      <h1>Troubleshooting a Failed PCR</h1>
+      <div class="meta">
+        <span class="ai-badge ai-claude">Claude</span>
+        <span class="card-tag tag-lab">Lab &amp; Research</span>
+        <span class="convo-date">Date: [add date]</span>
+      </div>
+    </div>
+
+    <div class="convo-context">
+      <strong>Context:</strong> I ran a PCR that should have produced a clean band around
+      400 bp. The gel showed a bright smear with no distinct band. I had a full day
+      of work scheduled and didn't want to spend hours working through a troubleshooting
+      checklist from memory. I described the conditions to Claude and asked for a ranked
+      differential diagnosis.
+    </div>
+
+    <div class="chat-thread">
+
+      <div class="chat-turn user">
+        <span class="chat-label">You</span>
+        <div class="chat-bubble">My PCR failed. The gel shows a bright smear and no distinct band. Here are my conditions:
+
+- Annealing temp: 58°C
+- Mg²⁺: 2.5 mM
+- Primers: designed for rbcL, Tm ~60°C each, ordered 6 months ago
+- Template: Chelex-extracted plant DNA, used 2 µL in 25 µL reaction
+- Polymerase: Promega GoTaq, fresh aliquot
+- Cycle: 95°C 2min, 35 cycles of [95°C 30s, 58°C 30s, 72°C 1min], 72°C 5min
+
+What are the most likely causes in order of probability?</div>
+      </div>
+
+      <div class="chat-turn ai">
+        <span class="chat-label">Claude</span>
+        <div class="chat-bubble">A smear with no distinct band usually means product is forming but isn't resolving cleanly. Here are the most likely causes, roughly in order:
+
+<strong>1. Primer dimer or non-specific amplification (most likely)</strong>
+At 2.5 mM Mg²⁺ and 58°C — which is 2°C below your primer Tm — conditions are permissive enough for non-specific binding, especially if primer stocks have degraded or concentration is off. A bright low-MW smear is a classic primer dimer signature.
+
+<strong>2. Too much template / inhibitors in template</strong>
+Chelex extracts from plant tissue often carry polyphenols and polysaccharides that don't inhibit completely but cause smearing. 2 µL can also be too much depending on the extraction quality.
+
+<strong>3. Primer degradation</strong>
+Six months is within range, but if primers were freeze-thawed repeatedly or stored improperly, 3′-end degradation can cause non-specific priming. How many freeze-thaw cycles have the working stocks seen?
+
+<strong>4. Mg²⁺ too high</strong>
+2.5 mM is on the high end. High Mg²⁺ decreases polymerase fidelity and promotes non-specific amplification. Standard for GoTaq is 1.5–2.0 mM.
+
+<strong>Suggested first step:</strong> Run a no-template control and a primer-only control (primers, water, no template) on a fresh gel. If you see product in the primer-only lane, you have primer dimer. That points directly to cause #1 and tells you to increase annealing temp to 62–64°C and/or drop Mg²⁺ to 1.5 mM.</div>
+      </div>
+
+      <div class="chat-turn user">
+        <span class="chat-label">You</span>
+        <div class="chat-bubble">The primer-only control had a faint band around 100 bp. So primer dimer is confirmed. What's the fix?</div>
+      </div>
+
+      <div class="chat-turn ai">
+        <span class="chat-label">Claude</span>
+        <div class="chat-bubble">Confirmed primer dimer. Three levers to pull, in order of how disruptive they are:
+
+<strong>1. Raise annealing temperature (least disruptive)</strong>
+Try 62°C first. Your primers have a Tm of ~60°C, so 58°C is too low — primers can snap back to each other at that temp. Bumping to 62°C should reduce dimer formation while still amplifying your target. If smearing persists, try 64°C.
+
+<strong>2. Lower Mg²⁺ to 1.5 mM</strong>
+Drop from 2.5 mM to 1.5 mM. This increases stringency and is compatible with GoTaq. Run the Mg²⁺ change alongside the temperature change if you have enough reactions to test both conditions simultaneously.
+
+<strong>3. Hot-start or touchdown PCR (if above don't resolve it)</strong>
+If you're still getting smear, a touchdown protocol starting at 68°C and stepping down to 58°C over 10 cycles can preferentially amplify specific product before primer dimer has a chance to accumulate. GoTaq doesn't have hot-start capability, but you can do a manual hot-start by adding the polymerase after the initial denaturation step.
+
+I'd run condition 1 and 2 together in a 2×2 matrix (58 vs 62°C × 1.5 vs 2.5 mM Mg²⁺) if you have the template to spare. That gives you four lanes of data and usually resolves it in one more gel run.</div>
+      </div>
+
+      <div class="chat-turn user">
+        <span class="chat-label">You</span>
+        <div class="chat-bubble">Raising the annealing temp to 62°C and dropping Mg to 1.5 mM fixed it. Single clean band.</div>
+      </div>
+
+      <div class="chat-turn ai">
+        <span class="chat-label">Claude</span>
+        <div class="chat-bubble">Good outcome. Worth noting for your records:
+
+- Your working conditions: 62°C annealing, 1.5 mM Mg²⁺, 2 µL Chelex-extracted plant template in 25 µL GoTaq reaction.
+- The original 58°C / 2.5 mM Mg²⁺ combination was too permissive for these primers, likely compounded by primer working stocks being at or past their best.
+
+If you run this assay routinely, updating the SOP to reflect 62°C / 1.5 mM will save you this troubleshooting step in the future.</div>
+      </div>
+
+    </div><!-- /chat-thread -->
+
+    <div class="convo-takeaway">
+      <h2>What I took away</h2>
+      <ul>
+        <li>Primer dimer was indeed the cause — Claude ranked it first and it was correct.</li>
+        <li>The diagnostic suggestion (run a primer-only control) was exactly the right move. I already knew this, but having it stated clearly confirmed I was on the right track.</li>
+        <li>The 2×2 matrix suggestion was useful framing — I ended up running just two conditions but the logic was sound.</li>
+        <li>This worked well because I knew enough to evaluate the answer. If I hadn't, I would have needed to verify the Mg²⁺ guidance against the GoTaq manual — which I did anyway.</li>
+      </ul>
+    </div>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>AI in My Work &amp; Life — A Faculty Perspective</p>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

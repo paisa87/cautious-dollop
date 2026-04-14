@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Updating a Lab Procedure Doc with Copilot &mdash; AI in My Work &amp; Life</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&family=Comic+Neue:ital,wght@0,400;0,700;1,400;1,700&family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/styles.css" />
+  <style>
+    .code-block {
+      background: #1e1e1e;
+      color: #d4d4d4;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.78rem;
+      line-height: 1.6;
+      padding: 1rem 1.25rem;
+      border-radius: 6px;
+      overflow-x: auto;
+      margin: 0.75rem 0;
+      border: 1px solid #333;
+      max-height: 260px;
+      overflow-y: auto;
+    }
+    .code-block .comment { color: #6a9955; }
+    .code-block .keyword { color: #569cd6; }
+    .code-block .string  { color: #ce9178; }
+    .code-note {
+      font-family: 'VT323', monospace;
+      font-size: 0.95rem;
+      color: #A7A8AA;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+    .clarify-badge {
+      font-family: 'VT323', monospace;
+      font-size: 0.95rem;
+      background: #dbeafe;
+      color: #1e40af;
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+      display: inline-block;
+      margin-bottom: 0.6rem;
+    }
+    .output-badge {
+      font-family: 'VT323', monospace;
+      font-size: 0.95rem;
+      background: #d1fae5;
+      color: #065f46;
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+      display: inline-block;
+      margin-bottom: 0.6rem;
+    }
+    .doc-summary {
+      background: #f9faf7;
+      border: 1px solid #c8d4ca;
+      border-radius: 8px;
+      padding: 1.1rem 1.4rem;
+      margin-top: 0.75rem;
+      font-size: 0.875rem;
+      color: #4a5056;
+      line-height: 1.7;
+    }
+    .doc-summary h4 {
+      font-family: 'Lobster Two', cursive;
+      font-style: italic;
+      font-size: 1.05rem;
+      color: #005a25;
+      margin-bottom: 0.6rem;
+    }
+    .doc-summary ul {
+      margin: 0.4rem 0 0 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+    .doc-summary ol {
+      margin: 0.4rem 0 0 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+    .download-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-top: 1rem;
+      font-family: 'Comic Neue', cursive;
+      font-weight: 700;
+      font-size: 0.875rem;
+      background: #007A33;
+      color: #fff;
+      padding: 0.5rem 1.1rem;
+      border-radius: 6px;
+      border: 2px solid #005a25;
+      box-shadow: 3px 3px 0 #005a25;
+      text-decoration: none;
+      transition: transform 0.1s, box-shadow 0.1s;
+    }
+    .download-btn:hover {
+      transform: translate(-2px,-2px);
+      box-shadow: 5px 5px 0 #005a25;
+      text-decoration: none;
+      color: #fff;
+    }
+    .copilot-disclaimer {
+      font-family: 'Comic Neue', cursive;
+      font-size: 0.78rem;
+      color: #A7A8AA;
+      font-style: italic;
+      margin-bottom: 0.75rem;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <nav id="navbar">
+    <div class="nav-inner">
+      <a href="../index.html" class="nav-brand">AI in Practice</a>
+      <ul class="nav-links">
+        <li><a href="../index.html#use-cases">Use Cases</a></li>
+        <li><a href="../index.html#conversations">Conversations</a></li>
+        <li><a href="../index.html#gems">Gems</a></li>
+        <li><a href="../index.html#reflections">Reflections</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="convo-page">
+    <a href="../index.html#conversations" class="convo-back">&larr; Back to all conversations</a>
+
+    <div class="convo-page-header">
+      <h1>Updating a Lab Procedure Doc with Copilot</h1>
+      <div class="meta">
+        <span class="ai-badge ai-chatgpt">ChatGPT / Copilot</span>
+        <span class="card-tag tag-teaching">Teaching</span>
+        <span class="card-tag tag-lab">Lab &amp; Research</span>
+        <span class="convo-date">January 24, 2026</span>
+      </div>
+    </div>
+
+    <div class="convo-context">
+      <strong>Context:</strong> I needed to update an existing student handout —
+      originally written for the CyVerse-hosted DNA Subway — to reflect the new
+      standalone Blue Line workflow at <a href="https://dnasubway.org/" target="_blank" rel="noopener">dnasubway.org</a>.
+      The document covers how BTC181 students analyze rbcL Sanger sequences from
+      SeqStudio to identify unknown plant samples. Rather than rewriting it myself,
+      I pasted the old document into <strong>Microsoft Copilot</strong> and asked it
+      to do the update. What followed was something I didn't expect: Copilot stopped
+      and asked clarifying questions before writing a single word of the new document.
+      That single exchange saved at least one full revision cycle.
+      <br><br>
+      The output file is available in the BTC181 SOP repository:
+      <a href="../Lab_stuff/Course_materials/BTC181-LabTechniques/Attachments/VG008 Attachment - Analyze_rbcL_on_DNA_Subway_Blue_Line_UPDATED.docx"
+         download class="convo-back" style="display:inline;margin:0;padding:0;border:none;box-shadow:none;">
+        Download updated .docx &darr;
+      </a>
+    </div>
+
+    <div class="chat-thread">
+
+      <!-- TURN 1: User -->
+      <div class="chat-turn user">
+        <span class="chat-label">You</span>
+        <div class="chat-bubble">Please update this document to follow the steps for the new DNASubway Blue Line available at: https://dnasubway.org/
+
+[attached: 4. Print - Analyze and export DNA sequence files on CyVerse]</div>
+      </div>
+
+      <!-- TURN 1: Copilot — asks clarifying questions -->
+      <div class="chat-turn ai">
+        <span class="chat-label">Copilot</span>
+        <div class="chat-bubble">
+          <span class="clarify-badge">&#x1F4AC; Stopped to ask clarifying questions — didn't guess</span>
+          I can absolutely do that — but to make sure the updated document is accurate and aligned with the current Blue Line workflow, I need to first verify the exact steps of the new DNA Subway Blue Line interface.
+
+The Blue Line at dnasubway.org has undergone several UI and workflow changes over time (login options, supported file types, trimming/assembly tools, BLAST integration, and export formats), and I don't want to risk giving your students outdated or incorrect instructions.
+
+<strong>What I'll do next</strong>
+I will:
+<ul>
+<li>Review the current Blue Line documentation and interface on dnasubway.org</li>
+<li>Map your existing steps (L1–L15) to the new Blue Line workflow</li>
+<li>Rewrite the document so it uses correct menu names and button labels, reflects current file upload requirements (e.g., FASTQ/FASTA vs AB1), matches current trimming, assembly, and BLAST steps, and maintains your learning outcomes and instructional tone</li>
+<li>Deliver a fully updated, classroom-ready version</li>
+</ul>
+
+<strong>One quick clarification (so I get this exactly right)</strong>
+Before I proceed, could you tell me:
+<ul>
+<li>Do you want this written assuming students sign in with accounts, or should it still be guest-based / no-login if possible?</li>
+<li>Are students starting with AB1 trace files from SeqStudio, or are you now exporting FASTA/FASTQ upstream?</li>
+</ul>
+You can answer in a sentence or two. Once I have that, I'll update the document cleanly and completely in one pass.</div>
+      </div>
+
+      <!-- TURN 2: User — domain-specific clarifications -->
+      <div class="chat-turn user">
+        <span class="chat-label">You</span>
+        <div class="chat-bubble">Thank you. To clarify:
+
+1. Write assuming they follow the guest-based/no login step but recommend they register for a free account to save their progress.
+
+2. Yes, the students are starting with AB1 trace files from SeqStudio. The samples they're working with come from the rbcL gene, so if we can do the analysis in the DNA Subway, there is no need to export and use BLAST — so update the directions accordingly, but still note where students can export their sequences as FASTA files.
+
+Lastly, give students a few extra steps to detail how they can produce a diagram of a simple phylogenetic tree within the pipeline.</div>
+      </div>
+
+      <!-- TURN 2: Copilot — generates Python + document summary -->
+      <div class="chat-turn ai">
+        <span class="chat-label">Copilot</span>
+        <div class="chat-bubble">
+          <span class="output-badge">&#x2713; Generated Word document via Python (python-docx)</span>
+          <span class="copilot-disclaimer">Reasoning completed in 9 steps</span>
+
+Copilot produced a Python script using <code>python-docx</code> to build the updated .docx directly:
+
+          <span class="code-note">&#x1F4CB; Generated code (condensed — key structure shown)</span>
+          <div class="code-block"><span class="keyword">from</span> docx <span class="keyword">import</span> Document
+<span class="keyword">from</span> docx.shared <span class="keyword">import</span> Pt, Inches
+
+doc = Document()
+
+<span class="comment"># Title + Learning Outcomes</span>
+doc.add_heading(<span class="string">'Analyze rbcL Sanger sequences with DNA Subway (Blue Line)'</span>, level=<span class="string">1</span>)
+doc.add_heading(<span class="string">'Specific Learning Outcomes'</span>, level=<span class="string">2</span>)
+<span class="comment"># ... outcomes: quality assessment, trimming, MUSCLE alignment, PHYLIP tree, FASTA export</span>
+
+<span class="comment"># Procedure — 11 numbered steps</span>
+steps = [
+  (<span class="string">'Open DNA Subway 2.0'</span>, <span class="string">'Go to dnasubway.org → Continue as Guest (or Log in)...'</span>),
+  (<span class="string">'Create a project'</span>,    <span class="string">'Barcoding → rbcL (plants) → enter Project Name → Continue'</span>),
+  (<span class="string">'Import Sanger sequences'</span>, <span class="string">'SELECT → Upload AB1 trace files → Choose Files → Upload'</span>),
+  (<span class="string">'Inspect traces & quality'</span>, <span class="string">'Open Sequence Viewer to examine chromatograms and Ns'</span>),
+  (<span class="string">'Trim poor-quality bases'</span>, <span class="string">'EDIT → Trimming and Preparing Reads → compare before/after'</span>),
+  (<span class="string">'Pair reads / build consensus'</span>, <span class="string">'Pair Sequences → toggle F/R → Edit Consensus'</span>),
+  (<span class="string">'Select sequences'</span>,    <span class="string">'Select Data → check high-quality sequences → Save/Apply'</span>),
+  (<span class="string">'Align (MUSCLE)'</span>,      <span class="string">'ANALYZE → MUSCLE → review alignment'</span>),
+  (<span class="string">'Build phylogenetic tree'</span>, <span class="string">'ANALYZE → PHYLIP (Maximum Likelihood) → open tree viewer'</span>),
+  (<span class="string">'(Optional) BLAST in-platform'</span>, <span class="string">'BLASTn inside Blue Line if desired'</span>),
+  (<span class="string">'Export FASTA'</span>,        <span class="string">'Select Data → Download → FASTA'</span>),
+]
+<span class="comment"># ... Extra section: produce and download phylogenetic tree image</span>
+
+doc.save(<span class="string">'Analyze_rbcL_on_DNA_Subway_Blue_Line_UPDATED.docx'</span>)</div>
+
+          <div class="doc-summary">
+            <h4>What changed (at a glance)</h4>
+            <ul>
+              <li><strong>Platform &amp; account model:</strong> Uses dnasubway.org (the updated 2.0 site). Students can Continue as Guest but are encouraged to register to save work.</li>
+              <li><strong>Sanger-focused Blue Line:</strong> Steps reflect the AB1 upload → trim → pair/edit consensus → align (MUSCLE) → tree (PHYLIP) flow now bundled in Blue Line.</li>
+              <li><strong>In-platform comparisons:</strong> If database matches are wanted, students can run BLASTn inside DNA Subway. External NCBI BLAST is no longer required.</li>
+              <li><strong>Exports:</strong> Students can export FASTA from Select Data → Download.</li>
+              <li><strong>Phylogenetic diagram:</strong> Added steps to produce and download a tree figure from PHYLIP after MUSCLE alignment.</li>
+            </ul>
+            <h4 style="margin-top:0.9rem;">Procedure overview (11 steps)</h4>
+            <ol>
+              <li>Open dnasubway.org → Continue as Guest → Blue Line</li>
+              <li>Barcoding → rbcL (plants) → name project</li>
+              <li>Upload AB1 files (Sanger)</li>
+              <li>Sequence Viewer to inspect traces</li>
+              <li>EDIT → Trimming and Preparing Reads</li>
+              <li>Pair Sequences (if F/R) → Edit Consensus</li>
+              <li>Select Data (choose high-quality / consensus sequences)</li>
+              <li>ANALYZE → MUSCLE (alignment)</li>
+              <li>ANALYZE → PHYLIP (tree)</li>
+              <li>(Optional) BLASTn inside Blue Line</li>
+              <li>Select Data → Download (FASTA export)</li>
+            </ol>
+          </div>
+
+          <a href="../Lab_stuff/Course_materials/BTC181-LabTechniques/Attachments/VG008 Attachment - Analyze_rbcL_on_DNA_Subway_Blue_Line_UPDATED.docx"
+             download class="download-btn">
+            &#x1F4C4; Download updated .docx
+          </a>
+        </div>
+      </div>
+
+    </div><!-- /chat-thread -->
+
+    <div class="convo-takeaway">
+      <h2>What I took away</h2>
+      <ul>
+        <li>Copilot stopped and asked two targeted clarifying questions before writing anything. This is the behavior I want — it cost one extra exchange and saved at least a full revision cycle because the domain-specific answers (rbcL, AB1, no-BLAST, add phylogenetics) shaped the entire document.</li>
+        <li>The output wasn't a text response — Copilot wrote a Python script using <code>python-docx</code> to programmatically generate a properly formatted Word document. That's a meaningfully different (and more useful) kind of output than a wall of text I'd have to paste somewhere.</li>
+        <li>The 11-step procedure and the Extra section on phylogenetic trees matched what I asked for without needing follow-up edits. I reviewed and accepted it with minor changes.</li>
+        <li>Knowing your domain matters: the clarifications I gave (rbcL is analyzable entirely inside DNA Subway, students start from AB1 not FASTQ) are things the AI couldn't know. The AI's job was to structure and format — mine was to supply the correct context.</li>
+        <li>The produced file is the actual VG008 attachment now in use in BTC181.</li>
+      </ul>
+    </div>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>AI in My Work &amp; Life &mdash; A Faculty Perspective</p>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

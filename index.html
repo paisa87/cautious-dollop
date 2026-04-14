@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Creativity & Efficiency with AI — Perspectives from an educator and life long learner</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lobster+Two:ital,wght@0,400;0,700;1,400&family=Comic+Neue:ital,wght@0,400;0,700;1,400&family=Press+Start+2P&family=VT323:wght@400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- ========== MARQUEE TICKER ========== -->
+  <div class="marquee-bar" aria-hidden="true">
+    <div class="marquee-track">
+      <span>✦ Welcome to my AI Portfolio ✦ Real prompts and results with some AI fluff. ✦ Current inspiration: The Pendleton Act ✦ Powered by curiosity &amp; too much coffee ✦ Biotech is life ✦ DNA doesn't lie and neither does this site ✦ Views: <span id="visitorCount">1,337</span> ✦ Best viewed at 1024×768 ✦ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+      <span aria-hidden="true">✦ Welcome to my AI Portfolio ✦ Real prompts and results with some AI fluff. ✦ Current inspiration: The Pendleton Act ✦ Powered by curiosity &amp; too much coffee ✦ Biotech is life ✦ DNA doesn't lie and neither does this site ✦ Views: 1,337 ✦ Best viewed at 1024×768 ✦ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+    </div>
+  </div>
+
+  <!-- ========== NAV ========== -->
+  <nav id="navbar">
+    <div class="nav-inner">
+      <span class="nav-brand">AI in Practice</span>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">&#9776;</button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#about">About</a></li>
+        <li><a href="#use-cases">Use Cases</a></li>
+        <li><a href="#conversations">Conversations</a></li>
+        <li><a href="#gems">Gems</a></li>
+        <li><a href="#reflections">Reflections</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ========== HERO ========== -->
+  <header id="hero">
+    <div class="hero-content">
+      <p class="hero-eyebrow">Perspectives from educator and life long learner Andrew Pais</p>
+      <h1>Work &amp; Life with AI Andrew</h1>
+      <p class="hero-sub">
+        Musings on AI recent conversations. No Theory: Reflections on what's working,
+        what isn't, and what I'm cooking with AI as the sous chef.
+      </p>
+      <div class="hero-badges">
+        <span class="badge badge-claude">Claude</span>
+        <span class="badge badge-chatgpt">ChatGPT</span>
+        <span class="badge badge-gemini">Gemini</span>
+      </div>
+      <a href="#use-cases" class="btn-primary">See My Use Cases</a>
+    </div>
+    <div class="hero-scroll-hint" aria-hidden="true">&#8595;</div>
+  </header>
+
+  <!-- ========== ABOUT ========== -->
+  <section id="about">
+    <div class="container">
+      <div class="section-header">
+        <h2>About This Site</h2>
+      </div>
+      <div class="about-grid">
+        <div class="about-text">
+          <p>
+            I (<a href="https://www.linkedin.com/in/andrew-pais-773b93b9/" target="_blank">Andrew Pais</a>) am a professor in biotechnology who teaches introductory biology and advanced,
+            lab-based courses while fostering course-based research projects and other creative 
+            pursuits with the assistance of AI. I started experimenting with AI in 2023
+            when my students began using it, and I have kept using it as an administrative
+            assistant, educational tool, and soundboard for idea generation.
+          </p>
+          <p>
+            This site collects a select number of use cases, which I deem ethical and worth
+            sharing. This includes prompts I've tweaked, the products/workflows I've built,
+            and genuine surprises/misfires. This website is for my peers and educators, but
+            it's also just a public record I can point people to.
+          </p>
+          <p>
+            I'll spare you the hype and doom. I'm just a science-enthusiast, creative, and parent
+            trying to figure out how AI fits into the lab, the classroom, and everything else
+            (And where I fit into life given the impacts of AI...)
+          </p>
+        </div>
+        <div class="about-cards">
+          <div class="about-card">
+            <div class="about-card-icon">&#128300;</div>
+            <h3>Research &amp; Lab</h3>
+            <p>DNA extraction, lab management, DNA sequencing, data wrangling, and writing up results.</p>
+          </div>
+          <div class="about-card">
+            <div class="about-card-icon">&#128218;</div>
+            <h3>Teaching</h3>
+            <p>Course design, SOPs, rubrics, student feedback, and lab safety docs.</p>
+          </div>
+          <div class="about-card">
+            <div class="about-card-icon">&#127968;</div>
+            <h3>Personal</h3>
+            <p>Everyday uses that don't fit neatly into "work" but shaped how I think about AI.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== USE CASES ========== -->
+  <section id="use-cases">
+    <div class="container">
+      <div class="section-header">
+        <h2>Use Cases</h2>
+        <p class="section-sub">Filter by domain to see how I've used AI across different parts of my work.</p>
+      </div>
+
+      <!-- Filter tabs -->
+      <div class="filter-tabs" role="tablist">
+        <button class="tab active" data-filter="all" role="tab" aria-selected="true">All</button>
+        <button class="tab" data-filter="teaching" role="tab" aria-selected="false">Teaching</button>
+        <button class="tab" data-filter="lab" role="tab" aria-selected="false">Lab &amp; Research</button>
+        <button class="tab" data-filter="personal" role="tab" aria-selected="false">Personal</button>
+      </div>
+
+      <!-- Cards -->
+      <div class="cards-grid" id="useCaseGrid">
+
+        <!-- TEACHING -->
+        <article class="use-card" data-category="teaching lab">
+          <div class="card-tag tag-teaching">Teaching</div>
+          <div class="card-tag tag-lab" style="margin-top:-0.4rem;">Lab &amp; Research</div>
+          <h3>Drafting Lab SOPs from Scratch</h3>
+          <p>
+            I pasted an outdated student lab handout into Microsoft Copilot and
+            asked it to update the procedure for the new DNA Subway Blue Line.
+            Instead of guessing, Copilot stopped and asked two clarifying questions
+            — which saved a full revision cycle. The output was a Python-generated
+            Word document I put directly into use in BTC181.
+          </p>
+          <div class="card-meta">
+            <span class="ai-badge ai-chatgpt">ChatGPT / Copilot</span>
+            <a href="conversations/sop-drafting.html" class="card-link">See the conversation &rarr;</a>
+          </div>
+        </article>
+
+        <article class="use-card" data-category="teaching personal">
+          <div class="card-tag tag-teaching">Teaching</div>
+          <div class="card-tag tag-personal" style="margin-top:-0.4rem;">Personal</div>
+          <h3>Converting Research Papers into Visual Summaries</h3>
+          <p>
+            I've been using Gemini's Storybook feature to turn open-access
+            peer-reviewed articles into 10-page illustrated graphic summaries
+            students can actually read. The same feature works surprisingly
+            well at home — I've used it to teach my 7-year-old about historical
+            events and all the American presidents.
+          </p>
+          <div class="card-meta">
+            <span class="ai-badge ai-gemini">Gemini</span>
+            <a href="conversations/concept-analogies.html" class="card-link">See the conversation &rarr;</a>
+          </div>
+        </article>
+
+        <article class="use-card" data-category="teaching lab">
+          <div class="card-tag tag-teaching">Teaching</div>
+          <div class="card-tag tag-lab" style="margin-top:-0.4rem;">Lab &amp; Research</div>
+          <h3>Brainstorming Undergraduate Research with ChatGPT</h3>
+          <p>
+            I set up a ChatGPT project with past research data and research-grade
+            samples, then used it to brainstorm publishable hypotheses with
+            students as potential coauthors. From there we worked through
+            experimental designs and process maps for course-based lab activities
+            and outreach programs.
+          </p>
+          <div class="card-meta">
+            <span class="ai-badge ai-chatgpt">ChatGPT</span>
+            <a href="conversations/undergrad-research.html" class="card-link">See the conversation &rarr;</a>
+          </div>
+        </article>
+
+        <article class="use-card" data-category="lab">
+          <div class="card-tag tag-lab">Lab &amp; Research</div>
+          <h3>Building a Lab Management Database with Claude Code</h3>
+          <p>
+            I used Claude Code to iteratively build VG Lab Manager &mdash; a full
+            GUI database for the VGCC Biotech lab covering sample accessions,
+            DNA extractions, PCR and Sanger runs, qPCR, chemical inventory,
+            and vendor tracking. Claude wrote and debugged the code across
+            multiple sessions as the system grew in scope.
+          </p>
+          <div class="card-meta">
+            <span class="ai-badge ai-claude">Claude</span>
+            <a href="conversations/lab-database.html" class="card-link">See the conversation &rarr;</a>
+          </div>
+        </article>
+
+        <article class="use-card" data-category="teaching lab">
+          <div class="card-tag tag-teaching">Teaching</div>
+          <div class="card-tag tag-lab" style="margin-top:-0.4rem;">Lab &amp; Research</div>
+          <h3>Building a Notetaking Worksheet from OER Documents</h3>
+          <p>
+            I gave Copilot my webinar agenda, the KingFisher instrument slide deck,
+            and a merged SDS PDF for all DNA extraction reagents. In two exchanges &mdash;
+            outline, then fillable worksheet &mdash; it produced a classroom-ready
+            student handout grounded entirely in the actual attached documents,
+            with specific slide and page citations throughout.
+          </p>
+          <div class="card-meta">
+            <span class="ai-badge ai-chatgpt">ChatGPT / Copilot</span>
+            <a href="conversations/notetaking-worksheet.html" class="card-link">See the conversation &rarr;</a>
+          </div>
+        </article>
+
+        <article class="use-card" data-category="personal teaching">
+          <div class="card-tag tag-personal">Personal</div>
+          <div class="card-tag tag-teaching" style="margin-top:-0.4rem;">Teaching</div>
+          <h3>Producing Songs about Biology</h3>
+          <p>
+            Using music as a teaching tool, I write original songs exploring concepts in biology,
+            including scientific understanding of evolution and possible mechanisms for life's origin.
+            I record phone video takes and bring Claude in to build a clean
+            composite, surgically remove hesitation artifacts, fix phrase timing,
+            and master to streaming-ready loudness (&minus;14&nbsp;LUFS).
+            An honest look at what AI audio production can and can&rsquo;t do.
+          </p>
+          <div class="card-meta">
+            <span class="ai-badge ai-chatgpt">ChatGPT</span>
+            <span class="ai-badge ai-claude">Claude</span>
+            <a href="conversations/music-production.html" class="card-link">See the conversation &rarr;</a>
+          </div>
+        </article>
+
+      </div><!-- /cards-grid -->
+    </div>
+  </section>
+
+  <!-- ========== CONVERSATIONS ========== -->
+  <section id="conversations">
+    <div class="container">
+      <div class="section-header">
+        <h2>Selected Conversations</h2>
+        <p class="section-sub">
+          These are select chats between me and an AI assistant. Each one is linked from
+          a use case above and is available for your review.
+        </p>
+      </div>
+
+      <div class="convo-list">
+
+        <a href="conversations/sop-drafting.html" class="convo-preview">
+          <div class="convo-preview-header">
+            <span class="ai-badge ai-chatgpt">ChatGPT / Copilot</span>
+            <span class="convo-category">Teaching &amp; Lab</span>
+          </div>
+          <h3>Updating a Lab Procedure Doc with Copilot</h3>
+          <p class="convo-excerpt">
+            "Please update this document to follow the steps for the new
+            DNASubway Blue Line available at: https://dnasubway.org/"
+          </p>
+          <span class="convo-read-more">Read conversation &rarr;</span>
+        </a>
+
+        <a href="conversations/concept-analogies.html" class="convo-preview">
+          <div class="convo-preview-header">
+            <span class="ai-badge ai-gemini">Gemini</span>
+            <span class="convo-category">Teaching &amp; Personal</span>
+          </div>
+          <h3>The Tree's Invisible Shield</h3>
+          <p class="convo-excerpt">
+            "I want the story to summarize the work I did according to this
+            linked research paper… This story is geared towards my kids,
+            explaining what kind of science I've done."
+          </p>
+          <span class="convo-read-more">Read conversation &rarr;</span>
+        </a>
+
+        <a href="conversations/undergrad-research.html" class="convo-preview">
+          <div class="convo-preview-header">
+            <span class="ai-badge ai-chatgpt">ChatGPT</span>
+            <span class="convo-category">Teaching &amp; Lab</span>
+          </div>
+          <h3>Brainstorming Undergraduate Research with ChatGPT</h3>
+          <p class="convo-excerpt">
+            &ldquo;Can you help me brainstorm hypotheses that would have
+            peer-review publication potential, with students as coauthors?&rdquo;
+          </p>
+          <span class="convo-read-more">Read conversation &rarr;</span>
+        </a>
+
+        <a href="conversations/lab-database.html" class="convo-preview">
+          <div class="convo-preview-header">
+            <span class="ai-badge ai-claude">Claude</span>
+            <span class="convo-category">Lab &amp; Research</span>
+          </div>
+          <h3>Building a Lab Management Database with Claude Code</h3>
+          <p class="convo-excerpt">
+            &ldquo;I need a database system for the VGCC Biotech lab&hellip;&rdquo;
+            &mdash; building VG Lab Manager iteratively across multiple sessions.
+          </p>
+          <span class="convo-read-more">Read conversation &rarr;</span>
+        </a>
+
+        <a href="conversations/notetaking-worksheet.html" class="convo-preview">
+          <div class="convo-preview-header">
+            <span class="ai-badge ai-chatgpt">ChatGPT / Copilot</span>
+            <span class="convo-category">Teaching &amp; Lab</span>
+          </div>
+          <h3>Building a Notetaking Worksheet with Copilot</h3>
+          <p class="convo-excerpt">
+            &ldquo;Please use the documents attached to flesh out the second
+            and third points in my outline on the theory of DNA extraction
+            and review of SDS&hellip;&rdquo;
+          </p>
+          <span class="convo-read-more">Read conversation &rarr;</span>
+        </a>
+
+        <a href="conversations/music-production.html" class="convo-preview">
+          <div class="convo-preview-header">
+            <span class="ai-badge ai-chatgpt">ChatGPT</span>
+            <span class="ai-badge ai-claude">Claude</span>
+            <span class="convo-category">Personal &amp; Teaching</span>
+          </div>
+          <h3>Producing Songs about Biology</h3>
+          <p class="convo-excerpt">
+            &ldquo;I want you to use the three takes I have attached to make
+            the best composite and then do the requested compression, EQ,
+            balancing&hellip;&rdquo; &mdash; six versions and a final master later.
+          </p>
+          <span class="convo-read-more">Read conversation &rarr;</span>
+        </a>
+
+      </div><!-- /convo-list -->
+    </div>
+  </section>
+
+  <!-- ========== GEMS ========== -->
+  <section id="gems">
+    <div class="container">
+      <div class="section-header">
+        <h2>Gems &amp; Featured Outputs</h2>
+        <p class="section-sub">
+          Real things built, written, or illustrated with AI assistance.
+          Not demos — actual deliverables.
+        </p>
+      </div>
+
+      <div class="gems-grid">
+
+        <!-- BTC181 SOP Repository -->
+        <div class="gem-card">
+          <div class="gem-icon gem-icon-github">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+          </div>
+          <h3>BTC 181 SOP Repository</h3>
+          <p>
+            A curated set of Standard Operating Procedures for Laboratory
+            Techniques, drafted and refined with ChatGPT. Covers DNA
+            extraction, PCR, gel electrophoresis, qPCR, and more.
+          </p>
+          <a href="https://github.com/paisa87/cautious-dollop/tree/main/Lab_stuff/Course_materials/BTC181-LabTechniques"
+             target="_blank" rel="noopener" class="gem-link">
+            View on GitHub &rarr;
+          </a>
+        </div>
+
+        <!-- Gemini Storybooks -->
+        <div class="gem-card">
+          <div class="gem-icon gem-icon-gemini">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
+          </div>
+          <h3>Gemini Storybooks</h3>
+          <p>
+            Open-access peer-reviewed articles transformed into illustrated
+            10-page graphic summaries using Gemini's Storybook feature.
+            Also used for teaching history and presidents to a 7-year-old.
+          </p>
+          <div class="gem-links-list">
+
+            <div class="storybook-entry">
+              <a href="https://gemini.google.com/share/388751e9e07f" target="_blank" rel="noopener" class="gem-link">&#x1F4D6; The Tree&rsquo;s Invisible Shield &rarr;</a>
+              <span class="storybook-caption">Me explaining a scientific research article I published to my 7 year old.</span>
+            </div>
+
+            <div class="storybook-entry">
+              <a href="https://gemini.google.com/share/c2b7716223eb" target="_blank" rel="noopener" class="gem-link">&#x1F4D6; The Battle of Yorktown &rarr;</a>
+              <span class="storybook-caption">Historical fiction my seven year old and I created about the Battle of Yorktown using a description of her, some silly prompting, and images she drew of her favorite stuffed animals.</span>
+            </div>
+
+            <div class="storybook-entry" id="sb3Entry">
+              <!-- Locked state -->
+              <div class="sb3-locked" id="sb3Locked">
+                <span class="sb3-lock-label">&#x1F512; Storybook 3 &mdash; Password Protected</span>
+                <div class="sb3-input-row">
+                  <input type="text" id="sb3Password" class="sb3-input" placeholder="Enter sequence&hellip;" autocomplete="off" spellcheck="false" />
+                  <button id="sb3Submit" class="sb3-btn">Unlock</button>
+                </div>
+                <span class="sb3-hint">Need the password? Contact <a href="https://www.linkedin.com/in/andrew-pais-773b93b9/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;">Andrew Pais</a> to get a clue about the easter egg hidden within this site.</span>
+              </div>
+              <!-- Unlocked state (hidden until correct password) -->
+              <div id="sb3Unlocked" style="display:none;">
+                <a href="https://gemini.google.com/share/f2c478bfa52e" target="_blank" rel="noopener" class="gem-link">&#x1F4D6; Storybook 3 &rarr;</a>
+                <span class="storybook-caption">A dystopian sci-fi storybook I created to warn my kids about getting too enmeshed with tablets and other forms of screen time.</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- AI Music Remaster — Winamp player -->
+        <!-- Upload your MP3 to audio/it-was-good-demo.mp3 to activate the player -->
+        <div class="gem-card winamp-card">
+          <div class="gem-icon" style="background:var(--green-pale);color:var(--green-dark);">
+            <span style="font-size:1.6rem;">&#x1F3B5;</span>
+          </div>
+          <h3>AI-Remastered Music</h3>
+          <p>
+            Raw phone-video vocals stitched, EQ&rsquo;d, and balanced
+            using Claude. This is just a demo (fades at 1:10). See
+            "More Gems on the Way" when more polished versions are done.
+          </p>
+
+          <!-- Winamp player -->
+          <div class="wa-player" id="winampPlayer">
+
+            <div class="wa-titlebar">
+              <span class="wa-titlebar-name">&#x25A0; Winamp</span>
+              <div class="wa-tb-btns">
+                <span class="wa-tb-btn">_</span>
+                <span class="wa-tb-btn">&#x25A1;</span>
+                <span class="wa-tb-btn">&#x00D7;</span>
+              </div>
+            </div>
+
+            <div class="wa-display">
+              <div class="wa-display-top">
+                <span class="wa-time" id="waTime">0:00</span>
+                <span class="wa-status" id="waStatus">STOPPED</span>
+              </div>
+              <div class="wa-title-scroll paused" id="waTitleScroll">
+                <span>It Was Good &mdash; Andrew Pais &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; It Was Good &mdash; Andrew Pais &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+              </div>
+              <div class="wa-eq-bars" id="waEqBars">
+                <span style="height:3px"></span>
+                <span style="height:5px"></span>
+                <span style="height:2px"></span>
+                <span style="height:8px"></span>
+                <span style="height:4px"></span>
+                <span style="height:6px"></span>
+                <span style="height:3px"></span>
+              </div>
+            </div>
+
+            <div class="wa-seek-wrap">
+              <div class="wa-seek" id="waSeek">
+                <div class="wa-seek-fill" id="waSeekFill"></div>
+                <div class="wa-seek-thumb" id="waSeekThumb"></div>
+              </div>
+            </div>
+
+            <div class="wa-controls">
+              <button class="wa-ctrl-btn" id="waPrev" title="Previous">&#x23EE;</button>
+              <button class="wa-ctrl-btn wa-play-btn" id="waPlayBtn" title="Play">&#x25BA;</button>
+              <button class="wa-ctrl-btn" id="waPauseBtn" title="Pause">&#x23F8;</button>
+              <button class="wa-ctrl-btn" id="waStopBtn" title="Stop">&#x23F9;</button>
+              <button class="wa-ctrl-btn" id="waNext" title="Next">&#x23ED;</button>
+            </div>
+
+            <div class="wa-bottom">
+              <span class="wa-vol-label">VOL</span>
+              <input type="range" class="wa-volume" id="waVolume" min="0" max="100" value="80" />
+              <span class="wa-demo-label">DEMO &bull; 1:10</span>
+            </div>
+
+          </div><!-- /wa-player -->
+
+          <audio id="waAudio" preload="none">
+            <source src="audio/it-was-good-demo.mp3" type="audio/mpeg" />
+          </audio>
+
+          <p class="gem-caption">AI sound-engineered remaster &mdash; more tracks coming soon.</p>
+        </div>
+
+        <!-- Lab Database System -->
+        <div class="gem-card gem-card-wide">
+          <div class="gem-icon gem-icon-database">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3C7.58 3 4 4.79 4 7s3.58 4 8 4 8-1.79 8-4-3.58-4-8-4zM4 9v3c0 2.21 3.58 4 8 4s8-1.79 8-4V9c0 2.21-3.58 4-8 4S4 11.21 4 9zm0 5v3c0 2.21 3.58 4 8 4s8-1.79 8-4v-3c0 2.21-3.58 4-8 4s-8-1.79-8-4z"/></svg>
+          </div>
+          <h3>Lab Database &amp; Management System</h3>
+          <p>
+            A custom laboratory database and GUI built with AI assistance
+            to manage sample tracking, extraction records, and run logs
+            for BTC181. Developed iteratively with Claude.
+          </p>
+          <div class="gem-screenshot-frame">
+            <img src="images/lab-db-screenshot.png" alt="VG Lab Manager — Add Inventory Item form showing fields for chemicals and reagents, storage location, and stock tracking" style="width:100%;border-radius:4px;display:block;" />
+          </div>
+          <p class="gem-caption">
+            The finalized database file will be made shareable after the spring semester.
+          </p>
+        </div>
+
+        <!-- Placeholder gem -->
+        <div class="gem-card gem-card-placeholder">
+          <div class="gem-icon gem-icon-placeholder">
+            <span style="font-size:1.75rem;">&#x2728;</span>
+          </div>
+          <h3>More Gems on the Way</h3>
+          <p>
+            Coming soon: More AI sound-engineered remasters of my lofi recordings,
+            plus additional AI-assisted outputs — lesson plans, research tools,
+            and creative experiments — as the semester continues.
+          </p>
+          <span class="gem-link gem-link-placeholder">[placeholder — to be filled]</span>
+        </div>
+
+      </div><!-- /gems-grid -->
+    </div>
+  </section>
+
+  <!-- ========== REFLECTIONS ========== -->
+  <section id="reflections">
+    <div class="container">
+      <div class="section-header">
+        <h2>Honest Reflections</h2>
+        <p class="section-sub">
+          The good, and bad, and ugly. Take aways from my
+          experiences so far.
+        </p>
+      </div>
+
+      <div class="reflections-grid">
+
+        <div class="reflection-block reflection-working">
+          <div class="reflection-icon">&#10003;</div>
+          <h3>What's Working</h3>
+          <ul>
+            <li>First-draft generation for documents I'd otherwise procrastinate on (SOPs, quiz banks, etc.)</li>
+            <li>Troubleshooting in domains where I know enough to evaluate the answer</li>
+            <li>Explaining concepts in multiple ways for different student levels</li>
+            <li>Turning messy notes into structured, readable documents</li>
+            <li>Breaking writer's block — Sometimes you need a sounding boarding to spark ideas</li>
+          </ul>
+        </div>
+
+        <div class="reflection-block reflection-didnt">
+          <div class="reflection-icon">&#10007;</div>
+          <h3>AI Fails</h3>
+          <ul>
+            <li>AI messing with parts of orignal files I did not ask it to (e.g. quiz banks)</li>
+            <li>Drawing the wrong conclusions from literature and hallucinating references confidently</li>
+            <li>Losing your voice. Beware of AI slop</li>
+            <li>Expecting consistent output across sessions — the same prompt can give different results</li>
+            <li>Confiding too much in AI (just ask it to roast you)</li>
+          </ul>
+        </div>
+
+        <div class="reflection-block reflection-differently">
+          <div class="reflection-icon">&#8635;</div>
+          <h3>Recommended Practices</h3>
+          <ul>
+            <li>Ask yourself if the request honors institution's policies and ethical codes (e.g. FERPA)</li>
+            <li>Ask for permission rather than forgiveness if you have doubts</li>
+            <li>Be transparent with your use of AI</li>
+            <li>Treat it more as a partner rather than a blackbox</li>
+            <li>Keep notes on what worked — this site is partly me doing that retroactively</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Panel note -->
+      <div class="panel-note">
+        <p>
+          <strong>For the curious:</strong> I'm happy to go deeper on
+          any of these use cases, conversations, and outputs. Some of the summary is
+          AI trying to capture my voice while I edit it behind it with my own thoughts.
+          To get more directly from me, send me a DM using Linkedin or the form below.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========== CONTACT ========== -->
+  <section id="contact">
+    <div class="container">
+      <div class="section-header">
+        <h2>Get In Touch</h2>
+        <p class="section-sub">
+          Questions about anything on this site? Want to share your own
+          experiences? Reach out.
+        </p>
+      </div>
+      <div class="contact-block">
+        <p>
+          <strong>Institution:</strong> Vance-Granville Community College
+        </p>
+        <p>
+          <strong>Email:</strong> paisa@vgcc.edu
+        </p>
+        <div class="contact-social">
+          <a href="https://www.linkedin.com/in/andrew-pais-773b93b9/"
+             target="_blank" rel="noopener" class="linkedin-link" aria-label="Andrew Pais on LinkedIn">
+            <svg class="linkedin-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+            </svg>
+            Connect on LinkedIn
+          </a>
+        </div>
+      </div>
+
+      <!-- GUESTBOOK -->
+      <!-- To activate: create a free account at formspree.io, create a new form,
+           and replace YOUR_FORM_ID below with your actual form ID (e.g. xpwzqkde). -->
+      <div class="guestbook-wrap">
+        <h3 class="guestbook-header">&#x1F4D6; Sign the Guestbook</h3>
+        <span class="guestbook-sub">Leave a comment, ask a question, or say hi &#x2014; all welcome.</span>
+
+        <form
+          id="guestbookForm"
+          class="guestbook-form"
+          action="https://formspree.io/f/xeepyrgg"
+          method="POST"
+        >
+          <div class="guestbook-row">
+            <div class="gb-field">
+              <label for="gb-name">Name <span aria-hidden="true">*</span></label>
+              <input type="text" id="gb-name" name="name" required placeholder="Your name" autocomplete="name" />
+            </div>
+            <div class="gb-field">
+              <label for="gb-email">Email <span class="gb-optional">(optional)</span></label>
+              <input type="email" id="gb-email" name="email" placeholder="So I can reply" autocomplete="email" />
+            </div>
+          </div>
+
+          <div class="guestbook-row">
+            <div class="gb-field">
+              <label for="gb-role">Role / Affiliation <span class="gb-optional">(optional)</span></label>
+              <input type="text" id="gb-role" name="role" placeholder="e.g. Educator, Researcher&hellip;" />
+            </div>
+            <div class="gb-field">
+              <label for="gb-subject">Reason for reaching out</label>
+              <select id="gb-subject" name="subject">
+                <option value="Question">Question about the site</option>
+                <option value="Collaboration">Collaboration request</option>
+                <option value="AI Guidance">Looking for AI guidance</option>
+                <option value="Comment">Just leaving a comment</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="gb-field">
+            <label for="gb-message">Message <span aria-hidden="true">*</span></label>
+            <textarea id="gb-message" name="message" required placeholder="What&rsquo;s on your mind?"></textarea>
+          </div>
+
+          <div id="gbError" class="guestbook-error" style="display:none;" role="alert"></div>
+
+          <button type="submit" class="guestbook-submit" id="gbSubmit">
+            &#x270D; Submit Entry
+          </button>
+        </form>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer>
+    <div class="container">
+      <p>
+        Built to share real AI experiences with fellow educators.
+        All conversations are paraphrased or lightly edited for clarity
+        unless marked as verbatim.
+      </p>
+      <p class="footer-konami-hint" title="...">&#8593;&#8593;&#8595;&#8595;&#8592;&#8594;&#8592;&#8594; B A &nbsp;&nbsp; [ try it ]</p>
+    </div>
+  </footer>
+
+  <!-- ========== EASTER EGG MODAL ========== -->
+  <div id="easterEgg" class="easter-egg-overlay" role="dialog" aria-modal="true" aria-label="Secret DNA sequence unlocked" aria-hidden="true">
+    <div class="easter-egg-modal">
+      <button class="ee-close" id="eeClose">[ESC] CLOSE</button>
+
+      <div class="ee-header">&#x1F9EC; CHEAT CODE ACTIVATED &#x1F9EC;</div>
+      <p class="ee-sub">
+        You found the Genetic Code&#8482;<br>
+        The original cheat code of life.<br><br>
+        <strong style="font-family:'VT323',monospace;font-size:1.1rem;color:var(--yellow);">
+          &#x1F512; SECRET: Read the left strand 5&prime; &rarr; 3&prime; (top to bottom).<br>
+          That sequence is the password to unlock a hidden Storybook in the Gems section.
+        </strong>
+      </p>
+
+      <!-- DNA double helix as Minecraft-colored blocks -->
+      <div class="dna-helix" aria-label="DNA double helix with Pokemon base pair labels">
+
+        <div class="dna-row">
+          <span class="dna-label right">&#x1F7E2; Bulbasaur</span>
+          <div class="dna-block A">A</div>
+          <div class="dna-bridge"></div>
+          <div class="dna-block T">T</div>
+          <span class="dna-label">&#x1F525; Charmander</span>
+        </div>
+        <div class="dna-connector"></div>
+
+        <div class="dna-row">
+          <span class="dna-label right">&#x1F4A7; Squirtle</span>
+          <div class="dna-block G">G</div>
+          <div class="dna-bridge"></div>
+          <div class="dna-block C">C</div>
+          <span class="dna-label">&#x26A1; Pikachu</span>
+        </div>
+        <div class="dna-connector twist"></div>
+
+        <div class="dna-row">
+          <span class="dna-label right">&#x1F525; Charmander</span>
+          <div class="dna-block T">T</div>
+          <div class="dna-bridge"></div>
+          <div class="dna-block A">A</div>
+          <span class="dna-label">&#x1F7E2; Bulbasaur</span>
+        </div>
+        <div class="dna-connector"></div>
+
+        <div class="dna-row">
+          <span class="dna-label right">&#x26A1; Pikachu</span>
+          <div class="dna-block C">C</div>
+          <div class="dna-bridge"></div>
+          <div class="dna-block G">G</div>
+          <span class="dna-label">&#x1F4A7; Squirtle</span>
+        </div>
+        <div class="dna-connector twist"></div>
+
+        <div class="dna-row">
+          <span class="dna-label right">&#x1F7E2; Bulbasaur</span>
+          <div class="dna-block A">A</div>
+          <div class="dna-bridge"></div>
+          <div class="dna-block T">T</div>
+          <span class="dna-label">&#x1F525; Charmander</span>
+        </div>
+        <div class="dna-connector"></div>
+
+        <div class="dna-row">
+          <span class="dna-label right">&#x1F4A7; Squirtle</span>
+          <div class="dna-block G">G</div>
+          <div class="dna-bridge"></div>
+          <div class="dna-block C">C</div>
+          <span class="dna-label">&#x26A1; Pikachu</span>
+        </div>
+
+      </div><!-- /dna-helix -->
+
+      <div class="ee-legend">
+        <span><strong style="color:#4caf50">A</strong> Adenine &nbsp;=&nbsp; &#x1F7E2; Bulbasaur</span>
+        <span><strong style="color:#f44336">T</strong> Thymine &nbsp;=&nbsp; &#x1F525; Charmander</span>
+        <span><strong style="color:#2196f3">G</strong> Guanine &nbsp;=&nbsp; &#x1F4A7; Squirtle</span>
+        <span><strong style="color:#c9b300">C</strong> Cytosine =&nbsp; &#x26A1; Pikachu</span>
+      </div>
+
+      <p class="ee-footer-text">
+        A pairs with T &nbsp;|&nbsp; G pairs with C &nbsp;|&nbsp; Always.<br>
+        In Minecraft, every block has a place. In DNA, every base has a pair.<br>
+        &#x2191;&#x2191;&#x2193;&#x2193;&#x2190;&#x2192;&#x2190;&#x2192; B A &mdash; the first cheat code was written in nucleotides.
+      </p>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

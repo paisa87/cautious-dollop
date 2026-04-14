@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Generating Quiz Questions &mdash; AI in My Work &amp; Life</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&family=Comic+Neue:ital,wght@0,400;0,700;1,400;1,700&family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/styles.css" />
+</head>
+<body>
+  <nav id="navbar">
+    <div class="nav-inner">
+      <a href="../index.html" class="nav-brand">AI in Practice</a>
+      <ul class="nav-links">
+        <li><a href="../index.html#use-cases">Use Cases</a></li>
+        <li><a href="../index.html#conversations">Conversations</a></li>
+        <li><a href="../index.html#reflections">Reflections</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="convo-page">
+    <a href="../index.html#conversations" class="convo-back">&larr; Back to all conversations</a>
+
+    <div class="convo-page-header">
+      <h1>Generating Practice Quiz Questions</h1>
+      <div class="meta">
+        <span class="ai-badge ai-gemini">Gemini</span>
+        <span class="card-tag tag-teaching">Teaching</span>
+        <span class="convo-date">Date: [add date]</span>
+      </div>
+    </div>
+
+    <div class="convo-context">
+      <strong>Context:</strong> I needed a set of practice multiple-choice questions for BTC181
+      students reviewing gel electrophoresis before a lab practical. I tried Gemini for this
+      one. It was fast &mdash; but I had to fact-check every distractor carefully. This is one
+      of the use cases I&rsquo;d categorize as &ldquo;saves time but requires expert review.&rdquo;
+    </div>
+
+    <div class="chat-thread">
+
+      <div class="chat-turn user">
+        <span class="chat-label">You</span>
+        <div class="chat-bubble">Generate 5 multiple-choice questions for community college students on gel electrophoresis principles. Each question should have 4 answer choices (A&ndash;D). Include the correct answer and a brief explanation. Focus on: how DNA migrates, the role of the DNA ladder, interpreting band size, and common errors.</div>
+      </div>
+
+      <div class="chat-turn ai">
+        <span class="chat-label">Gemini</span>
+        <div class="chat-bubble"><strong>Question 1</strong>
+In gel electrophoresis, why does DNA migrate toward the positive electrode (anode)?
+A) DNA is positively charged due to its phosphate backbone
+B) DNA is negatively charged due to its phosphate backbone
+C) DNA is attracted to the agarose matrix
+D) DNA migrates toward the negative electrode, not the positive one
+
+<strong>Answer: B</strong>
+DNA has a negatively charged phosphate backbone, so it migrates toward the positive electrode in an electric field.
+
+---
+
+<strong>Question 2</strong>
+A DNA ladder contains fragments of known sizes. What is its primary purpose in gel electrophoresis?
+A) To confirm the gel has been run correctly
+B) To estimate the size of unknown DNA fragments by comparison
+C) To increase the migration speed of the samples
+D) To prevent DNA degradation during the run
+
+<strong>Answer: B</strong>
+The ladder provides reference bands at known sizes, allowing you to estimate the size of unknown fragments by comparing their migration distance.
+
+---
+
+<strong>Question 3</strong>
+Two DNA fragments of 500 bp and 1500 bp are run on the same gel. Which statement is correct?
+A) The 1500 bp fragment will migrate farther from the wells
+B) The 500 bp fragment will migrate farther from the wells
+C) Both fragments will migrate the same distance
+D) The larger fragment migrates faster in a low-percentage gel
+
+<strong>Answer: B</strong>
+Smaller DNA fragments migrate faster and travel farther from the well in the same time period.
+
+---
+
+<strong>Question 4</strong>
+A student runs a PCR product on a gel and sees a faint smear instead of a distinct band. What is the most likely explanation?
+A) The DNA ladder was loaded incorrectly
+B) Too little ethidium bromide was used
+C) Non-specific amplification or primer dimer formation occurred
+D) The gel percentage was too low for the expected fragment size
+
+<strong>Answer: C</strong>
+A smear often indicates non-specific amplification, primer dimer, or degraded DNA &mdash; all producing heterogeneous fragment sizes rather than a single discrete band.
+
+---
+
+<strong>Question 5</strong>
+What does it indicate when a student sees no bands at all in their sample lane but the DNA ladder bands are clearly visible?
+A) The gel ran too long
+B) The sample DNA is too large to migrate
+C) The PCR failed or the sample was not loaded
+D) The buffer concentration was too high
+
+<strong>Answer: C</strong>
+If the ladder is visible but the sample lane is empty, the most likely explanations are failed PCR amplification, failure to load the sample, or sample degradation.</div>
+      </div>
+
+      <div class="chat-turn user">
+        <span class="chat-label">You</span>
+        <div class="chat-bubble">Question 4, answer D &mdash; I want to push back. A low gel percentage would actually make it harder to resolve small fragments, not impossible. And the "correct" answer C is fine, but the explanation doesn&rsquo;t mention degraded DNA as a distinct cause from primer dimer. Can you separate those?</div>
+      </div>
+
+      <div class="chat-turn ai">
+        <span class="chat-label">Gemini</span>
+        <div class="chat-bubble">You&rsquo;re right on both points.
+
+<strong>Revised distractor D:</strong> "The gel was run at too high a voltage, causing the DNA to overheat"
+(This is a more plausible incorrect answer &mdash; high voltage can cause smearing by generating heat, and it&rsquo;s a common student mistake.)
+
+<strong>Revised explanation for C:</strong>
+A smear has several possible causes that students should be able to distinguish:
+- <em>Primer dimer</em>: Short non-specific products formed when primers anneal to each other; appear as a bright low-molecular-weight band or diffuse smear near the bottom of the gel.
+- <em>Non-specific amplification</em>: Multiple off-target products amplified due to low annealing stringency; appear as multiple bands or a ladder-like smear across a range of sizes.
+- <em>Degraded DNA template</em>: Template DNA that has been partially digested produces a smear of fragments of varying sizes throughout the lane.
+
+Each has a different cause and a different fix, which is worth discussing with students.</div>
+      </div>
+
+    </div>
+
+    <div class="convo-takeaway">
+      <h2>What I took away</h2>
+      <ul>
+        <li>Gemini generated five usable questions quickly &mdash; the structure and format were exactly right, and questions 1&ndash;3 and 5 were accurate without changes.</li>
+        <li>Question 4 had a weak distractor and an imprecise explanation that I caught because I know the content. Students wouldn&rsquo;t have caught it, which is the problem.</li>
+        <li>The correction process was fast and the revised explanation was actually better than what I would have written myself on a first pass.</li>
+        <li>Rule I now follow: never use AI-generated quiz questions without reading every distractor as if I were a confused student. That&rsquo;s where errors hide.</li>
+      </ul>
+    </div>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>AI in My Work &amp; Life &mdash; A Faculty Perspective</p>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Producing Songs about Biology &mdash; AI in My Work &amp; Life</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&family=Comic+Neue:ital,wght@0,400;0,700;1,400;1,700&family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/styles.css" />
+  <style>
+    .phase-label {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 0.6rem;
+      color: var(--gray-mid, #A7A8AA);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      display: block;
+      margin: 2rem 0 0.75rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 2px dashed #e2e4e0;
+    }
+    .worked-badge {
+      font-family: 'VT323', monospace;
+      font-size: 0.95rem;
+      background: #d1fae5;
+      color: #065f46;
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+      display: inline-block;
+      margin-bottom: 0.6rem;
+    }
+    .warn-badge {
+      font-family: 'VT323', monospace;
+      font-size: 0.95rem;
+      background: #fed7aa;
+      color: #92400e;
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+      display: inline-block;
+      margin-bottom: 0.6rem;
+    }
+    .dead-badge {
+      font-family: 'VT323', monospace;
+      font-size: 0.95rem;
+      background: #fce7f3;
+      color: #9d174d;
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+      display: inline-block;
+      margin-bottom: 0.6rem;
+    }
+    .loop-summary {
+      background: #fff7ed;
+      border: 1px solid #fed7aa;
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+      margin: 0.75rem 0;
+      font-size: 0.875rem;
+      color: #4a5056;
+      line-height: 1.7;
+    }
+    .loop-summary strong {
+      color: #92400e;
+    }
+    .loop-summary ul {
+      margin: 0.4rem 0 0 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+    .tech-block {
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+      margin: 0.75rem 0;
+      font-size: 0.875rem;
+      color: #4a5056;
+      line-height: 1.7;
+    }
+    .tech-block strong {
+      color: #065f46;
+    }
+    .tech-block table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 0.5rem;
+      font-size: 0.8rem;
+    }
+    .tech-block th {
+      background: #d1fae5;
+      color: #065f46;
+      padding: 0.3rem 0.6rem;
+      text-align: left;
+    }
+    .tech-block td {
+      padding: 0.3rem 0.6rem;
+      border-bottom: 1px solid #d1fae5;
+    }
+    .version-pill {
+      font-family: 'VT323', monospace;
+      font-size: 0.9rem;
+      background: #e0e7ff;
+      color: #3730a3;
+      padding: 0.15rem 0.55rem;
+      border-radius: 4px;
+      display: inline-block;
+      margin-right: 0.3rem;
+    }
+    .limit-note {
+      font-family: 'Comic Neue', cursive;
+      font-size: 0.78rem;
+      color: #A7A8AA;
+      font-style: italic;
+      margin-bottom: 0.75rem;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <nav id="navbar">
+    <div class="nav-inner">
+      <a href="../index.html" class="nav-brand">AI in Practice</a>
+      <ul class="nav-links">
+        <li><a href="../index.html#use-cases">Use Cases</a></li>
+        <li><a href="../index.html#conversations">Conversations</a></li>
+        <li><a href="../index.html#gems">Gems</a></li>
+        <li><a href="../index.html#reflections">Reflections</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="convo-page">
+    <a href="../index.html#conversations" class="convo-back">&larr; Back to all conversations</a>
+
+    <div class="convo-page-header">
+      <h1>Producing Songs about Biology</h1>
+      <div class="meta">
+        <span class="ai-badge ai-chatgpt">ChatGPT</span>
+        <span class="ai-badge ai-claude">Claude</span>
+        <span class="card-tag tag-personal">Personal</span>
+        <span class="card-tag tag-teaching">Teaching</span>
+        <span class="convo-date">Spring 2026</span>
+      </div>
+    </div>
+
+    <div class="convo-context">
+      <strong>Context:</strong> I write original songs exploring the scientific understanding of abiogenesis
+      and themes of evolutionary history &mdash; biology as music, music as a teaching tool. The songs are
+      meant to educate listeners about how life originated and evolved, set to original vocal performances
+      I record on my phone. The song featured here, <em>&ldquo;It Was Good,&rdquo;</em> draws on the
+      Genesis creation narrative as a lens for discussing the scientific evidence for abiogenesis and
+      deep evolutionary time.
+      <br><br>
+      I record multiple phone video takes (.MOV files) and then use AI to do professional-grade audio
+      production work: composite building from the best segments across takes, surgical hesitation removal,
+      phrase timing correction, and multi-stage mastering. Earlier sessions used ChatGPT for initial
+      splicing and vocal processing. This session documents the Claude Code work on &ldquo;It Was Good&rdquo;
+      &mdash; six versions across an afternoon before arriving at a final master ready for web sharing.
+    </div>
+
+    <div class="chat-thread">
+
+      <!-- ===== PHASE 1 ===== -->
+      <span class="phase-label">Phase 1 &mdash; Composite from three takes</span>
+
+      <div class="chat-turn user">
+        <span class="chat-label">You</span>
+        <div class="chat-bubble">
+          I want you to do a similar process I requested for the songs &ldquo;Goats and Praise&rdquo; but for a new song I call &ldquo;It Was Good&rdquo;. For this remaster one of my songs, I want you to use the three takes I have attached to make the best composite and then do the requested compression, EQ, balancing, etc. to make a song that could be ready for sharing on the web.
+          <br><br>
+          <em>[Attached: IMG_9373.MOV, IMG_9374.MOV, IMG_9372.MOV]</em>
+        </div>
+      </div>
+
+      <div class="chat-turn ai">
+        <span class="chat-label">Claude</span>
+        <div class="chat-bubble">
+          <span class="worked-badge">&#x2713; Composite + mastered — ready for web</span>
+          Here&rsquo;s your mastered &ldquo;It Was Good&rdquo; &mdash; 4.3&thinsp;MB, 320&thinsp;kbps MP3, ready for web sharing.
+        </div>
+      </div>
+
+      <div class="tech-block">
+        <strong>How the composite was built:</strong> All three takes analyzed in 5-second blocks, scoring each on energy level and spectral clarity (mid/high frequency presence &mdash; a good proxy for vocal clarity). Take 74 dominated (16 of 22 blocks) &mdash; most consistent energy and presence throughout. Take 72 contributed 5 blocks (notably around 40s, 70&ndash;75s, and 80&ndash;90s). Take 73 contributed the opening block. 80&thinsp;ms crossfades applied at every splice point; takes time-aligned to a common reference before selection.
+        <br><br>
+        <strong>Mastering chain applied:</strong> High-pass filter at 80&thinsp;Hz &rarr; EQ cuts at 250&thinsp;Hz (&minus;2.5&thinsp;dB) and 500&thinsp;Hz (&minus;1.5&thinsp;dB) for mud &rarr; presence boost at 3&thinsp;kHz (+2&thinsp;dB) &rarr; air shelf at 8&thinsp;kHz (+1.5&thinsp;dB) &rarr; 3:1 compression (threshold &minus;22&thinsp;dB, 15&thinsp;ms attack, 100&thinsp;ms release, +3&thinsp;dB makeup) &rarr; noise gate at &minus;48&thinsp;dBFS &rarr; normalized to &minus;1&thinsp;dBFS peak.
+      </div>
+
+      <!-- ===== PHASE 2 ===== -->
+      <span class="phase-label">Phase 2 &mdash; Single best take: removing the hesitation</span>
+
+      <div class="chat-turn user">
+        <span class="chat-label">You</span>
+        <div class="chat-bubble">
+          Ok, splicing the best parts from all three is a bit chaotic. How about we work with only what I think is the best take (IMG_9374) and fix the hesitation mistake I made at time mark 0:00:36.
+        </div>
+      </div>
+
+      <div class="chat-turn ai">
+        <span class="chat-label">Claude</span>
+        <div class="chat-bubble">
+          <span class="worked-badge">&#x2713; Hesitation removed cleanly</span>
+          <span class="version-pill">v2</span>
+          The hesitation gap ran from about 36.40s to 36.88s &mdash; roughly half a second of near-silence right in the middle of a phrase. The energy analysis bottomed out in that window (RMS ~0.002&ndash;0.003, about 10&ndash;20&times; quieter than surrounding audio). Fixed with a 60&thinsp;ms crossfade at the splice point. Total runtime went from 1:53.2 down to 1:52.6.
+        </div>
+      </div>
+
+      <!-- ===== PHASE 3 ===== -->
+      <span class="phase-label">Phase 3 &mdash; Timing: &ldquo;life, it was good, good, good, good&rdquo;</span>
+
+      <div class="chat-turn user">
+        <span class="chat-label">You</span>
+        <div class="chat-bubble">
+          Almost, it just needs a slight bit more nudging at the line around 0:00:36: &ldquo;life, it was good, good, good, good&rdquo;. It slows down some where, right?
+        </div>
+      </div>
+
+      <div class="chat-turn ai">
+        <span class="chat-label">Claude</span>
+        <div class="chat-bubble">
+          <span class="worked-badge">&#x2713; Onset analysis confirmed the drag</span>
+          <span class="version-pill">v3</span>
+          Four &ldquo;good&rdquo; onsets mapped at: 36.38s &rarr; 37.16s &rarr; 37.72s &rarr; 38.02s. Gap between &ldquo;good&rdquo; #1 and #2 was 830&thinsp;ms &mdash; nearly twice as long as the others. Trimmed 280&thinsp;ms from that gap and another 180&thinsp;ms from the next. Final &ldquo;good good good&rdquo; now hits at roughly 380&thinsp;ms &rarr; 290&thinsp;ms apart.
+        </div>
+      </div>
+
+      <div class="chat-turn user">
+        <span class="chat-label">You</span>
+        <div class="chat-bubble">
+          Ok, something is a bit off around 0:00:35&ndash;0:00:37. Can you figure out what that is and smooth it out a bit at that spot?
+        </div>
+      </div>
+
+      <div class="chat-turn ai">
+        <span class="chat-label">Claude</span>
+        <div class="chat-bubble">
+          <span class="warn-badge">&#x26A0; Phase cancellation artifact found at splice seam</span>
+          <span class="version-pill">v4</span>
+          The previous crossfades were placed at arbitrary sample positions. When two audio signals are summed mid-waveform at non-zero amplitude with even a slight phase mismatch, you get incoherent cancellation &mdash; rapid sign-flipping that sounds like a crackle or roughness. Rebuilt all three edits from the original take_74 with zero-crossing snapping (cut points nudged to nearest waveform zero-crossing) and equal-power fades (square-root curve). Seam artifacts eliminated.
+        </div>
+      </div>
+
+      <div class="chat-turn user">
+        <span class="chat-label">You</span>
+        <div class="chat-bubble">
+          Ok, I see the issue. At 0:00:36 (&ldquo;life, and it&rdquo;), &ldquo;life&rdquo; is cut off too short.
+        </div>
+      </div>
+
+      <div class="chat-turn ai">
+        <span class="chat-label">Claude</span>
+        <div class="chat-bubble">
+          <span class="worked-badge">&#x2713; Natural decay preserved</span>
+          <span class="version-pill">v5</span>
+          &ldquo;Life&rdquo; peaks around 35.91&ndash;36.09s with a natural tail decaying through 36.32s. The previous splice cut at 36.38s, right as the word still had body to it. Moved the cut to 36.50s where the energy truly reaches silence, giving the word its full 120&thinsp;ms of natural resonant decay.
+        </div>
+      </div>
+
+      <div class="chat-turn user">
+        <span class="chat-label">You</span>
+        <div class="chat-bubble">
+          &ldquo;And it was&rdquo; at 0:00:37 is sped up too much.
+        </div>
+      </div>
+
+      <div class="chat-turn ai">
+        <span class="chat-label">Claude</span>
+        <div class="chat-bubble">
+          <span class="worked-badge">&#x2713; Natural pacing restored</span>
+          <span class="version-pill">v6</span>
+          In the original, &ldquo;and it was&rdquo; runs from 36.90s to 37.40s &mdash; a full 500&thinsp;ms of natural phrasing before &ldquo;good&rdquo; hits at 37.74s. The timing edit from v3 had cut 270&thinsp;ms right out of the middle of that phrase. Removed that edit entirely. This version has only one edit: the hesitation gap removal. The &ldquo;good good good&rdquo; section is now at its original, natural tempo.
+        </div>
+      </div>
+
+      <!-- ===== PHASE 4 ===== -->
+      <span class="phase-label">Phase 4 &mdash; Final mastering to streaming loudness</span>
+
+      <div class="chat-turn user">
+        <span class="chat-label">You</span>
+        <div class="chat-bubble">
+          Good enough, thank you. What else can you recommend to make this latest version slick and shiny enough for sharing on the web?
+        </div>
+      </div>
+
+      <div class="chat-turn ai">
+        <span class="chat-label">Claude</span>
+        <div class="chat-bubble">
+          <span class="warn-badge">&#x26A0; Loudness gap identified as the main issue</span>
+          The integrated LUFS is approximately &minus;27 LUFS &mdash; about 13&thinsp;dB quieter than Spotify/YouTube&rsquo;s normalization target of &minus;14 LUFS. The crest factor of 23.6&thinsp;dB is very high for a finished track (commercial music typically lands 8&ndash;14&thinsp;dB). Three things worth fixing:
+          <ul>
+            <li><strong>Second-stage limiting</strong> to bring loudness to &minus;14 LUFS (the biggest practical improvement)</li>
+            <li><strong>Gentle high-shelf air boost</strong> at 12&thinsp;kHz (+2&thinsp;dB) for brightness and openness</li>
+            <li><strong>Slightly tighter noise gate</strong> (&minus;44&thinsp;dBFS) to clean up between-phrase room noise</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="chat-turn user">
+        <span class="chat-label">You</span>
+        <div class="chat-bubble">Yes, party time!</div>
+      </div>
+
+      <div class="chat-turn ai">
+        <span class="chat-label">Claude</span>
+        <div class="chat-bubble">
+          <span class="worked-badge">&#x2713; Final master — streaming ready</span>
+          Here&rsquo;s your final master.
+        </div>
+      </div>
+
+      <div class="tech-block">
+        <strong>Before vs. After:</strong>
+        <table>
+          <thead>
+            <tr><th>Metric</th><th>v6 (before)</th><th>Final master</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Integrated LUFS</td><td>&minus;27.3</td><td>&minus;14.2</td></tr>
+            <tr><td>Crest factor</td><td>23.6&thinsp;dB</td><td>10.1&thinsp;dB</td></tr>
+            <tr><td>Peak</td><td>&minus;1.0&thinsp;dBFS</td><td>&minus;1.0&thinsp;dBFS</td></tr>
+          </tbody>
+        </table>
+        That 13&thinsp;dB of loudness gained means the track now sits comfortably alongside commercial tracks on Spotify, YouTube, or SoundCloud. Crest factor at 10.1&thinsp;dB is the sweet spot for a vocal recording: present and punchy without being squashed.
+      </div>
+
+      <!-- ===== PHASE 5 ===== -->
+      <span class="phase-label">Phase 5 &mdash; Voice modulation (honest limit)</span>
+
+      <div class="chat-turn user">
+        <span class="chat-label">You</span>
+        <div class="chat-bubble">Can you make my voice in this song sound like a Johnny Cash-like singer?</div>
+      </div>
+
+      <div class="chat-turn ai">
+        <span class="chat-label">Claude</span>
+        <div class="chat-bubble">
+          <span class="dead-badge">&#x2715; Honest limit — this is where the ceiling is</span>
+          <span class="limit-note">Transparent assessment given upfront, no overclaiming</span>
+          Convincingly transforming vocal timbre to sound like a specific artist requires neural voice conversion &mdash; models like RVC (Retrieval-based Voice Conversion) or similar AI singing voice tools trained on actual vocal characteristics. That&rsquo;s not something I can replicate with EQ and compression alone. I could make your voice darker and add some grit, but it would sound like a filtered version of you, not genuinely Cash-like.
+          <br><br>
+          Tools that actually do this well: RVC, So-VITS-SVC, or web services like Covers.ai or Musicfy. What I can do is prepare the cleanest possible dry vocal stem from your final master &mdash; isolated, noise-reduced, ready to feed into one of those tools.
+        </div>
+      </div>
+
+    </div><!-- /chat-thread -->
+
+    <div class="convo-takeaway">
+      <h2>What I took away</h2>
+      <ul>
+        <li>Claude Code had access to ffmpeg, numpy, and scipy, which made it genuinely capable of audio analysis &mdash; it could map RMS energy at 5&thinsp;ms resolution to find exact hesitation boundaries, plot onset timing, and diagnose phase cancellation artifacts at the sample level. This isn&rsquo;t "chat about audio," it&rsquo;s actually running code on the file.</li>
+        <li>Six versions to get one phrase right (&ldquo;life, it was good, good, good, good&rdquo;) is not a failure &mdash; it&rsquo;s an accurate reflection of how surgical audio editing works. Each iteration revealed something the last one introduced.</li>
+        <li>The loudness gap was the most practically important fix. At &minus;27 LUFS, the track sounded thin next to anything commercially produced. Getting to &minus;14.2 LUFS with a crest factor of 10.1&thinsp;dB was the difference between a demo and something shareable.</li>
+        <li>The voice modulation limit was handled honestly and immediately &mdash; no overclaiming, no 20-exchange loop. That contrast with earlier ChatGPT experience (where the backing track loop went 20 rounds before admission) is notable. Getting pointed to the right tools (RVC, Musicfy) was more useful than a bad attempt.</li>
+        <li>Music as a teaching vehicle is underexplored in science education. If a song about abiogenesis can make a listener curious enough to look it up, it&rsquo;s done more than a lecture slide.</li>
+      </ul>
+    </div>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>AI in My Work &amp; Life &mdash; A Faculty Perspective</p>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>
